@@ -98,7 +98,7 @@ wpdf_document_base <- function(toc = FALSE,
     if (is.null(intermediates_dir)) intermediates_dir <- normalizePath(".", winslash = "/")
     # write HTML <base> element to a temp file:
     in_header <- tempfile()
-    writeLines(sprintf('<base href="file:///%s/">', intermediates_dir), in_header)
+    writeLines(sprintf('<base href="file://localhost/%s/">', intermediates_dir), in_header)
     rmarkdown::includes_to_pandoc_args(rmarkdown::includes(in_header = rmarkdown::pandoc_path_arg(in_header)))
   }
 
