@@ -31,5 +31,12 @@ pdf_document_base <- function (fig_width = 5,
                                       ext = ".pdf"
                                       )
 
-  rmarkdown::output_format(knitr = knitr, pandoc = pandoc, keep_md = keep_md)
+  pre_processor <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir) {
+    # This is dirty, but it is the only way I found to pass to pandoc intermediates_dir :
+    intermediates_dir <- dynGet('intermediates_dir')
+    if (is.null(intermediates_dir)) intermediates_dir <- normalizePath(".")
+    c('--pdf-engine-opt="--base-url"', '--pdf-engine-opt', intermediates_dir)
+  }
+
+  rmarkdown::output_format(knitr = knitr, pandoc = pandoc, pre_processor = pre_processor, keep_md = keep_md)
 }
