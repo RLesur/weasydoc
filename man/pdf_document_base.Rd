@@ -2,7 +2,7 @@
 % Please edit documentation in R/pdf_document_base.R
 \name{pdf_document_base}
 \alias{pdf_document_base}
-\title{A simple pdf generator}
+\title{Base output format for PDF output formats with HTML/CSS}
 \usage{
 pdf_document_base(fig_width = 5, fig_height = 4, fig_caption = TRUE,
   smart = TRUE, keep_md = FALSE, md_extensions = NULL,
@@ -25,13 +25,13 @@ ellipses.}
 default definition or R Markdown. See the \code{\link{rmarkdown_format}} for
 additional details.}
 
-\item{pdf_engine}{PDF engine passed to pandoc}
+\item{pdf_engine}{PDF engine passed to pandoc.}
 
-\item{verbose}{logical indicating if verbose option passed to pandoc}
+\item{verbose}{Is \code{--verbose} option passed to \code{pandoc}?}
 }
 \value{
 R Markdown output format to pass to \code{rmarkdown::render}.
 }
 \description{
-A simple pdf generator
+Creates a PDF base output format with HTML/CSS to PDF engine.
 }
