@@ -9,14 +9,14 @@
 #' @return R Markdown output format to pass to `rmarkdown::render`.
 #' @importFrom rmarkdown knitr_options includes_to_pandoc_args includes pandoc_options from_rmarkdown output_format
 #' @export
-pdf_document_base <- function (fig_width = 5,
-                               fig_height = 4,
-                               fig_caption = TRUE,
-                               smart = TRUE,
-                               keep_md = FALSE,
-                               md_extensions = NULL,
-                               pdf_engine = "weasyprint",
-                               verbose = FALSE) {
+pdf_document_base <- function(fig_width = 5,
+                              fig_height = 4,
+                              fig_caption = TRUE,
+                              smart = TRUE,
+                              keep_md = FALSE,
+                              md_extensions = NULL,
+                              pdf_engine = "weasyprint",
+                              verbose = FALSE) {
 
   md_extensions <- c(md_extensions, if (smart) "+smart")
   args <- c("--section-divs", "--pdf-engine", pdf_engine, if (verbose) "--verbose")
