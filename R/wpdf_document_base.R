@@ -32,6 +32,7 @@ wpdf_document_base <- function(toc = FALSE,
                                fig_height = 4,
                                fig_caption = TRUE,
                                dev = "png",
+                               dpi = 96,
                                df_print = NULL,
                                highlight = "default",
                                template = NULL,
@@ -46,7 +47,7 @@ wpdf_document_base <- function(toc = FALSE,
   # knitr options and hooks
   knitr <- rmarkdown::knitr_options(
     opts_chunk = list(dev = dev,
-                      dpi = 96,
+                      dpi = dpi,
                       fig.width = fig_width,
                       fig.height = fig_height)
   )

@@ -5,10 +5,11 @@
 \title{Base output format for PDF/HTML/CSS output formats}
 \usage{
 wpdf_document_base(toc = FALSE, toc_depth = 3, fig_width = 5,
-  fig_height = 4, fig_caption = TRUE, dev = "png", df_print = NULL,
-  highlight = "default", template = NULL, keep_md = FALSE,
-  wpdf_engine = "weasyprint", smart = TRUE, verbose = FALSE,
-  includes = NULL, md_extensions = NULL, pandoc_args = NULL)
+  fig_height = 4, fig_caption = TRUE, dev = "png", dpi = 96,
+  df_print = NULL, highlight = "default", template = NULL,
+  keep_md = FALSE, wpdf_engine = "weasyprint", smart = TRUE,
+  verbose = FALSE, includes = NULL, md_extensions = NULL,
+  pandoc_args = NULL)
 }
 \arguments{
 \item{toc}{\code{TRUE} to include a table of contents in the output}
