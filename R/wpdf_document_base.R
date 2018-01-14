@@ -20,11 +20,17 @@
 #'   [`weasyprint`](http://weasyprint.org/).
 #' @param verbose Is `--verbose` option passed to `pandoc`? Use `TRUE` to
 #'   inspect `pandoc`'s `HTML`.
+#' @param keep_html,self_contained Keep intermediate `HTML` file. Use
+#'   `self_contained` to indicate if external dependencies are embedded in
+#'   `HTML` file.
 #' @inheritParams rmarkdown::html_document
 #' @inheritParams rmarkdown::output_format
 #'
 #' @return `R Markdown` output format to pass to [rmarkdown::render()].
-#' @importFrom rmarkdown knitr_options includes_to_pandoc_args includes pandoc_options from_rmarkdown output_format pandoc_path_arg pandoc_toc_args pandoc_highlight_args pandoc_latex_engine_args
+#' @importFrom rmarkdown knitr_options includes_to_pandoc_args includes
+#'   pandoc_options from_rmarkdown output_format pandoc_path_arg pandoc_toc_args
+#'   pandoc_highlight_args pandoc_latex_engine_args pandoc_convert
+#' @importFrom tools file_path_sans_ext file_path_as_absolute
 #' @export
 wpdf_document_base <- function(toc = FALSE,
                                toc_depth = 3,
@@ -37,12 +43,16 @@ wpdf_document_base <- function(toc = FALSE,
                                highlight = "default",
                                template = NULL,
                                keep_md = FALSE,
+                               keep_html = FALSE,
+                               self_contained = TRUE,
                                wpdf_engine = "weasyprint",
                                smart = TRUE,
                                verbose = FALSE,
                                includes = NULL,
                                md_extensions = NULL,
                                pandoc_args = NULL) {
+  # initialize the post_processor
+  post_processor <- NULL
 
   # knitr options and hooks
   knitr <- rmarkdown::knitr_options(
@@ -54,6 +64,7 @@ wpdf_document_base <- function(toc = FALSE,
 
   # smart extension
   md_extensions <- c(md_extensions, if (smart) "+smart")
+  from <- rmarkdown::from_rmarkdown(fig_caption, md_extensions)
 
   # base pandoc options for all HTML/CSS to PDF output
   args <- c("--section-divs")
@@ -65,10 +76,6 @@ wpdf_document_base <- function(toc = FALSE,
   if (!is.null(highlight))
     highlight <- match.arg(highlight, highlighters())
   args <- c(args, rmarkdown::pandoc_highlight_args(highlight))
-
-  # HTML to PDF engine
-  wpdf_engine <- match.arg(wpdf_engine, c("wkhtmltopdf", "weasyprint", "prince"))
-  args <- c(args, rmarkdown::pandoc_latex_engine_args(wpdf_engine))
 
   # verbose pandoc execution (use to inspect intermediate HTML)
   args <- c(args, if (verbose) "--verbose")
@@ -83,10 +90,18 @@ wpdf_document_base <- function(toc = FALSE,
   # pandoc args
   args <- c(args, pandoc_args)
 
+  # HTML to PDF engine
+  wpdf_engine <- match.arg(wpdf_engine, c("wkhtmltopdf", "weasyprint", "prince"))
+  args_with_engine <- c(args, rmarkdown::pandoc_latex_engine_args(wpdf_engine))
+
+  if (!keep_html)
+    self_contained <- TRUE
+  clean_supporting <-  self_contained
+
   pandoc <- rmarkdown::pandoc_options(
     to = "html",
-    from = rmarkdown::from_rmarkdown(fig_caption, md_extensions),
-    args = args,
+    from = from,
+    args = args_with_engine,
     ext = ".pdf"
   )
 
@@ -103,10 +118,29 @@ wpdf_document_base <- function(toc = FALSE,
     rmarkdown::includes_to_pandoc_args(rmarkdown::includes(in_header = rmarkdown::pandoc_path_arg(in_header)))
   }
 
+  if (keep_html) {
+    post_processor <- function(metadata, input_file, output_file, clean, verbose) {
+      output <- paste0(tools::file_path_sans_ext(output_file), ".html")
+      options <- c(args, "--standalone", if (self_contained) "--self-contained")
+      wd <- dirname(tools::file_path_as_absolute(input_file))
+      rmarkdown::pandoc_convert(
+        input = input_file,
+        to = "html",
+        from = from,
+        output = output,
+        options = options,
+        verbose = verbose,
+        wd = wd
+      )
+      output_file
+    }
+  }
+
   rmarkdown::output_format(knitr = knitr,
                            pandoc = pandoc,
                            keep_md = keep_md,
-                           clean_supporting = TRUE,
+                           clean_supporting = clean_supporting,
                            df_print = df_print,
-                           pre_processor = pre_processor)
+                           pre_processor = pre_processor,
+                           post_processor = post_processor)
 }
