@@ -18,5 +18,5 @@ This package suits my needs. Feel free to send PR.
 ``` r
 devtools::install_github('RLesur/weasydoc')
 
-rmarkdown::render('myfile.Rmd', weasydoc::pdf_document(highlight = "pygments", template = NULL, fig_retina = NULL))
+rmarkdown::render('myfile.Rmd', weasydoc::wpdf_document_base(highlight = "pygments"))
 ```
