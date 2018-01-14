@@ -4,15 +4,25 @@
 \alias{pdf_document}
 \title{Convert a RMarkdown file to pdf using Weasyprint}
 \usage{
-pdf_document(number_sections = FALSE, fig_width = 7, fig_height = 5,
-  fig_retina = 2, fig_caption = TRUE, dev = "png", df_print = "default",
-  smart = TRUE, highlight = "default", template = "default",
+pdf_document(toc = FALSE, toc_depth = 3, number_sections = FALSE,
+  section_divs = TRUE, fig_width = 7, fig_height = 5, fig_retina = 2,
+  fig_caption = TRUE, dev = "png", df_print = "default",
+  code_download = FALSE, smart = TRUE, theme = "default",
+  highlight = "default", mathjax = "default", template = "default",
   extra_dependencies = NULL, css = NULL, includes = NULL,
   keep_md = FALSE, lib_dir = NULL, md_extensions = NULL,
-  pandoc_args = NULL, ...)
+  pandoc_args = NULL, pdf_engine = "weasyprint", ...)
 }
 \arguments{
+\item{toc}{\code{TRUE} to include a table of contents in the output}
+
+\item{toc_depth}{Depth of headers to include in table of contents}
+
 \item{number_sections}{\code{TRUE} to number section headings}
+
+\item{section_divs}{Wrap sections in <div> tags (or <section> tags in HTML5),
+and attach identifiers to the enclosing <div> (or <section>) rather than the
+header itself.}
 
 \item{fig_width}{Default width (in inches) for figures}
 
@@ -39,13 +49,26 @@ to the named methods you can also pass an arbitrary function to be used
 for printing data frames. You can disable the df_print behavior entirely
 by setting the option \code{rmarkdown.df_print} to \code{FALSE}.}
 
+\item{code_download}{Embed the Rmd source code within the document and provide
+a link that can be used by readers to download the code.}
+
 \item{smart}{Produce typographically correct output, converting straight
 quotes to curly quotes, --- to em-dashes, -- to en-dashes, and ... to
 ellipses.}
 
+\item{theme}{Visual theme ("default", "cerulean", "journal", "flatly",
+"readable", "spacelab", "united", "cosmo", "lumen", "paper", "sandstone",
+"simplex", or "yeti"). Pass \code{NULL} for no theme (in this case you can
+use the \code{css} parameter to add your own styles).}
+
 \item{highlight}{Syntax highlighting style. Supported styles include
 "default", "tango", "pygments", "kate", "monochrome", "espresso", "zenburn",
 "haddock", and "textmate". Pass \code{NULL} to prevent syntax highlighting.}
+
+\item{mathjax}{Include mathjax. The "default" option uses an https URL from a
+MathJax CDN. The "local" option uses a local version of MathJax (which is
+copied into the output directory). You can pass an alternate URL or pass
+\code{NULL} to exclude MathJax entirely.}
 
 \item{template}{Pandoc template to use for rendering. Pass "default" to use
 the rmarkdown package default template; pass \code{NULL} to use pandoc's
