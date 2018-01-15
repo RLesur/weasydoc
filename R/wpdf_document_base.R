@@ -48,6 +48,7 @@ wpdf_document_base <- function(toc = FALSE,
                                wpdf_engine = "weasyprint",
                                smart = TRUE,
                                verbose = FALSE,
+                               css = NULL,
                                includes = NULL,
                                md_extensions = NULL,
                                pandoc_args = NULL) {
@@ -83,6 +84,10 @@ wpdf_document_base <- function(toc = FALSE,
   # template
   if (!is.null(template))
     args <- c(args, "--template", rmarkdown::pandoc_path_arg(template))
+
+  # additional css
+  for (css_file in css)
+    args <- c(args, "--css", rmarkdown::pandoc_path_arg(css_file))
 
   # content includes
   args <- c(args, rmarkdown::includes_to_pandoc_args(includes))

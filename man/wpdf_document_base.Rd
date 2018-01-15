@@ -8,7 +8,7 @@ wpdf_document_base(toc = FALSE, toc_depth = 3, fig_width = 5,
   fig_height = 4, fig_caption = TRUE, dev = "png", dpi = 96,
   df_print = NULL, highlight = "default", template = NULL,
   keep_md = FALSE, keep_html = FALSE, self_contained = TRUE,
-  wpdf_engine = "weasyprint", smart = TRUE, verbose = FALSE,
+  wpdf_engine = "weasyprint", smart = TRUE, verbose = FALSE, css = NULL,
   includes = NULL, md_extensions = NULL, pandoc_args = NULL)
 }
 \arguments{
@@ -59,6 +59,8 @@ ellipses.}
 
 \item{verbose}{Is \code{--verbose} option passed to \code{pandoc}? Use \code{TRUE} to
 inspect \code{pandoc}'s \code{HTML}.}
+
+\item{css}{One or more css files to include}
 
 \item{includes}{Named list of additional content to include within the
 document (typically created using the \code{\link{includes}} function).}
