@@ -104,7 +104,7 @@ wpdf_document_base <- function(toc = FALSE,
   clean_supporting <-  self_contained
 
   pandoc <- rmarkdown::pandoc_options(
-    to = "html",
+    to = "html5",
     from = from,
     args = args_with_engine,
     ext = ".pdf"
@@ -130,7 +130,7 @@ wpdf_document_base <- function(toc = FALSE,
       wd <- dirname(tools::file_path_as_absolute(input_file))
       rmarkdown::pandoc_convert(
         input = input_file,
-        to = "html",
+        to = "html5",
         from = from,
         output = output,
         options = options,
