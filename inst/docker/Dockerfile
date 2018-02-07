@@ -1,10 +1,27 @@
-FROM rocker/verse:3.4.1
+FROM rocker/verse:3.4.3
 
 # Avoid warning during package installation
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends apt-utils
+
+# Install Prince
+RUN wget -O prince_20171214-1_debian9.1_amd64.deb https://www.princexml.com/download/prince_20171214-1_debian9.1_amd64.deb \
+  && dpkg -i prince_20171214-1_debian9.1_amd64.deb \
+  && rm prince_20171214-1_debian9.1_amd64.deb
+
+# Install wkhtmltopdf
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends xz-utils \
+  && wget -O wkhtmltox-0.12.3_linux-generic-amd64.tar.xz https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
+  && tar vxf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
+  && cp wkhtmltox/bin/wkhtmltopdf /usr/local/bin/ \
+  && rm -rf wkhtmltox \
+  && apt-get remove --purge -y xz-utils \
+  && apt-get autoremove -y \
+  && apt-get autoclean -y \
+  && rm -rf /var/lib/apt/lists/*
 
 # Install weasyprint dependencies
 RUN apt-get update \
@@ -20,10 +37,7 @@ RUN apt-get update \
     python3-pip \
     python3-setuptools \
     python3-wheel \
-    shared-mime-info \
-  && apt-get autoremove -y \
-  && apt-get autoclean -y \
-  && rm -rf /var/lib/apt/lists/*
+    shared-mime-info
 
 ENV DEBIAN_FRONTEND teletype
 
@@ -36,4 +50,7 @@ RUN rm /usr/local/bin/pandoc \
   && wget -O pandoc-2.1.1-1-amd64.deb https://github.com/jgm/pandoc/releases/download/2.1.1/pandoc-2.1.1-1-amd64.deb \
   && dpkg -i pandoc-2.1.1-1-amd64.deb \
   && rm pandoc-2.1.1-1-amd64.deb
+
+# Install weasydoc
+RUN Rscript -e "devtools::install_github('RLesur/weasydoc')"
 
