@@ -11,7 +11,7 @@ Since [`pandoc`](https://pandoc.org/) version 2.0 supports `PDF` generation thro
 
 ## Contribution
 
-This package suits my needs. Feel free to send PR.
+This package suits my needs. Feel free to send PR. 
 
 ## Example
 
