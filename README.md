@@ -5,7 +5,7 @@ The goal of `weasydoc` is to convert `R Markdown` to `PDF` using [`WeasyPrint`](
 ## Motivation
 
 The usual way to convert `R Markdown` documents to `PDF` relies on `LaTeX`.  
-The only caveat is that learning `LaTeX` layout is not obvious.
+The only caveat is that learning `LaTeX` layout is not obvious. 
 
 Since [`pandoc`](https://pandoc.org/) version 2.0 supports `PDF` generation through `HTML+CSS`, formatting `PDF` document can now be achieved through `CSS`. I think this may be quite easier...
 
