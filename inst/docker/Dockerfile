@@ -1,5 +1,13 @@
 FROM rocker/verse:3.4.3
 
+# Install FiraCode font
+RUN mkdir -p /usr/share/fonts/truetype/firacode \
+  && wget -O /usr/share/fonts/truetype/firacode/FiraCode-Bold.ttf "https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-Bold.ttf?raw=true" \
+  && wget -O /usr/share/fonts/truetype/firacode/FiraCode-Light.ttf "https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-Light.ttf?raw=true" \
+  && wget -O /usr/share/fonts/truetype/firacode/FiraCode-Medium.ttf "https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-Medium.ttf?raw=true" \
+  && wget -O /usr/share/fonts/truetype/firacode/FiraCode-Regular.ttf "https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-Regular.ttf?raw=true" \
+  && wget -O /usr/share/fonts/truetype/firacode/FiraCode-Retina.ttf "https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-Retina.ttf?raw=true"
+
 # Avoid warning during package installation
 ENV DEBIAN_FRONTEND noninteractive
 
