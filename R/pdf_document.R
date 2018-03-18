@@ -70,7 +70,7 @@ pdf_document <- function(toc = FALSE,
     wd <- dirname(tools::file_path_as_absolute(input_file))
     rmarkdown::pandoc_convert(
       input = input_file,
-      to = "html",
+      to = "html5",
       from = base_format$pandoc$from,
       output = output,
       options = options,
