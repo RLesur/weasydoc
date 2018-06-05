@@ -1,4 +1,4 @@
-FROM rocker/verse:3.4.3
+FROM rocker/verse:3.4.4
 
 # Install FiraCode font
 RUN mkdir -p /usr/share/fonts/truetype/firacode \
