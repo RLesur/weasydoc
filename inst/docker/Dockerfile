@@ -15,9 +15,9 @@ RUN apt-get update \
   && apt-get install -y --no-install-recommends apt-utils
 
 # Install Prince
-RUN wget -O prince_20171214-1_debian9.1_amd64.deb https://www.princexml.com/download/prince_20171214-1_debian9.1_amd64.deb \
-  && dpkg -i prince_20171214-1_debian9.1_amd64.deb \
-  && rm prince_20171214-1_debian9.1_amd64.deb
+RUN wget -O prince_20180524-1_debian9.1_amd64.deb https://www.princexml.com/download/prince_20180524-1_debian9.1_amd64.deb \
+  && dpkg -i prince_20180524-1_debian9.1_amd64.deb \
+  && rm prince_20180524-1_debian9.1_amd64.deb
 
 # Install wkhtmltopdf
 RUN apt-get update \
