@@ -30,6 +30,10 @@ NULL
 #'   `self_contained` to indicate if external dependencies are embedded in
 #'   `HTML` file.
 #' @param dpi The DPI (dots per inch) for bitmap devices.
+#' @param fig_retina Setting this option to a ratio (for example, 2) will
+#'   change the `dpi` parameter to `dpi * fig.retina`, and `fig_width` to
+#'   `fig_width * dpi / fig_retina` internally; for example, the physical size
+#'   of an image is doubled and its display size is halved when `fig_retina = 2`.
 #' @inheritParams rmarkdown::html_document
 #' @inheritParams rmarkdown::output_format
 #'
@@ -42,6 +46,7 @@ wpdf_document_base <- function(toc = FALSE,
                                fig_caption = TRUE,
                                dev = "png",
                                dpi = 96,
+                               fig_retina = 1,
                                df_print = NULL,
                                highlight = "default",
                                template = NULL,
@@ -63,7 +68,8 @@ wpdf_document_base <- function(toc = FALSE,
     opts_chunk = list(dev = dev,
                       dpi = dpi,
                       fig.width = fig_width,
-                      fig.height = fig_height)
+                      fig.height = fig_height,
+                      fig.retina = fig_retina)
   )
 
   # smart extension
