@@ -24,6 +24,8 @@ wpdf_document_base(toc = FALSE, toc_depth = 3, fig_width = 5,
 
 \item{dev}{Graphics device to use for figure output (defaults to png)}
 
+\item{dpi}{The DPI (dots per inch) for bitmap devices.}
+
 \item{df_print}{Method to be used for printing data frames. Valid values
 include \code{"default"}, \code{"kable"} and \code{"tibble"}. The \code{"default"} method uses
 \code{print.data.frame}. The \code{"kable"} method uses the \code{\link[knitr:kable]{knitr::kable()}}

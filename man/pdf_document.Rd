@@ -97,6 +97,10 @@ additional details.}
 
 \item{pandoc_args}{Additional command line options to pass to pandoc}
 
+\item{pdf_engine}{\code{HTML} to \code{PDF} engine for producing \code{PDF} output. Options
+are \code{"wkhtmltopdf"}, \code{"weasyprint"} and \code{"prince"}. Default is
+\href{http://weasyprint.org/}{weasyprint}.}
+
 \item{...}{Additional function arguments to pass to the
 base R Markdown HTML output formatter \code{\link{html_document_base}}}
 }

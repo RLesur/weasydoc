@@ -1,3 +1,9 @@
+#' @importFrom rmarkdown knitr_options includes_to_pandoc_args includes
+#'   pandoc_options from_rmarkdown output_format pandoc_path_arg pandoc_toc_args
+#'   pandoc_highlight_args pandoc_latex_engine_args pandoc_convert
+#' @importFrom tools file_path_sans_ext file_path_as_absolute
+NULL
+
 #' Base output format for PDF/HTML/CSS output formats
 #'
 #' Creates a `PDF` base output format for `HTML/CSS` to `PDF` output formats.
@@ -23,14 +29,11 @@
 #' @param keep_html,self_contained Keep intermediate `HTML` file. Use
 #'   `self_contained` to indicate if external dependencies are embedded in
 #'   `HTML` file.
+#' @param dpi The DPI (dots per inch) for bitmap devices.
 #' @inheritParams rmarkdown::html_document
 #' @inheritParams rmarkdown::output_format
 #'
 #' @return `R Markdown` output format to pass to [rmarkdown::render()].
-#' @importFrom rmarkdown knitr_options includes_to_pandoc_args includes
-#'   pandoc_options from_rmarkdown output_format pandoc_path_arg pandoc_toc_args
-#'   pandoc_highlight_args pandoc_latex_engine_args pandoc_convert
-#' @importFrom tools file_path_sans_ext file_path_as_absolute
 #' @export
 wpdf_document_base <- function(toc = FALSE,
                                toc_depth = 3,
