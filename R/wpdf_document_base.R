@@ -16,7 +16,7 @@ NULL
 #' @param df_print Method to be used for printing data frames. Valid values
 #'   include `"default"`, `"kable"` and `"tibble"`. The `"default"` method uses
 #'   `print.data.frame`. The `"kable"` method uses the [knitr::kable()]
-#'   function. The `"tibble"` method uses the **tibble** package to print a
+#'   function. The `"tibble"` method uses the [tibble::tibble-package] to print a
 #'   summary of the data frame. In addition to the named methods you can also
 #'   pass an arbitrary function to be used for printing data frames. You can
 #'   disable the `df_print` behavior entirely by setting the option

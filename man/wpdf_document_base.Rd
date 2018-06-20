@@ -35,7 +35,7 @@ of an image is doubled and its display size is halved when \code{fig_retina = 2}
 \item{df_print}{Method to be used for printing data frames. Valid values
 include \code{"default"}, \code{"kable"} and \code{"tibble"}. The \code{"default"} method uses
 \code{print.data.frame}. The \code{"kable"} method uses the \code{\link[knitr:kable]{knitr::kable()}}
-function. The \code{"tibble"} method uses the \strong{tibble} package to print a
+function. The \code{"tibble"} method uses the \link[tibble:tibble-package]{tibble::tibble-package} to print a
 summary of the data frame. In addition to the named methods you can also
 pass an arbitrary function to be used for printing data frames. You can
 disable the \code{df_print} behavior entirely by setting the option
