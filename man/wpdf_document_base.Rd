@@ -6,7 +6,7 @@
 \usage{
 wpdf_document_base(toc = FALSE, toc_depth = 3, fig_width = 5,
   fig_height = 4, fig_caption = TRUE, dev = "png", dpi = 96,
-  fig_retina = 1, df_print = NULL, highlight = "default",
+  fig_retina = 8, df_print = NULL, highlight = "default",
   template = NULL, keep_md = FALSE, keep_html = FALSE,
   self_contained = TRUE, wpdf_engine = "weasyprint", smart = TRUE,
   verbose = FALSE, css = NULL, includes = NULL, md_extensions = NULL,

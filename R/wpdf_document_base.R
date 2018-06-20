@@ -46,7 +46,7 @@ wpdf_document_base <- function(toc = FALSE,
                                fig_caption = TRUE,
                                dev = "png",
                                dpi = 96,
-                               fig_retina = 1,
+                               fig_retina = 8,
                                df_print = NULL,
                                highlight = "default",
                                template = NULL,
@@ -107,6 +107,10 @@ wpdf_document_base <- function(toc = FALSE,
   # HTML to PDF engine
   wpdf_engine <- match.arg(wpdf_engine, c("wkhtmltopdf", "weasyprint", "prince"))
   args_with_engine <- c(args, rmarkdown::pandoc_latex_engine_args(wpdf_engine))
+
+  # Activate HTML presentation hints for WeasyPrint
+  if (wpdf_engine == "weasyprint")
+    args_with_engine <- c(args_with_engine, "--pdf-engine-opt", "-p")
 
   if (!keep_html)
     self_contained <- TRUE
