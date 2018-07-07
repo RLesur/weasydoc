@@ -123,19 +123,6 @@ wpdf_document_base <- function(toc = FALSE,
     ext = ".pdf"
   )
 
-  # Pre-processor to include intermediates_dir as base url in temporary pandoc's HTML
-  # Use verbose=TRUE option to debug
-  pre_processor <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir) {
-    # This is dirty, but it is the only way I found to get intermediates_dir
-    # Retrieve intermediates_dir
-    intermediates_dir <- dynGet('intermediates_dir')
-    if (is.null(intermediates_dir)) intermediates_dir <- normalizePath(".", winslash = "/")
-    # write HTML <base> element to a temp file:
-    in_header <- tempfile()
-    writeLines(sprintf('<base href="file://localhost/%s/">', intermediates_dir), in_header)
-    rmarkdown::includes_to_pandoc_args(rmarkdown::includes(in_header = rmarkdown::pandoc_path_arg(in_header)))
-  }
-
   if (keep_html) {
     post_processor <- function(metadata, input_file, output_file, clean, verbose) {
       output <- paste0(tools::file_path_sans_ext(output_file), ".html")
@@ -159,6 +146,5 @@ wpdf_document_base <- function(toc = FALSE,
                            keep_md = keep_md,
                            clean_supporting = clean_supporting,
                            df_print = df_print,
-                           pre_processor = pre_processor,
                            post_processor = post_processor)
 }
