@@ -7,9 +7,12 @@ Authors@R: person("Romain", "Lesur", email = "romain.lesur@gmail.com", role = c(
 Description: Using weasydoc, one can use CSS layout to generate PDF from R Markdown.
 License: MIT + file LICENSE
 Imports: rmarkdown (>= 1.8.0), tools
-Suggests: tibble
+Suggests: 
+    tibble,
+    knitr
 SystemRequirements: pandoc (>= 2.0.0), WeasyPrint
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr
