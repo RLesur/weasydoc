@@ -1,10 +1,15 @@
+#' @importFrom rmarkdown output_format knitr_options pandoc_options html_document from_rmarkdown
+NULL
+
 #' Convert a RMarkdown file to pdf using Weasyprint
 #'
 #' Format for converting from R Markdown to a PDF using Weasyprint.
 #'
 #' @inheritParams rmarkdown::html_document
+#' @param pdf_engine `HTML` to `PDF` engine for producing `PDF` output. Options
+#'   are `"wkhtmltopdf"`, `"weasyprint"` and `"prince"`. Default is
+#'   [`weasyprint`](http://weasyprint.org/).
 #' @return R Markdown output format to pass to `rmarkdown::render`.
-#' @importFrom rmarkdown output_format knitr_options pandoc_options html_document from_rmarkdown
 #' @export
 pdf_document <- function(toc = FALSE,
                          toc_depth = 3,
@@ -70,7 +75,7 @@ pdf_document <- function(toc = FALSE,
     wd <- dirname(tools::file_path_as_absolute(input_file))
     rmarkdown::pandoc_convert(
       input = input_file,
-      to = "html",
+      to = "html5",
       from = base_format$pandoc$from,
       output = output,
       options = options,

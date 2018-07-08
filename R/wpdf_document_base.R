@@ -1,3 +1,9 @@
+#' @importFrom rmarkdown knitr_options includes_to_pandoc_args includes
+#'   pandoc_options from_rmarkdown output_format pandoc_path_arg pandoc_toc_args
+#'   pandoc_highlight_args pandoc_latex_engine_args pandoc_convert
+#' @importFrom tools file_path_sans_ext file_path_as_absolute
+NULL
+
 #' Base output format for PDF/HTML/CSS output formats
 #'
 #' Creates a `PDF` base output format for `HTML/CSS` to `PDF` output formats.
@@ -10,7 +16,7 @@
 #' @param df_print Method to be used for printing data frames. Valid values
 #'   include `"default"`, `"kable"` and `"tibble"`. The `"default"` method uses
 #'   `print.data.frame`. The `"kable"` method uses the [knitr::kable()]
-#'   function. The `"tibble"` method uses the **tibble** package to print a
+#'   function. The `"tibble"` method uses the [tibble::tibble-package] to print a
 #'   summary of the data frame. In addition to the named methods you can also
 #'   pass an arbitrary function to be used for printing data frames. You can
 #'   disable the `df_print` behavior entirely by setting the option
@@ -23,14 +29,15 @@
 #' @param keep_html,self_contained Keep intermediate `HTML` file. Use
 #'   `self_contained` to indicate if external dependencies are embedded in
 #'   `HTML` file.
+#' @param dpi The DPI (dots per inch) for bitmap devices.
+#' @param fig_retina Setting this option to a ratio (for example, 2) will
+#'   change the `dpi` parameter to `dpi * fig.retina`, and `fig_width` to
+#'   `fig_width * dpi / fig_retina` internally; for example, the physical size
+#'   of an image is doubled and its display size is halved when `fig_retina = 2`.
 #' @inheritParams rmarkdown::html_document
 #' @inheritParams rmarkdown::output_format
 #'
 #' @return `R Markdown` output format to pass to [rmarkdown::render()].
-#' @importFrom rmarkdown knitr_options includes_to_pandoc_args includes
-#'   pandoc_options from_rmarkdown output_format pandoc_path_arg pandoc_toc_args
-#'   pandoc_highlight_args pandoc_latex_engine_args pandoc_convert
-#' @importFrom tools file_path_sans_ext file_path_as_absolute
 #' @export
 wpdf_document_base <- function(toc = FALSE,
                                toc_depth = 3,
@@ -39,6 +46,7 @@ wpdf_document_base <- function(toc = FALSE,
                                fig_caption = TRUE,
                                dev = "png",
                                dpi = 96,
+                               fig_retina = 8,
                                df_print = NULL,
                                highlight = "default",
                                template = NULL,
@@ -60,7 +68,8 @@ wpdf_document_base <- function(toc = FALSE,
     opts_chunk = list(dev = dev,
                       dpi = dpi,
                       fig.width = fig_width,
-                      fig.height = fig_height)
+                      fig.height = fig_height,
+                      fig.retina = fig_retina)
   )
 
   # smart extension
@@ -99,6 +108,10 @@ wpdf_document_base <- function(toc = FALSE,
   wpdf_engine <- match.arg(wpdf_engine, c("wkhtmltopdf", "weasyprint", "prince"))
   args_with_engine <- c(args, rmarkdown::pandoc_latex_engine_args(wpdf_engine))
 
+  # Activate HTML presentation hints for WeasyPrint
+  if (wpdf_engine == "weasyprint")
+    args_with_engine <- c(args_with_engine, "--pdf-engine-opt", "-p")
+
   if (!keep_html)
     self_contained <- TRUE
   clean_supporting <-  self_contained
@@ -109,19 +122,6 @@ wpdf_document_base <- function(toc = FALSE,
     args = args_with_engine,
     ext = ".pdf"
   )
-
-  # Pre-processor to include intermediates_dir as base url in temporary pandoc's HTML
-  # Use verbose=TRUE option to debug
-  pre_processor <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir) {
-    # This is dirty, but it is the only way I found to get intermediates_dir
-    # Retrieve intermediates_dir
-    intermediates_dir <- dynGet('intermediates_dir')
-    if (is.null(intermediates_dir)) intermediates_dir <- normalizePath(".", winslash = "/")
-    # write HTML <base> element to a temp file:
-    in_header <- tempfile()
-    writeLines(sprintf('<base href="file://localhost/%s/">', intermediates_dir), in_header)
-    rmarkdown::includes_to_pandoc_args(rmarkdown::includes(in_header = rmarkdown::pandoc_path_arg(in_header)))
-  }
 
   if (keep_html) {
     post_processor <- function(metadata, input_file, output_file, clean, verbose) {
@@ -146,6 +146,5 @@ wpdf_document_base <- function(toc = FALSE,
                            keep_md = keep_md,
                            clean_supporting = clean_supporting,
                            df_print = df_print,
-                           pre_processor = pre_processor,
                            post_processor = post_processor)
 }

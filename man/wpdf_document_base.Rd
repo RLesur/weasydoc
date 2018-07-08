@@ -6,10 +6,11 @@
 \usage{
 wpdf_document_base(toc = FALSE, toc_depth = 3, fig_width = 5,
   fig_height = 4, fig_caption = TRUE, dev = "png", dpi = 96,
-  df_print = NULL, highlight = "default", template = NULL,
-  keep_md = FALSE, keep_html = FALSE, self_contained = TRUE,
-  wpdf_engine = "weasyprint", smart = TRUE, verbose = FALSE, css = NULL,
-  includes = NULL, md_extensions = NULL, pandoc_args = NULL)
+  fig_retina = 8, df_print = NULL, highlight = "default",
+  template = NULL, keep_md = FALSE, keep_html = FALSE,
+  self_contained = TRUE, wpdf_engine = "weasyprint", smart = TRUE,
+  verbose = FALSE, css = NULL, includes = NULL, md_extensions = NULL,
+  pandoc_args = NULL)
 }
 \arguments{
 \item{toc}{\code{TRUE} to include a table of contents in the output}
@@ -24,10 +25,17 @@ wpdf_document_base(toc = FALSE, toc_depth = 3, fig_width = 5,
 
 \item{dev}{Graphics device to use for figure output (defaults to png)}
 
+\item{dpi}{The DPI (dots per inch) for bitmap devices.}
+
+\item{fig_retina}{Setting this option to a ratio (for example, 2) will
+change the \code{dpi} parameter to \code{dpi * fig.retina}, and \code{fig_width} to
+\code{fig_width * dpi / fig_retina} internally; for example, the physical size
+of an image is doubled and its display size is halved when \code{fig_retina = 2}.}
+
 \item{df_print}{Method to be used for printing data frames. Valid values
 include \code{"default"}, \code{"kable"} and \code{"tibble"}. The \code{"default"} method uses
 \code{print.data.frame}. The \code{"kable"} method uses the \code{\link[knitr:kable]{knitr::kable()}}
-function. The \code{"tibble"} method uses the \strong{tibble} package to print a
+function. The \code{"tibble"} method uses the \link[tibble:tibble-package]{tibble::tibble-package} to print a
 summary of the data frame. In addition to the named methods you can also
 pass an arbitrary function to be used for printing data frames. You can
 disable the \code{df_print} behavior entirely by setting the option
