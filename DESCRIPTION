@@ -2,8 +2,11 @@ Package: weasydoc
 Type: Package
 Title: Convert R Markdown to PDF Using Weasyprint
 Version: 0.0.9000
-Authors@R: person("Romain", "Lesur", email = "romain.lesur@gmail.com", role = c("aut", "cre"),
-         comment = c(ORCID = "0000-0002-0721-5595"))
+Authors@R: c(
+  person("Romain", "Lesur", email = "romain.lesur@gmail.com", 
+         role = c("aut", "cre"), comment = c(ORCID = "0000-0002-0721-5595")),
+  person(family = "Ministère de la Justice, République Française", role = "cph")
+  )
 Description: Using weasydoc, one can use CSS layout to generate PDF from R Markdown.
 License: GPL-3
 Imports: rmarkdown (>= 1.8.0), tools
