@@ -1,0 +1,12 @@
+options(repos = c(CRAN = 'https://cran.rstudio.com/'), download.file.method = 'libcurl')
+options(repos = c(CRAN='https://mran.microsoft.com/snapshot/2018-06-19'), download.file.method = 'libcurl')
+
+
+# Configure httr to perform out-of-band authentication if HTTR_LOCALHOST
+# is not set since a redirect to localhost may not work depending upon
+# where this Docker container is running.
+if(is.na(Sys.getenv("HTTR_LOCALHOST", unset=NA))) {
+  options(httr_oob_default = TRUE)
+}
+
+message("Read carefully the Prince XML License")
