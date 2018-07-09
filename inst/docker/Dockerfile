@@ -61,6 +61,3 @@ RUN rm /usr/local/bin/pandoc \
 
 # Install weasydoc
 RUN Rscript -e "devtools::install_github('RLesur/weasydoc')"
-
-# Copy Rprofile.site
-COPY ./Rprofile.site /usr/local/lib/R/etc
