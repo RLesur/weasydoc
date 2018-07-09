@@ -94,6 +94,7 @@ TO THE MAXIMUM EXTENT PERMITTED BY LAW, IN NO EVENT SHALL YESLOGIC OR ITS SUPPLI
 
 This Agreement shall be governed by and construed in accordance with Norwegian law. Any dispute arising under or in connection with this contract shall be referred to arbitration pursuant to the Norwegian 2004 Arbitration Act. Each Party shall appoint one arbitrator and the two arbitrators shall appoint the third arbitrator who shall be the chairman of the arbitration tribunal. The chairman shall be a Norwegian legal professional. If one Party fails to appoint an arbitrator within one month from being requested to do so or if the two arbitrators can not within one month from the last appointment agree on who shall be appointed chairman, the Chief Justice of Oslo District Court shall be the appointer. The venue of the arbitral proceedings shall be in Oslo, and the proceedings shall be conducted in the English language. The arbitration is deemed to be commenced when request for arbitration is being sent from the Party requesting arbitration. The Parties agree to conclude a separate agreement on confidentiality of both the arbitral proceedings and the award immediately after arbitration has been requested.'
 
+.First <- function() {
 if(interactive()) {
   agree <- shiny::runGadget(
     app = miniUI::miniPage(
@@ -120,5 +121,6 @@ if(interactive()) {
     viewer = shiny::dialogViewer("License")
   )
 
-  if(!agree) quit()
+  if(!agree) quit(save = "no")
+}
 }
