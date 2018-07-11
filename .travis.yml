@@ -3,7 +3,6 @@
 language: r
 sudo: false
 cache: packages
-latex: false
 pandoc_version: 2.2.1
 
 addons:

@@ -1,5 +1,7 @@
 # weasydoc
 
+[![Travis build status](https://travis-ci.org/RLesur/weasydoc.svg?branch=master)](https://travis-ci.org/RLesur/weasydoc)
+
 The goal of `weasydoc` is to convert `R Markdown` to `PDF` using [`WeasyPrint`](http://weasyprint.org/).
 
 ## Motivation
