@@ -21,3 +21,4 @@ before_install:
   - sudo pip3 install WeasyPrint
   - wget https://www.princexml.com/download/prince_12-1_ubuntu14.04_amd64.deb
   - sudo dpkg -i prince_12-1_ubuntu14.04_amd64.deb
+  - rm prince_12-1_ubuntu14.04_amd64.deb
