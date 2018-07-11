@@ -128,6 +128,10 @@ wpdf_document_base <- function(toc = FALSE,
   if (wpdf_engine == "weasyprint")
     args_with_engine <- c(args_with_engine, "--pdf-engine-opt", "-p")
 
+  # Run JavaScript by default with Prince
+  if (wpdf_engine == "prince")
+    args_with_engine <- c(args_with_engine, "--pdf-engine-opt", "--javascript")
+
   if (!keep_html)
     self_contained <- TRUE
   clean_supporting <-  self_contained
