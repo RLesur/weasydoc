@@ -1,0 +1,15 @@
+---
+title: "Document rendered with PDF engine"
+author: "Author"
+lang: en
+---
+
+## Section
+
+Some text.
+
+```{js echo=FALSE}
+var newHeader = document.createElement('h3');
+newHeader.textContent = "Created with Javascript";
+document.body.appendChild(newHeader);
+```
