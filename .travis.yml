@@ -6,6 +6,6 @@ cache: packages
 pandoc_version: 2.2.1
 
 before_install:
-  - pip install WeasyPrint
+  - pip3 install WeasyPrint
   - wget -O prince_12-1_ubuntu14.04_amd64.deb https://www.princexml.com/download/prince_12-1_ubuntu14.04_amd64.deb
   - dpkg -i prince_12-1_ubuntu14.04_amd64.deb
