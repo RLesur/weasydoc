@@ -14,7 +14,8 @@ Suggests:
     tibble,
     knitr,
     pdftools,
-    testthat
+    testthat,
+    covr
 SystemRequirements: pandoc (>= 2.1.3), WeasyPrint
 Encoding: UTF-8
 LazyData: true
