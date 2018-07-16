@@ -6,7 +6,7 @@
 
 [![](https://images.microbadger.com/badges/version/rlesur/weasydoc.svg)](https://microbadger.com/images/rlesur/weasydoc "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/image/rlesur/weasydoc.svg)](https://microbadger.com/images/rlesur/weasydoc "Get your own image badge on microbadger.com")
 
-The goal of `weasydoc` is to convert `R Markdown` to `PDF` using [`WeasyPrint`](http://weasyprint.org/).
+The goal of `weasydoc` is to convert `R Markdown` to `PDF` using [`WeasyPrint`](https://weasyprint.org/) or [`Prince`](https://www.princexml.com/).
 
 ## Motivation
 
