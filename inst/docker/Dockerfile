@@ -1,5 +1,10 @@
 FROM rocker/verse:3.5.0
 
+LABEL org.label-schema.license="GPL-3.0" \
+      org.label-schema.vcs-url="https://github.com/RLesur/weasydoc/inst/docker/Dockerfile" \
+      org.label-schema.vendor="weasydoc" \
+      maintainer="Romain Lesur <romain.lesur@gmail.com>"
+
 # Install FiraCode font
 RUN mkdir -p /usr/share/fonts/truetype/firacode \
   && wget -O /usr/share/fonts/truetype/firacode/FiraCode-Bold.ttf "https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-Bold.ttf?raw=true" \
@@ -13,11 +18,6 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends apt-utils
-
-# Install Prince
-RUN wget -O prince_20180524-1_debian9.1_amd64.deb https://www.princexml.com/download/prince_20180524-1_debian9.1_amd64.deb \
-  && dpkg -i prince_20180524-1_debian9.1_amd64.deb \
-  && rm prince_20180524-1_debian9.1_amd64.deb
 
 # Install wkhtmltopdf
 RUN apt-get update \
@@ -61,3 +61,14 @@ RUN rm /usr/local/bin/pandoc \
 
 # Install weasydoc
 RUN Rscript -e "devtools::install_github('RLesur/weasydoc')"
+
+# Install Prince
+RUN wget -O prince_20180524-1_debian9.1_amd64.deb https://www.princexml.com/download/prince_20180524-1_debian9.1_amd64.deb \
+  && dpkg -i prince_20180524-1_debian9.1_amd64.deb \
+  && rm prince_20180524-1_debian9.1_amd64.deb
+
+LABEL org.opencontainers.image.licenses="(GPL-3.0 AND DocumentRef-https://www.princexml.com/license/)" \
+      org.opencontainers.image.url="https://github.com/RLesur/weasydoc" \
+      org.opencontainers.image.source="https://github.com/RLesur/weasydoc/inst/docker/Dockerfile" \
+      org.opencontainers.image.vendor="weasydoc" \
+      org.opencontainers.image.authors="Romain Lesur <romain.lesur@gmail.com>"
