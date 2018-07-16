@@ -3,7 +3,7 @@ FROM rocker/verse:3.5.0
 LABEL org.label-schema.license="(GPL-3.0 AND DocumentRef-https://www.princexml.com/license/)" \
       org.label-schema.vcs-url="https://github.com/RLesur/weasydoc/inst/docker/Dockerfile" \
       org.label-schema.vendor="weasydoc" \
-      maintainer="Romain Lesur <romain.lesur@gmail.com>"
+      maintainer="Romain Lesur <romain.lesur@gmail.com>" \
       org.opencontainers.image.licenses="(GPL-3.0 AND DocumentRef-https://www.princexml.com/license/)" \
       org.opencontainers.image.url="https://github.com/RLesur/weasydoc" \
       org.opencontainers.image.source="https://github.com/RLesur/weasydoc/inst/docker/Dockerfile" \
