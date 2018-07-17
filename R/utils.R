@@ -15,5 +15,21 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 highlighters <- function() {
-  c("default", "tango", "pygments", "kate", "monochrome", "espresso", "zenburn", "haddock", "breezedark")
+  c("default",
+    "tango",
+    "pygments",
+    "kate",
+    "monochrome",
+    "espresso",
+    "zenburn",
+    "haddock",
+    "breezedark"
+    )
+}
+
+is_installed <- function(pgm) {
+  version <- tryCatch(system2(pgm, "--version", stdout = TRUE, stderr = TRUE),
+                      error = function(e) "")
+
+  !identical(nzchar(version), FALSE)
 }

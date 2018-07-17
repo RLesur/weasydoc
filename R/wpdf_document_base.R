@@ -18,6 +18,7 @@
 #'   pandoc_options from_rmarkdown output_format pandoc_path_arg pandoc_toc_args
 #'   pandoc_highlight_args pandoc_latex_engine_args pandoc_convert
 #' @importFrom tools file_path_sans_ext file_path_as_absolute
+#' @include utils.R
 NULL
 
 #' Base output format for PDF/HTML/CSS output formats
