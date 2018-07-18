@@ -33,3 +33,12 @@ is_installed <- function(pgm) {
 
   !identical(nzchar(version), FALSE)
 }
+
+weasyprint_available <- function() {
+  is_installed("weasyprint")
+}
+
+prince_available <- function() {
+  is_installed("prince")
+}
+
