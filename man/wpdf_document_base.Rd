@@ -58,7 +58,7 @@ for details on creating custom templates.}
 \code{HTML} file.}
 
 \item{wpdf_engine}{\code{HTML} to \code{PDF} engine for producing \code{PDF} output. Options
-are \code{"wkhtmltopdf"}, \code{"weasyprint"} and \code{"prince"}. Default is
+are \code{"weasyprint"} and \code{"prince"}. Default is
 \href{http://weasyprint.org/}{weasyprint}.}
 
 \item{smart}{Produce typographically correct output, converting straight
