@@ -14,6 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#' @importFrom rmarkdown pandoc_available
+NULL
+
 highlighters <- function() {
   c("default",
     "tango",
@@ -42,3 +45,6 @@ prince_available <- function() {
   is_installed("prince")
 }
 
+is_pandoc_compatible <- function() {
+  rmarkdown::pandoc_available('2.1.3')
+}

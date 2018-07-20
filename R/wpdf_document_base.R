@@ -77,6 +77,11 @@ wpdf_document_base <- function(toc = FALSE,
                                includes = NULL,
                                md_extensions = NULL,
                                pandoc_args = NULL) {
+  # test Pandoc version
+  if (!is_pandoc_compatible()) {
+    stop("Pandoc version 2.1.3 or greater is required.\n")
+  }
+
   # initialize the post_processor
   post_processor <- NULL
 
