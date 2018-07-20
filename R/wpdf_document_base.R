@@ -39,7 +39,7 @@ NULL
 #'   disable the `df_print` behavior entirely by setting the option
 #'   `rmarkdown.df_print` to `FALSE`.
 #' @param wpdf_engine `HTML` to `PDF` engine for producing `PDF` output. Options
-#'   are `"wkhtmltopdf"`, `"weasyprint"` and `"prince"`. Default is
+#'   are `"weasyprint"` and `"prince"`. Default is
 #'   [`weasyprint`](http://weasyprint.org/).
 #' @param verbose Is `--verbose` option passed to `pandoc`? Use `TRUE` to
 #'   inspect `pandoc`'s `HTML`.
@@ -127,7 +127,7 @@ wpdf_document_base <- function(toc = FALSE,
   args <- c(args, pandoc_args)
 
   # HTML to PDF engine
-  wpdf_engine <- match.arg(wpdf_engine, c("wkhtmltopdf", "weasyprint", "prince"))
+  wpdf_engine <- match.arg(wpdf_engine, c("weasyprint", "prince"))
   args_with_engine <- c(args, rmarkdown::pandoc_latex_engine_args(wpdf_engine))
 
   # Activate HTML presentation hints for WeasyPrint

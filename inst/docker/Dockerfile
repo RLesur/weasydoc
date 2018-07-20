@@ -24,18 +24,6 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update \
   && apt-get install -y --no-install-recommends apt-utils
 
-# Install wkhtmltopdf
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends xz-utils \
-  && wget -O wkhtmltox-0.12.3_linux-generic-amd64.tar.xz https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.3/wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
-  && tar vxf wkhtmltox-0.12.3_linux-generic-amd64.tar.xz \
-  && cp wkhtmltox/bin/wkhtmltopdf /usr/local/bin/ \
-  && rm -rf wkhtmltox \
-  && apt-get remove --purge -y xz-utils \
-  && apt-get autoremove -y \
-  && apt-get autoclean -y \
-  && rm -rf /var/lib/apt/lists/*
-
 # Install weasyprint dependencies
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
@@ -50,7 +38,10 @@ RUN apt-get update \
     python3-pip \
     python3-setuptools \
     python3-wheel \
-    shared-mime-info
+    shared-mime-info \
+  && apt-get autoremove -y \
+  && apt-get autoclean -y \
+  && rm -rf /var/lib/apt/lists/*
 
 ENV DEBIAN_FRONTEND teletype
 
