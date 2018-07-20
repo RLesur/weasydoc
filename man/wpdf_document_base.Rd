@@ -6,11 +6,11 @@
 \usage{
 wpdf_document_base(toc = FALSE, toc_depth = 3, fig_width = 5,
   fig_height = 4, fig_caption = TRUE, dev = "png", dpi = 96,
-  fig_retina = 8, df_print = NULL, highlight = "default",
-  template = NULL, keep_md = FALSE, keep_html = FALSE,
-  self_contained = TRUE, wpdf_engine = "weasyprint", smart = TRUE,
-  verbose = FALSE, css = NULL, includes = NULL, md_extensions = NULL,
-  pandoc_args = NULL)
+  fig_retina = 8, df_print = NULL, attach_code = FALSE,
+  highlight = "default", template = NULL, keep_md = FALSE,
+  keep_html = FALSE, self_contained = TRUE, wpdf_engine = "weasyprint",
+  smart = TRUE, verbose = FALSE, css = NULL, includes = NULL,
+  md_extensions = NULL, pandoc_args = NULL)
 }
 \arguments{
 \item{toc}{\code{TRUE} to include a table of contents in the output}
@@ -40,6 +40,9 @@ summary of the data frame. In addition to the named methods you can also
 pass an arbitrary function to be used for printing data frames. You can
 disable the \code{df_print} behavior entirely by setting the option
 \code{rmarkdown.df_print} to \code{FALSE}.}
+
+\item{attach_code}{Add the \code{Rmd} source code as an attachment to the \code{PDF}
+document.}
 
 \item{highlight}{Syntax highlighting style. Supported styles include
 "default", "tango", "pygments", "kate", "monochrome", "espresso", "zenburn",

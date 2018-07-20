@@ -38,6 +38,8 @@ NULL
 #'   pass an arbitrary function to be used for printing data frames. You can
 #'   disable the `df_print` behavior entirely by setting the option
 #'   `rmarkdown.df_print` to `FALSE`.
+#' @param attach_code Add the `Rmd` source code as an attachment to the `PDF`
+#'   document.
 #' @param wpdf_engine `HTML` to `PDF` engine for producing `PDF` output. Options
 #'   are `"weasyprint"` and `"prince"`. Default is
 #'   [`weasyprint`](http://weasyprint.org/).
@@ -65,6 +67,7 @@ wpdf_document_base <- function(toc = FALSE,
                                dpi = 96,
                                fig_retina = 8,
                                df_print = NULL,
+                               attach_code = FALSE,
                                highlight = "default",
                                template = NULL,
                                keep_md = FALSE,
@@ -82,7 +85,8 @@ wpdf_document_base <- function(toc = FALSE,
     stop("Pandoc version 2.1.3 or greater is required.\n")
   }
 
-  # initialize the post_processor
+  # initialize pre and post processors
+  pre_processor <- NULL
   post_processor <- NULL
 
   # knitr options and hooks
@@ -149,8 +153,27 @@ wpdf_document_base <- function(toc = FALSE,
     ext = ".pdf"
   )
 
+  # get the rmd_file path using a pre_knit
+  # it is useful only with attach_code=TRUE
+  rmd_file <- NULL
+  pre_knit <- function(input, ...) {
+    rmd_file <<- input
+  }
+
+  if (isTRUE(attach_code)) {
+    pre_processor <- function(metadata, input_file, runtime, knit_meta, files_dir,
+                              output_dir) {
+      # Attach Rmd file
+      if (wpdf_engine == "weasyprint")
+        return(c("--pdf-engine-opt", "-a","--pdf-engine-opt", rmd_file))
+      if (wpdf_engine == "prince")
+        return(c("--pdf-engine-opt", paste0("--attach=", rmd_file)))
+    }
+  }
+
   if (keep_html) {
-    post_processor <- function(metadata, input_file, output_file, clean, verbose) {
+    post_processor <- function(metadata, input_file, output_file, clean,
+                               verbose) {
       output <- paste0(tools::file_path_sans_ext(output_file), ".html")
       options <- c(args, "--standalone", if (self_contained) "--self-contained")
       wd <- dirname(tools::file_path_as_absolute(input_file))
@@ -172,5 +195,7 @@ wpdf_document_base <- function(toc = FALSE,
                            keep_md = keep_md,
                            clean_supporting = clean_supporting,
                            df_print = df_print,
+                           pre_knit = pre_knit,
+                           pre_processor = pre_processor,
                            post_processor = post_processor)
 }
