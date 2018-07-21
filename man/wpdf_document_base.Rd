@@ -7,10 +7,10 @@
 wpdf_document_base(toc = FALSE, toc_depth = 3, fig_width = 5,
   fig_height = 4, fig_caption = TRUE, dev = "png", dpi = 96,
   fig_retina = 8, df_print = NULL, attach_code = FALSE,
-  highlight = "default", template = NULL, keep_md = FALSE,
-  keep_html = FALSE, self_contained = TRUE, wpdf_engine = "weasyprint",
-  smart = TRUE, verbose = FALSE, css = NULL, includes = NULL,
-  md_extensions = NULL, pandoc_args = NULL)
+  highlight = "default", math_engine = "webtex_svg", template = NULL,
+  keep_md = FALSE, keep_html = FALSE, self_contained = TRUE,
+  wpdf_engine = "weasyprint", smart = TRUE, verbose = FALSE, css = NULL,
+  includes = NULL, md_extensions = NULL, pandoc_args = NULL)
 }
 \arguments{
 \item{toc}{\code{TRUE} to include a table of contents in the output}
@@ -47,6 +47,10 @@ document.}
 \item{highlight}{Syntax highlighting style. Supported styles include
 "default", "tango", "pygments", "kate", "monochrome", "espresso", "zenburn",
 "haddock", and "textmate". Pass \code{NULL} to prevent syntax highlighting.}
+
+\item{math_engine}{Method to be used to render \code{TeX} math. Valid values
+include \code{"unicode"}, \code{"mathjax"}, \code{"mathml"}, \code{"webtex_svg"}, \code{"webtex_png"}
+and \code{"katex"}. See the \code{pandoc} manual for details.}
 
 \item{template}{\code{Pandoc} template to use for rendering. Pass \code{NULL} to use
 \code{pandoc}'s built-in template; pass a path to use a custom template that

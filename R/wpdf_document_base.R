@@ -53,6 +53,9 @@ NULL
 #'   change the `dpi` parameter to `dpi * fig.retina`, and `fig_width` to
 #'   `fig_width * dpi / fig_retina` internally; for example, the physical size
 #'   of an image is doubled and its display size is halved when `fig_retina = 2`.
+#' @param math_engine Method to be used to render `TeX` math. Valid values
+#'   include `"unicode"`, `"mathjax"`, `"mathml"`, `"webtex_svg"`, `"webtex_png"`
+#'   and `"katex"`. See the `pandoc` manual for details.
 #' @inheritParams rmarkdown::html_document
 #' @inheritParams rmarkdown::output_format
 #'
@@ -69,6 +72,7 @@ wpdf_document_base <- function(toc = FALSE,
                                df_print = NULL,
                                attach_code = FALSE,
                                highlight = "default",
+                               math_engine = "webtex_svg",
                                template = NULL,
                                keep_md = FALSE,
                                keep_html = FALSE,
@@ -115,6 +119,9 @@ wpdf_document_base <- function(toc = FALSE,
 
   # verbose pandoc execution (use to inspect intermediate HTML)
   args <- c(args, if (verbose) "--verbose")
+
+  # math engine
+  args <- c(args, pandoc_math_engine_args(math_engine))
 
   # template
   if (!is.null(template))
