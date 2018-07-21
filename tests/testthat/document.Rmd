@@ -8,6 +8,8 @@ lang: en
 
 Some text.
 
+Some math: $\sqrt{\frac{\pi}{2}}$
+
 ```{js echo=FALSE}
 var newHeader = document.createElement('h3');
 newHeader.textContent = "Created with Javascript";
