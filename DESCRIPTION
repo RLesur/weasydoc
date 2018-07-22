@@ -23,6 +23,6 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 Collate: 
-    'pdf_document.R'
     'utils.R'
+    'wpdf_document.R'
     'wpdf_document_base.R'
