@@ -24,5 +24,5 @@ RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 Collate: 
     'utils.R'
-    'wpdf_document.R'
     'wpdf_document_base.R'
+    'wpdf_document.R'
