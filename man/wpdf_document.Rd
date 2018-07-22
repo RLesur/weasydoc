@@ -52,7 +52,8 @@ document.}
 include \code{"unicode"}, \code{"mathjax"}, \code{"mathml"}, \code{"webtex_svg"}, \code{"webtex_png"}
 and \code{"katex"}. See the \code{pandoc} manual for details.}
 
-\item{template}{\code{Pandoc} template to use for rendering. Pass \code{NULL} to use
+\item{template}{\code{Pandoc} template to use for rendering.  Pass "default" to
+use the weasydoc package default template; pass \code{NULL} to use
 \code{pandoc}'s built-in template; pass a path to use a custom template that
 you've created. See the documentation on
 \href{http://pandoc.org/MANUAL.html#templates}{pandoc online documentation}

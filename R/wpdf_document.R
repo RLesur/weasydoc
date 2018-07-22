@@ -21,6 +21,12 @@ NULL
 #'
 #' Format for converting from R Markdown to a PDF using Weasyprint.
 #'
+#' @param template `Pandoc` template to use for rendering.  Pass "default" to
+#'   use the weasydoc package default template; pass `NULL` to use
+#'   `pandoc`'s built-in template; pass a path to use a custom template that
+#'   you've created. See the documentation on
+#'   [`pandoc` online documentation](http://pandoc.org/MANUAL.html#templates)
+#'   for details on creating custom templates.
 #' @inheritParams wpdf_document_base
 #' @return R Markdown output format to pass to `rmarkdown::render`.
 #' @export
