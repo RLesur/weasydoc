@@ -54,7 +54,7 @@ wpdf_document <- function(toc = FALSE,
                           md_extensions = NULL,
                           pandoc_args = NULL) {
   if (identical(template, "default")) {
-    template <- system.file("templates", "default", "default.html")
+    template <- system.file("templates", "default", "default.html", package = "weasydoc")
   }
 
   wpdf_document_base(toc = toc,
