@@ -41,7 +41,10 @@ $endif$
       @page landscape {size: landscape;}
       .landscape {page: landscape;}
       @media print {
-        html {font-size: $if(fontsize)$$fontsize$$else$11pt$endif$;}
+        html {
+          font-size: $if(fontsize)$$fontsize$$else$11pt$endif$;
+          line-height: $if(lineheight)$$lineheight$$else$1.5$endif$;
+        }
       }
   </style>
 $for(css)$

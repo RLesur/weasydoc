@@ -36,6 +36,10 @@ There is no `geometry` option. In order to control the margins, you have to use 
 
 The `fontsize` variable control the main size of the font for the document. Its default value is `11pt`.
 
+### Line spacing
+
+The line spacing is controlled by the `lineheight` variable. It replaces the `linestretch` variable of `pdf_document`.
+
 ## Built-in classes
 
 The `weasydoc::wpdf_document` provides a set of built-in classes. They can be overridden with a customized `CSS` style.
