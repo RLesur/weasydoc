@@ -103,7 +103,7 @@ wpdf_document_base <- function(toc = FALSE,
   )
 
   # smart extension
-  md_extensions <- c(md_extensions, if (smart) "+smart")
+  md_extensions <- c(md_extensions, if (isTRUE(smart)) "+smart")
   from <- rmarkdown::from_rmarkdown(fig_caption, md_extensions)
 
   # base pandoc options for all HTML/CSS to PDF output
@@ -113,19 +113,21 @@ wpdf_document_base <- function(toc = FALSE,
   args <- c(args, rmarkdown::pandoc_toc_args(toc, toc_depth))
 
   # highlighting
-  if (!is.null(highlight))
+  if (!is.null(highlight)) {
     highlight <- match.arg(highlight, highlighters())
+  }
   args <- c(args, rmarkdown::pandoc_highlight_args(highlight))
 
   # verbose pandoc execution (use to inspect intermediate HTML)
-  args <- c(args, if (verbose) "--verbose")
+  args <- c(args, if (isTRUE(verbose)) "--verbose")
 
   # math engine
   args <- c(args, pandoc_math_engine_args(math_engine))
 
   # template
-  if (!is.null(template))
+  if (!is.null(template)) {
     args <- c(args, "--template", rmarkdown::pandoc_path_arg(template))
+  }
 
   # additional css
   for (css_file in css)
@@ -142,16 +144,19 @@ wpdf_document_base <- function(toc = FALSE,
   args_with_engine <- c(args, rmarkdown::pandoc_latex_engine_args(wpdf_engine))
 
   # Activate HTML presentation hints for WeasyPrint
-  if (wpdf_engine == "weasyprint")
+  if (identical(wpdf_engine, "weasyprint")) {
     args_with_engine <- c(args_with_engine, "--pdf-engine-opt", "-p")
+  }
 
   # Run JavaScript by default with Prince
-  if (wpdf_engine == "prince")
+  if (identical(wpdf_engine, "prince")) {
     args_with_engine <- c(args_with_engine, "--pdf-engine-opt", "--javascript")
+  }
 
-  if (!keep_html)
+  if (!isTRUE(keep_html)) {
     self_contained <- TRUE
-  clean_supporting <-  self_contained
+  }
+  clean_supporting <- self_contained
 
   pandoc <- rmarkdown::pandoc_options(
     to = "html5",
@@ -171,18 +176,18 @@ wpdf_document_base <- function(toc = FALSE,
     pre_processor <- function(metadata, input_file, runtime, knit_meta, files_dir,
                               output_dir) {
       # Attach Rmd file
-      if (wpdf_engine == "weasyprint")
+      if (identical(wpdf_engine, "weasyprint"))
         return(c("--pdf-engine-opt", "-a","--pdf-engine-opt", rmd_file))
-      if (wpdf_engine == "prince")
+      if (identical(wpdf_engine, "prince"))
         return(c("--pdf-engine-opt", paste0("--attach=", rmd_file)))
     }
   }
 
-  if (keep_html) {
+  if (isTRUE(keep_html)) {
     post_processor <- function(metadata, input_file, output_file, clean,
                                verbose) {
       output <- paste0(tools::file_path_sans_ext(output_file), ".html")
-      options <- c(args, "--standalone", if (self_contained) "--self-contained")
+      options <- c(args, "--standalone", if (isTRUE(self_contained)) "--self-contained")
       wd <- dirname(tools::file_path_as_absolute(input_file))
       rmarkdown::pandoc_convert(
         input = input_file,
