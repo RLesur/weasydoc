@@ -28,6 +28,10 @@ The `papersize` variable control the size of the pages. You can use:
 You can add `landscape` for orientation, for instance: `"a5 landscape"`.
 - a customized size: `"4in 6in"`...
 
+### Font size
+
+The `fontsize` variable control the main size of the font for the document. Its default value is `11pt`.
+
 ## Built-in classes
 
 The `weasydoc::wpdf_document` provides a set of built-in classes. They can be overridden with a customized `CSS` style.
@@ -38,7 +42,11 @@ You can add the class `portrait` or `landscape` to change the orientation.
 
 For instance, the following `data.frame` will be print in landscape mode.
 
-```{r class.output="landscape"}
+    `r ''````{r echo=FALSE, class.output="landscape"}
+    mtcars
+    ```
+
+```{r echo=FALSE, class.output="landscape"}
 mtcars
 ```
 

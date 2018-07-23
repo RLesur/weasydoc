@@ -29,11 +29,14 @@ $highlighting-css$
   </style>
 $endif$
   <style type="text/css">
-      @page {$if(papersize)$size: $papersize$;$endif$}
+      @page {size: $if(papersize)$$papersize$$else$a4$endif$;}
       @page portrait {size: portrait;}
       .portrait {page: portrait;}
       @page landscape {size: landscape;}
       .landscape {page: landscape;}
+      @media print {
+        html {font-size: $if(fontsize)$$fontsize$$else$11pt$endif$;}
+      }
   </style>
 $for(css)$
   <link rel="stylesheet" href="$css$" />
