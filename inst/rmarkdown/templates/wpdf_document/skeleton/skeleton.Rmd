@@ -28,6 +28,10 @@ The `papersize` variable control the size of the pages. You can use:
 You can add `landscape` for orientation, for instance: `"a5 landscape"`.
 - a customized size: `"4in 6in"`...
 
+### Margins
+
+There is no `geometry` option. In order to control the margins, you have to use `margin-top`, `margin-right`, `margin-bottom` and `margin-left` variables.
+
 ### Font size
 
 The `fontsize` variable control the main size of the font for the document. Its default value is `11pt`.
