@@ -28,6 +28,13 @@ $if(highlighting-css)$
 $highlighting-css$
   </style>
 $endif$
+  <style type="text/css">
+      @page {$if(papersize)$size: $papersize$;$endif$}
+      @page portrait {size: portrait;}
+      .portrait {page: portrait;}
+      @page landscape {size: landscape;}
+      .landscape {page: landscape;}
+  </style>
 $for(css)$
   <link rel="stylesheet" href="$css$" />
 $endfor$

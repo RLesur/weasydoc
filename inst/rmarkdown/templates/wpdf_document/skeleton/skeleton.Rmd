@@ -20,23 +20,26 @@ With this template, you can use `CSS` for paged document (pdf).
 There is only one compulsory variable: `lang` that defines the language of the document.  
 See the [language variables section](http://pandoc.org/MANUAL.html#language-variables) of the `pandoc` documentation.
 
-The top-level variables that 
+### Papersize
 
-## R Markdown
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+The `papersize` variable control the size of the pages. You can use:
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+- a well-known size: `a4`, `letter`... 
+You can add `landscape` for orientation, for instance: `"a5 landscape"`.
+- a customized size: `"4in 6in"`...
 
-```{r cars}
-summary(cars)
+## Built-in classes
+
+The `weasydoc::wpdf_document` provides a set of built-in classes. They can be overridden with a customized `CSS` style.
+
+### Paper orientation
+
+You can add the class `portrait` or `landscape` to change the orientation.
+
+For instance, the following `data.frame` will be print in landscape mode.
+
+```{r class.output="landscape"}
+mtcars
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
