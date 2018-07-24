@@ -22,7 +22,7 @@ RUN mkdir -p /usr/share/fonts/truetype/firacode \
 RUN apt-get update \
   && apt-get install -y --no-install-recommends cabextract xfonts-utils fonts-liberation2 \
   && wget http://ftp.de.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.7_all.deb \
-  && apt install ./ttf-mscorefonts-installer_3.7_all.deb \
+  && apt install -y ./ttf-mscorefonts-installer_3.7_all.deb \
   && rm ttf-mscorefonts-installer_3.7_all.deb
 
 # Avoid warning during package installation
