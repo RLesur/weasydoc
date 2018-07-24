@@ -49,6 +49,10 @@ The defaut main font is a `serif` font. If you prefer a `sans-serif` font, you c
 
 With `mainfont`, you can change the main font for the document.
 
+### Specify `monofont`
+
+You can change `monofont`.
+
 ## Built-in classes
 
 The `weasydoc::wpdf_document` provides a set of built-in classes. They can be overridden with a customized `CSS` style.

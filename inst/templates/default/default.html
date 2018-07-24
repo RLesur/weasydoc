@@ -47,7 +47,7 @@ $endif$
           line-height: $if(lineheight)$$lineheight$$else$1$endif$;
         }
         code, kbd, listing, plaintext, pre, samp, tt, xmp {
-          font-family: "Courier New", "DejaVu Sans Mono", "DejaVu LGC Sans Mono", "Liberation Mono", monospace;
+          font-family: $if(monofont)$"$monofont$", $endif$"Courier New", "DejaVu Sans Mono", "DejaVu LGC Sans Mono", "Liberation Mono", monospace;
         }
       }
   </style>
