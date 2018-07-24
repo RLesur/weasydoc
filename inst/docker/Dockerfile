@@ -19,7 +19,9 @@ RUN mkdir -p /usr/share/fonts/truetype/firacode \
   && wget -O /usr/share/fonts/truetype/firacode/FiraCode-Retina.ttf "https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-Retina.ttf?raw=true"
 
 # Install MS fonts
-RUN wget http://ftp.de.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.7_all.deb \
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends cabextract xfonts-utils fonts-liberation2 \
+  && wget http://ftp.de.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.7_all.deb \
   && apt install ./ttf-mscorefonts-installer_3.7_all.deb \
   && rm ttf-mscorefonts-installer_3.7_all.deb
 
