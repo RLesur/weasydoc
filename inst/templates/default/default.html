@@ -35,6 +35,7 @@ $endif$
         margin-right: $if(margin-right)$$margin-right$$else$15%$endif$;
         margin-bottom: $if(margin-bottom)$$margin-bottom$$else$18%$endif$;
         margin-left: $if(margin-left)$$margin-left$$else$15%$endif$;
+        $if(pagecounter)$@$pagecounter${content: counter(page);}$endif$
       }
       @page portrait {size: portrait;}
       .portrait {page: portrait;}
@@ -50,6 +51,7 @@ $endif$
           font-family: $if(monofont)$"$monofont$", $endif$"Courier New", "DejaVu Sans Mono", "DejaVu LGC Sans Mono", "Liberation Mono", monospace;
           font-size: $if(monofontsize)$$monofontsize$$else$1em$endif$;
         }
+        p {text-align: $if(textalign)$$textalign$$else$justify$endif$;}
       }
   </style>
 $for(css)$

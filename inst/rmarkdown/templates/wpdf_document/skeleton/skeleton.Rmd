@@ -55,6 +55,14 @@ You can change `monofont`.
 
 ### monofontsize
 
+### Text alignment
+
+The text is justified by default. You can modify this behavior with the `textalign` variable. See values in CSS specifications.
+
+### Page counter
+
+You can add page counter with the `pagecounter` variable
+
 ## Built-in classes
 
 The `weasydoc::wpdf_document` provides a set of built-in classes. They can be overridden with a customized `CSS` style.
