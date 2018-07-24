@@ -42,8 +42,13 @@ $endif$
       .landscape {page: landscape;}
       @media print {
         html {
+          font-family: "Times New Roman", serif;
           font-size: $if(fontsize)$$fontsize$$else$11pt$endif$;
-          line-height: $if(lineheight)$$lineheight$$else$1.5$endif$;
+          line-height: $if(lineheight)$$lineheight$$else$1$endif$;
+        }
+        code, kbd, listing, plaintext, pre, samp, tt, xmp {
+          font-family: "Courier New", monospace;
+          font-size: 0.95em;
         }
       }
   </style>
