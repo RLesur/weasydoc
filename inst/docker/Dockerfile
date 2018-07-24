@@ -18,6 +18,11 @@ RUN mkdir -p /usr/share/fonts/truetype/firacode \
   && wget -O /usr/share/fonts/truetype/firacode/FiraCode-Regular.ttf "https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-Regular.ttf?raw=true" \
   && wget -O /usr/share/fonts/truetype/firacode/FiraCode-Retina.ttf "https://github.com/tonsky/FiraCode/blob/master/distr/ttf/FiraCode-Retina.ttf?raw=true"
 
+# Install MS fonts
+RUN wget http://ftp.de.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.7_all.deb \
+  && apt install ./ttf-mscorefonts-installer_3.7_all.deb \
+  && rm ttf-mscorefonts-installer_3.7_all.deb
+
 # Avoid warning during package installation
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -28,7 +33,6 @@ RUN apt-get update \
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     build-essential \
-    ttf-mscorefonts-installer \
     libcairo2 \
     libffi-dev \
     libgdk-pixbuf2.0-0 \
