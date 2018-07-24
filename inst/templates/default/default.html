@@ -46,6 +46,7 @@ $endif$
           font-family: $if(mainfont)$"$mainfont$", $endif$$if(main-sans-serif)$"TeX Gyre Heros", "Arial", "DejaVu Sans", "DejaVu LGC Sans", "Liberation Sans", sans-serif$else$"Tex Gyre Termes", "Times New Roman", "DejaVu Serif", "DejaVu LGC Serif", "Liberation Serif", serif$endif$;
           font-size: $if(fontsize)$$fontsize$$else$11pt$endif$;
           line-height: $if(lineheight)$$lineheight$$else$1$endif$;
+          color: cmyk(100%, 100%, 100%, 100%);
         }
         h1, h2, h3, h4, h5, h6 {
           font-family: $if(titlefont)$"$titlefont$", $endif$$if(titles-serif)$"Tex Gyre Termes", "Times New Roman", "DejaVu Serif", "DejaVu LGC Serif", "Liberation Serif", serif$else$"TeX Gyre Heros", "Arial", "DejaVu Sans", "DejaVu LGC Sans", "Liberation Sans", sans-serif$endif$;
@@ -58,7 +59,24 @@ $endif$
         }
         p {text-align: $if(textalign)$$textalign$$else$justify$endif$;}
         a:link {text-decoration: none; color: #377063; color: cmyk(51%, 0%, 12%, 56%);}
+        .toc {color: #20435C;color: cmyk(65%, 27%, 0%, 64%);page-break-before: always;}
+        .toc a:link {color: #20435C;color: cmyk(65%, 27%, 0%, 64%);}
+        .toc ul {counter-reset: toc-section;list-style: none;padding-left: 1em;}
+        .toc li::before {
+          counter-increment: toc-section;
+          content: counters(toc-section, ".") " ";
+        }
+        .toc a[href]::after {
+          content: target-counter(attr(href), page);
+        }
       }
+    $if(number-sections)$
+    section:first-of-type {counter-reset: section;}
+    section {counter-increment: section;}
+    .level1>h1::before, h2:not(.toc-title)::before, h3::before, h4::before, h5::before, h6::before {
+      content: counters(section, ".") " ";
+    }
+    $endif$
   </style>
 $for(css)$
   <link rel="stylesheet" href="$css$" />
@@ -92,7 +110,8 @@ $endif$
 </header>
 $endif$
 $if(toc)$
-<nav id="$idprefix$TOC">
+<nav id="$idprefix$TOC" class="toc">
+<h2 class="toc-title">Table of contents</h2>
 $table-of-contents$
 </nav>
 $endif$
