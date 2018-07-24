@@ -28,7 +28,7 @@ RUN apt-get update \
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
     build-essential \
-    msttcorefonts \
+    ttf-mscorefonts-installer \
     libcairo2 \
     libffi-dev \
     libgdk-pixbuf2.0-0 \
