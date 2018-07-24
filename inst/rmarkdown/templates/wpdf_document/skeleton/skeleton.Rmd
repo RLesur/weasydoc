@@ -43,7 +43,7 @@ The default value is 1. If you want double line spacing, you can set the `linehe
 
 ### Using a `sans-serif` main font
 
-The defaut main font is a `serif` font. If you prefer a `sans-serif` font, you can add the `sans-serif: true` option to the `YAML` header.
+The defaut main font is a `serif` font. If you prefer a `sans-serif` font, you can add the `main-sans-serif: true` option to the `YAML` header.
 
 ### Specify `mainfont`
 
@@ -52,6 +52,10 @@ With `mainfont`, you can change the main font for the document.
 ### Specify `monofont`
 
 You can change `monofont`.
+
+### Font titles
+
+Use `titlefont` or `title-serif`.
 
 ### monofontsize
 

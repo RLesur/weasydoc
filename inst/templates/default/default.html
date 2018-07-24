@@ -43,15 +43,21 @@ $endif$
       .landscape {page: landscape;}
       @media print {
         html {
-          font-family: $if(mainfont)$"$mainfont$", $endif$$if(sans-serif)$"Arial", "DejaVu Sans", "DejaVu LGC Sans", "Liberation Sans", sans-serif$else$"Times New Roman", "DejaVu Serif", "DejaVu LGC Serif", "Liberation Serif", serif$endif$;
+          font-family: $if(mainfont)$"$mainfont$", $endif$$if(main-sans-serif)$"TeX Gyre Heros", "Arial", "DejaVu Sans", "DejaVu LGC Sans", "Liberation Sans", sans-serif$else$"Tex Gyre Termes", "Times New Roman", "DejaVu Serif", "DejaVu LGC Serif", "Liberation Serif", serif$endif$;
           font-size: $if(fontsize)$$fontsize$$else$11pt$endif$;
           line-height: $if(lineheight)$$lineheight$$else$1$endif$;
         }
+        h1, h2, h3, h4, h5, h6 {
+          font-family: $if(titlefont)$"$titlefont$", $endif$$if(titles-serif)$"Tex Gyre Termes", "Times New Roman", "DejaVu Serif", "DejaVu LGC Serif", "Liberation Serif", serif$else$"TeX Gyre Heros", "Arial", "DejaVu Sans", "DejaVu LGC Sans", "Liberation Sans", sans-serif$endif$;
+          color: #20435C;
+          color: cmyk(65%, 27%, 0%, 64%);
+        }
         code, kbd, listing, plaintext, pre, samp, tt, xmp {
-          font-family: $if(monofont)$"$monofont$", $endif$"Courier New", "DejaVu Sans Mono", "DejaVu LGC Sans Mono", "Liberation Mono", monospace;
-          font-size: $if(monofontsize)$$monofontsize$$else$1em$endif$;
+          font-family: $if(monofont)$"$monofont$", $endif$"TeX Gyre Cursor", "Courier New", "DejaVu Sans Mono", "DejaVu LGC Sans Mono", "Liberation Mono", monospace;
+          font-size: $if(monofontsize)$$monofontsize$$else$0.9em$endif$;
         }
         p {text-align: $if(textalign)$$textalign$$else$justify$endif$;}
+        a:link {text-decoration: none; color: #377063; color: cmyk(51%, 0%, 12%, 56%);}
       }
   </style>
 $for(css)$
