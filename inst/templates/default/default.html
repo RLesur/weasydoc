@@ -42,13 +42,16 @@ $endif$
       .landscape {page: landscape;}
       @media print {
         html {
-          font-family: "Times New Roman", serif;
+          $if(sans-serif)$
+          font-family: "Arial", "DejaVu Sans", "DejaVu LGC Sans", "Liberation Sans", sans-serif;
+          $else$
+          font-family: "Times New Roman", "DejaVu Serif", "DejaVu LGC Serif", "Liberation Serif", serif;
+          $endif$
           font-size: $if(fontsize)$$fontsize$$else$11pt$endif$;
           line-height: $if(lineheight)$$lineheight$$else$1$endif$;
         }
         code, kbd, listing, plaintext, pre, samp, tt, xmp {
-          font-family: "Courier New", monospace;
-          font-size: 0.95em;
+          font-family: "Courier New", "DejaVu Sans Mono", "DejaVu LGC Sans Mono", "Liberation Mono", monospace;
         }
       }
   </style>
