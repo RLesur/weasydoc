@@ -48,6 +48,7 @@ $endif$
         }
         code, kbd, listing, plaintext, pre, samp, tt, xmp {
           font-family: $if(monofont)$"$monofont$", $endif$"Courier New", "DejaVu Sans Mono", "DejaVu LGC Sans Mono", "Liberation Mono", monospace;
+          font-size: $if(monofontsize)$$monofontsize$$else$1em$endif$;
         }
       }
   </style>

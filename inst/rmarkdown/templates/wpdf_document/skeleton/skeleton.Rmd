@@ -53,6 +53,8 @@ With `mainfont`, you can change the main font for the document.
 
 You can change `monofont`.
 
+### monofontsize
+
 ## Built-in classes
 
 The `weasydoc::wpdf_document` provides a set of built-in classes. They can be overridden with a customized `CSS` style.
