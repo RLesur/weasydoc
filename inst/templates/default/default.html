@@ -42,11 +42,7 @@ $endif$
       .landscape {page: landscape;}
       @media print {
         html {
-          $if(sans-serif)$
-          font-family: "Arial", "DejaVu Sans", "DejaVu LGC Sans", "Liberation Sans", sans-serif;
-          $else$
-          font-family: "Times New Roman", "DejaVu Serif", "DejaVu LGC Serif", "Liberation Serif", serif;
-          $endif$
+          font-family: $if(mainfont)$"$mainfont$", $endif$$if(sans-serif)$"Arial", "DejaVu Sans", "DejaVu LGC Sans", "Liberation Sans", sans-serif$else$"Times New Roman", "DejaVu Serif", "DejaVu LGC Serif", "Liberation Serif", serif$endif$;
           font-size: $if(fontsize)$$fontsize$$else$11pt$endif$;
           line-height: $if(lineheight)$$lineheight$$else$1$endif$;
         }

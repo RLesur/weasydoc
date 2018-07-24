@@ -45,6 +45,10 @@ The default value is 1. If you want double line spacing, you can set the `linehe
 
 The defaut main font is a `serif` font. If you prefer a `sans-serif` font, you can add the `sans-serif: true` option to the `YAML` header.
 
+### Specify `mainfont`
+
+With `mainfont`, you can change the main font for the document.
+
 ## Built-in classes
 
 The `weasydoc::wpdf_document` provides a set of built-in classes. They can be overridden with a customized `CSS` style.
