@@ -58,16 +58,33 @@ $endif$
           font-size: $if(monofontsize)$$monofontsize$$else$0.9em$endif$;
         }
         p {text-align: $if(textalign)$$textalign$$else$justify$endif$;}
-        a:link {text-decoration: none; color: #377063; color: cmyk(51%, 0%, 12%, 56%);}
-        .toc {color: #20435C;color: cmyk(65%, 27%, 0%, 64%);page-break-before: always;}
-        .toc a:link {color: #20435C;color: cmyk(65%, 27%, 0%, 64%);}
-        .toc ul {counter-reset: toc-section;list-style: none;padding-left: 1em;}
+        a:link {
+          text-decoration: none;
+          color: #377063;
+          color: cmyk(51%, 0%, 12%, 56%);
+        }
+        .toc {
+          color: #20435C;
+          color: cmyk(65%, 27%, 0%, 64%);
+          page-break-before: always;
+        }
+        .toc a:link {
+          color: #20435C;
+          color: cmyk(65%, 27%, 0%, 64%);
+        }
+        .toc ul {
+          counter-reset: toc-section;
+          list-style: none;
+          padding-left: 0;
+          margin-left: 0.5em;
+        }
         .toc li::before {
           counter-increment: toc-section;
           content: counters(toc-section, ".") " ";
         }
         .toc a[href]::after {
           content: target-counter(attr(href), page);
+          float: right;
         }
       }
     $if(number-sections)$
