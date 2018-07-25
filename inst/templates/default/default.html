@@ -73,15 +73,17 @@ $endif$
           color: cmyk(65%, 27%, 0%, 64%);
         }
         .toc ul {
-          counter-reset: toc-section;
+          $if(number-sections)$counter-reset: toc-section;$endif$
           list-style: none;
           padding-left: 0;
           margin-left: 0.5em;
         }
+        $if(number-sections)$
         .toc li::before {
           counter-increment: toc-section;
           content: counters(toc-section, ".") " ";
         }
+        $endif$
         .toc a[href]::after {
           content: target-counter(attr(href), page);
           float: right;
