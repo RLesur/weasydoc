@@ -27,11 +27,13 @@ NULL
 #'   you've created. See the documentation on
 #'   [`pandoc` online documentation](http://pandoc.org/MANUAL.html#templates)
 #'   for details on creating custom templates.
+#' @param number_sections `TRUE` to number section headings.
 #' @inheritParams wpdf_document_base
 #' @return R Markdown output format to pass to `rmarkdown::render`.
 #' @export
 wpdf_document <- function(toc = FALSE,
                           toc_depth = 3,
+                          number_sections = FALSE,
                           fig_width = 5,
                           fig_height = 4,
                           fig_caption = TRUE,
@@ -53,9 +55,18 @@ wpdf_document <- function(toc = FALSE,
                           includes = NULL,
                           md_extensions = NULL,
                           pandoc_args = NULL) {
+  # init args
+  args <- c()
+
   if (identical(template, "default")) {
     template <- system.file("templates", "default", "default.html", package = "weasydoc")
   }
+
+  if (isTRUE(number_sections)) {
+    args <- c("-V", "number-sections", args)
+  }
+
+  args <- c(args, pandoc_args)
 
   wpdf_document_base(toc = toc,
                      toc_depth = toc_depth,
@@ -79,5 +90,5 @@ wpdf_document <- function(toc = FALSE,
                      css = css,
                      includes = includes,
                      md_extensions = md_extensions,
-                     pandoc_args = pandoc_args)
+                     pandoc_args = args)
 }

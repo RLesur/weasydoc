@@ -4,18 +4,20 @@
 \alias{wpdf_document}
 \title{Convert a RMarkdown file to pdf using Weasyprint}
 \usage{
-wpdf_document(toc = FALSE, toc_depth = 3, fig_width = 5, fig_height = 4,
-  fig_caption = TRUE, dev = "png", dpi = 96, fig_retina = 8,
-  df_print = NULL, attach_code = FALSE, highlight = "default",
-  math_engine = "webtex_svg", template = "default", keep_md = FALSE,
-  keep_html = FALSE, self_contained = TRUE, wpdf_engine = "weasyprint",
-  smart = TRUE, verbose = FALSE, css = NULL, includes = NULL,
-  md_extensions = NULL, pandoc_args = NULL)
+wpdf_document(toc = FALSE, toc_depth = 3, number_sections = FALSE,
+  fig_width = 5, fig_height = 4, fig_caption = TRUE, dev = "png",
+  dpi = 96, fig_retina = 8, df_print = NULL, attach_code = FALSE,
+  highlight = "default", math_engine = "webtex_svg", template = "default",
+  keep_md = FALSE, keep_html = FALSE, self_contained = TRUE,
+  wpdf_engine = "weasyprint", smart = TRUE, verbose = FALSE, css = NULL,
+  includes = NULL, md_extensions = NULL, pandoc_args = NULL)
 }
 \arguments{
 \item{toc}{\code{TRUE} to include a table of contents in the output}
 
 \item{toc_depth}{Depth of headers to include in table of contents}
+
+\item{number_sections}{\code{TRUE} to number section headings.}
 
 \item{fig_width}{Default width (in inches) for figures}
 
