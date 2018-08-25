@@ -18,6 +18,7 @@
 #'   pandoc_options from_rmarkdown output_format pandoc_path_arg pandoc_toc_args
 #'   pandoc_highlight_args pandoc_latex_engine_args pandoc_convert
 #' @importFrom tools file_path_sans_ext file_path_as_absolute
+#' @include utils.R
 NULL
 
 #' Base output format for PDF/HTML/CSS output formats
@@ -37,8 +38,10 @@ NULL
 #'   pass an arbitrary function to be used for printing data frames. You can
 #'   disable the `df_print` behavior entirely by setting the option
 #'   `rmarkdown.df_print` to `FALSE`.
+#' @param attach_code Add the `Rmd` source code as an attachment to the `PDF`
+#'   document.
 #' @param wpdf_engine `HTML` to `PDF` engine for producing `PDF` output. Options
-#'   are `"wkhtmltopdf"`, `"weasyprint"` and `"prince"`. Default is
+#'   are `"weasyprint"` and `"prince"`. Default is
 #'   [`weasyprint`](http://weasyprint.org/).
 #' @param verbose Is `--verbose` option passed to `pandoc`? Use `TRUE` to
 #'   inspect `pandoc`'s `HTML`.
@@ -50,6 +53,9 @@ NULL
 #'   change the `dpi` parameter to `dpi * fig.retina`, and `fig_width` to
 #'   `fig_width * dpi / fig_retina` internally; for example, the physical size
 #'   of an image is doubled and its display size is halved when `fig_retina = 2`.
+#' @param math_engine Method to be used to render `TeX` math. Valid values
+#'   include `"unicode"`, `"mathjax"`, `"mathml"`, `"webtex_svg"`, `"webtex_png"`
+#'   and `"katex"`. See the `pandoc` manual for details.
 #' @inheritParams rmarkdown::html_document
 #' @inheritParams rmarkdown::output_format
 #'
@@ -64,7 +70,9 @@ wpdf_document_base <- function(toc = FALSE,
                                dpi = 96,
                                fig_retina = 8,
                                df_print = NULL,
+                               attach_code = FALSE,
                                highlight = "default",
+                               math_engine = "webtex_svg",
                                template = NULL,
                                keep_md = FALSE,
                                keep_html = FALSE,
@@ -76,7 +84,13 @@ wpdf_document_base <- function(toc = FALSE,
                                includes = NULL,
                                md_extensions = NULL,
                                pandoc_args = NULL) {
-  # initialize the post_processor
+  # test Pandoc version
+  if (!is_pandoc_compatible()) {
+    stop("Pandoc version 2.1.3 or greater is required.\n")
+  }
+
+  # initialize pre and post processors
+  pre_processor <- NULL
   post_processor <- NULL
 
   # knitr options and hooks
@@ -89,7 +103,7 @@ wpdf_document_base <- function(toc = FALSE,
   )
 
   # smart extension
-  md_extensions <- c(md_extensions, if (smart) "+smart")
+  md_extensions <- c(md_extensions, if (isTRUE(smart)) "+smart")
   from <- rmarkdown::from_rmarkdown(fig_caption, md_extensions)
 
   # base pandoc options for all HTML/CSS to PDF output
@@ -99,16 +113,21 @@ wpdf_document_base <- function(toc = FALSE,
   args <- c(args, rmarkdown::pandoc_toc_args(toc, toc_depth))
 
   # highlighting
-  if (!is.null(highlight))
+  if (!is.null(highlight)) {
     highlight <- match.arg(highlight, highlighters())
+  }
   args <- c(args, rmarkdown::pandoc_highlight_args(highlight))
 
   # verbose pandoc execution (use to inspect intermediate HTML)
-  args <- c(args, if (verbose) "--verbose")
+  args <- c(args, if (isTRUE(verbose)) "--verbose")
+
+  # math engine
+  args <- c(args, pandoc_math_engine_args(math_engine))
 
   # template
-  if (!is.null(template))
+  if (!is.null(template)) {
     args <- c(args, "--template", rmarkdown::pandoc_path_arg(template))
+  }
 
   # additional css
   for (css_file in css)
@@ -121,16 +140,23 @@ wpdf_document_base <- function(toc = FALSE,
   args <- c(args, pandoc_args)
 
   # HTML to PDF engine
-  wpdf_engine <- match.arg(wpdf_engine, c("wkhtmltopdf", "weasyprint", "prince"))
+  wpdf_engine <- match.arg(wpdf_engine, c("weasyprint", "prince"))
   args_with_engine <- c(args, rmarkdown::pandoc_latex_engine_args(wpdf_engine))
 
   # Activate HTML presentation hints for WeasyPrint
-  if (wpdf_engine == "weasyprint")
+  if (identical(wpdf_engine, "weasyprint")) {
     args_with_engine <- c(args_with_engine, "--pdf-engine-opt", "-p")
+  }
 
-  if (!keep_html)
+  # Run JavaScript by default with Prince
+  if (identical(wpdf_engine, "prince")) {
+    args_with_engine <- c(args_with_engine, "--pdf-engine-opt", "--javascript")
+  }
+
+  if (!isTRUE(keep_html)) {
     self_contained <- TRUE
-  clean_supporting <-  self_contained
+  }
+  clean_supporting <- self_contained
 
   pandoc <- rmarkdown::pandoc_options(
     to = "html5",
@@ -139,10 +165,29 @@ wpdf_document_base <- function(toc = FALSE,
     ext = ".pdf"
   )
 
-  if (keep_html) {
-    post_processor <- function(metadata, input_file, output_file, clean, verbose) {
+  # get the rmd_file path using a pre_knit
+  # it is useful only with attach_code=TRUE
+  rmd_file <- NULL
+  pre_knit <- function(input, ...) {
+    rmd_file <<- input
+  }
+
+  if (isTRUE(attach_code)) {
+    pre_processor <- function(metadata, input_file, runtime, knit_meta, files_dir,
+                              output_dir) {
+      # Attach Rmd file
+      if (identical(wpdf_engine, "weasyprint"))
+        return(c("--pdf-engine-opt", "-a","--pdf-engine-opt", rmd_file))
+      if (identical(wpdf_engine, "prince"))
+        return(c("--pdf-engine-opt", paste0("--attach=", rmd_file)))
+    }
+  }
+
+  if (isTRUE(keep_html)) {
+    post_processor <- function(metadata, input_file, output_file, clean,
+                               verbose) {
       output <- paste0(tools::file_path_sans_ext(output_file), ".html")
-      options <- c(args, "--standalone", if (self_contained) "--self-contained")
+      options <- c(args, "--standalone", if (isTRUE(self_contained)) "--self-contained")
       wd <- dirname(tools::file_path_as_absolute(input_file))
       rmarkdown::pandoc_convert(
         input = input_file,
@@ -162,5 +207,7 @@ wpdf_document_base <- function(toc = FALSE,
                            keep_md = keep_md,
                            clean_supporting = clean_supporting,
                            df_print = df_print,
+                           pre_knit = pre_knit,
+                           pre_processor = pre_processor,
                            post_processor = post_processor)
 }

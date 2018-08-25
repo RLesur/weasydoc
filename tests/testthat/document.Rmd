@@ -1,0 +1,17 @@
+---
+title: "Document rendered with PDF engine"
+author: "Author"
+lang: en
+---
+
+## Section
+
+Some text.
+
+Some math: $\sqrt{\frac{\pi}{2}}$
+
+```{js echo=FALSE}
+var newHeader = document.createElement('h3');
+newHeader.textContent = "Created with Javascript";
+document.body.appendChild(newHeader);
+```

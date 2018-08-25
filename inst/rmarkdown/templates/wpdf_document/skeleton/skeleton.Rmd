@@ -1,0 +1,92 @@
+---
+title: "Untitled"
+author: "Your Name"
+date: |
+  `r format(Sys.time(), '%d %B, %Y')`
+lang: en-US
+output: weasydoc::wpdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+With this template, you can use `CSS` for paged document (pdf).
+
+## Top level variables
+
+### Compulsory variable: `lang`
+
+There is only one compulsory variable: `lang` that defines the language of the document.  
+See the [language variables section](http://pandoc.org/MANUAL.html#language-variables) of the `pandoc` documentation.
+
+### Papersize
+
+The `papersize` variable control the size of the pages. You can use:
+
+- a well-known size: `a4`, `letter`... 
+You can add `landscape` for orientation, for instance: `"a5 landscape"`.
+- a customized size: `"4in 6in"`...
+
+### Margins
+
+There is no `geometry` option. In order to control the margins, you have to use `margin-top`, `margin-right`, `margin-bottom` and `margin-left` variables.
+
+### Font size
+
+The `fontsize` variable control the main size of the font for the document. Its default value is `11pt`.
+
+### Line spacing
+
+The line spacing is controlled by the `lineheight` variable. It replaces the `linestretch` variable of `pdf_document`.  
+The default value is 1. If you want double line spacing, you can set the `lineheight` value to 2.
+
+### Using a `sans-serif` main font
+
+The defaut main font is a `serif` font. If you prefer a `sans-serif` font, you can add the `main-sans-serif: true` option to the `YAML` header.
+
+### Specify `mainfont`
+
+With `mainfont`, you can change the main font for the document.
+
+### Specify `monofont`
+
+You can change `monofont`.
+
+### Font titles
+
+Use `titlefont` or `title-serif`.
+
+### monofontsize
+
+### Text alignment
+
+The text is justified by default. You can modify this behavior with the `textalign` variable. See values in CSS specifications.
+
+### Page counter
+
+You can add page counter with the `pagecounter` variable
+
+### Number sections
+
+Use `number-sections`.
+
+## Built-in classes
+
+The `weasydoc::wpdf_document` provides a set of built-in classes. They can be overridden with a customized `CSS` style.
+
+### Paper orientation
+
+You can add the class `portrait` or `landscape` to change the orientation.
+
+For instance, the following `data.frame` will be print in landscape mode.
+
+    `r ''````{r echo=FALSE, class.output="landscape"}
+    mtcars
+    ```
+
+```{r echo=FALSE, class.output="landscape"}
+mtcars
+```
+
+

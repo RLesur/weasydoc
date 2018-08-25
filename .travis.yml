@@ -1,0 +1,29 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+
+language: r
+sudo: false
+cache: packages
+pandoc_version: 2.2.1
+
+addons:
+  apt:
+    packages:
+    - ttf-dejavu
+    - python3-pip
+    - libgdk-pixbuf2.0-0
+    - libwebp-dev
+    - libpoppler-cpp-dev
+    - poppler-data
+    - valgrind
+
+before_install:
+  - sudo pip3 install --upgrade wheel
+  - sudo pip3 install --upgrade setuptools
+  - sudo pip3 install --upgrade cffi
+  - sudo pip3 install WeasyPrint
+  - wget https://www.princexml.com/download/prince_12-1_ubuntu14.04_amd64.deb
+  - sudo dpkg -i prince_12-1_ubuntu14.04_amd64.deb
+  - rm prince_12-1_ubuntu14.04_amd64.deb
+
+after_success:
+  - Rscript -e 'covr::codecov()'
