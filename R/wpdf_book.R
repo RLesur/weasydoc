@@ -14,31 +14,27 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#' @importFrom rmarkdown from_rmarkdown
-#' @include wpdf_document.R
+#' @importFrom bookdown html_document2
 NULL
 
 #' @export
-wpdf_book <- function(fig_caption = TRUE, md_extensions = NULL, pandoc_args = NULL, ...) {
-  from <- rmarkdown::from_rmarkdown(fig_caption, md_extensions)
+wpdf_document2 <- function(..., number_sections = TRUE, pandoc_args = NULL,
+                           base_format = rmarkdown::html_document) {
+  config <- bookdown::html_document2(...,
+                                     number_sections = number_sections,
+                                     pandoc_args = pandoc_args,
+                                     base_format = base_format)
 
-  config <- wpdf_document(
-    fig_caption = fig_caption, md_extensions = md_extensions, pandoc_args = pandoc_args, ...
-  )
-  pre <- config$pre_processor
-  config$pre_processor <- function(metadata, input_file, ...) {
-    # Pandoc does not support numbered sections for Word, so figures/tables have
-    # to be numbered globally from 1 to n
-    bookdown:::process_markdown(input_file, from, pandoc_args, TRUE, TRUE)
-    if (is.function(pre)) pre(metadata, input_file, ...)
-  }
   post <- config$post_processor
-  config$post_processor <- function(metadata, input, output, clean, verbose) {
+  config$post_processor <- function(metadata, input_file, output_file, clean, verbose) {
     if (is.function(post)) {
-      output <- post(metadata, input, output, clean, verbose)
+      output_file <- post(metadata, input_file, output_file, clean, verbose)
     }
-    bookdown:::move_output(output)
+    output <- paste0(tools::file_path_sans_ext(output_file), ".pdf")
+    system2("prince", c("--javascript", output_file, "-o", output))
+    output
   }
+
   config$bookdown_output_format <- 'pdf'
   config <- bookdown:::set_opts_knit(config)
   config
