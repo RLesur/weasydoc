@@ -4,9 +4,11 @@
 \alias{html2pdf}
 \title{Add conversion to pdf}
 \usage{
-html2pdf(base_format)
+html2pdf(..., base_format = rmarkdown::html_document)
 }
 \arguments{
+\item{...}{Arguments to be passed to a specific output format function.}
+
 \item{base_format}{Any \code{HTML} format.}
 }
 \value{
