@@ -46,7 +46,7 @@ $endif$
           font-family: $if(mainfont)$"$mainfont$", $endif$$if(main-sans-serif)$"TeX Gyre Heros", "Arial", "DejaVu Sans", "DejaVu LGC Sans", "Liberation Sans", sans-serif$else$"Tex Gyre Termes", "Times New Roman", "DejaVu Serif", "DejaVu LGC Serif", "Liberation Serif", serif$endif$;
           font-size: $if(fontsize)$$fontsize$$else$11pt$endif$;
           line-height: $if(lineheight)$$lineheight$$else$1em$endif$;
-          color: cmyk(100%, 100%, 100%, 100%);
+          color: cmyk(35%, 60%, 60%, 100%); /* Warm black */
         }
         h1, h2, h3, h4, h5, h6 {
           font-family: $if(titlefont)$"$titlefont$", $endif$$if(titles-serif)$"Tex Gyre Termes", "Times New Roman", "DejaVu Serif", "DejaVu LGC Serif", "Liberation Serif", serif$else$"TeX Gyre Heros", "Arial", "DejaVu Sans", "DejaVu LGC Sans", "Liberation Sans", sans-serif$endif$;
