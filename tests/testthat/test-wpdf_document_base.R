@@ -41,3 +41,12 @@ test_that("Keep html option", {
   unlink("prince.pdf")
   unlink("prince.html")
 })
+
+test_that("Include CSS works", {
+  rmarkdown::render("document.Rmd", wpdf_document_base(keep_html = TRUE, css = "css_file.css"), "include_css.pdf")
+  knitr::knit_meta()
+  expect_true(any(grepl("html {color: red;}", readLines("include_css.html"), fixed = TRUE)))
+
+  unlink("include_css.pdf")
+  unlink("include_css.html")
+})
