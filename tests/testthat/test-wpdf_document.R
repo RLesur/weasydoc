@@ -41,3 +41,16 @@ test_that("Keep html option", {
   unlink("prince.pdf")
   unlink("prince.html")
 })
+
+test_that("Numbered sections options", {
+  rmarkdown::render("document.Rmd", wpdf_document(number_sections = TRUE), "weasyprint.pdf")
+  knitr::knit_meta()
+  expect_true(file.exists("weasyprint.pdf"))
+  unlink("weasyprint.pdf")
+
+  rmarkdown::render("document.Rmd", wpdf_document(number_sections = TRUE, wpdf_engine = "prince"), "prince.pdf")
+  knitr::knit_meta()
+  expect_true(file.exists("prince.pdf"))
+  unlink("prince.pdf")
+})
+
