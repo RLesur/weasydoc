@@ -1,14 +1,14 @@
-context("test-wpdf_document_base.R")
+context("test-wpdf_document.R")
 
 test_that("Render with WeasyPrint-Default options", {
-  rmarkdown::render("document.Rmd", wpdf_document_base(), "weasyprint.pdf")
+  rmarkdown::render("document.Rmd", wpdf_document(), "weasyprint.pdf")
   knitr::knit_meta()
   expect_true(file.exists("weasyprint.pdf"))
   unlink("weasyprint.pdf")
 })
 
 test_that("Render with Prince-Default options", {
-  rmarkdown::render("document.Rmd", wpdf_document_base(wpdf_engine = "prince"), "prince.pdf")
+  rmarkdown::render("document.Rmd", wpdf_document(wpdf_engine = "prince"), "prince.pdf")
   knitr::knit_meta()
   expect_true(file.exists("prince.pdf"))
 
@@ -17,9 +17,9 @@ test_that("Render with Prince-Default options", {
 })
 
 test_that("Attach Rmd file correctly", {
-  rmarkdown::render("document.Rmd", wpdf_document_base(attach_code = TRUE), "weasyprint.pdf")
+  rmarkdown::render("document.Rmd", wpdf_document(attach_code = TRUE), "weasyprint.pdf")
   knitr::knit_meta()
-  rmarkdown::render("document.Rmd", wpdf_document_base(wpdf_engine = "prince", attach_code = TRUE), "prince.pdf")
+  rmarkdown::render("document.Rmd", wpdf_document(wpdf_engine = "prince", attach_code = TRUE), "prince.pdf")
   knitr::knit_meta()
 
   testthat::expect_equal(pdftools::pdf_attachments("weasyprint.pdf")[[1]]$name, "document.Rmd")
@@ -29,7 +29,7 @@ test_that("Attach Rmd file correctly", {
 })
 
 test_that("Keep html option", {
-  rmarkdown::render("document.Rmd", wpdf_document_base(keep_html = TRUE), "weasyprint.pdf")
+  rmarkdown::render("document.Rmd", wpdf_document(keep_html = TRUE), "weasyprint.pdf")
   knitr::knit_meta()
   expect_true(file.exists("weasyprint.html"))
   unlink("weasyprint.pdf")
@@ -42,11 +42,15 @@ test_that("Keep html option", {
   unlink("prince.html")
 })
 
-test_that("Include CSS works", {
-  rmarkdown::render("document.Rmd", wpdf_document_base(keep_html = TRUE, css = "css_file.css"), "include_css.pdf")
+test_that("Numbered sections options", {
+  rmarkdown::render("document.Rmd", wpdf_document(number_sections = TRUE), "weasyprint.pdf")
   knitr::knit_meta()
-  expect_true(any(grepl("html {color: red;}", readLines("include_css.html"), fixed = TRUE)))
+  expect_true(file.exists("weasyprint.pdf"))
+  unlink("weasyprint.pdf")
 
-  unlink("include_css.pdf")
-  unlink("include_css.html")
+  rmarkdown::render("document.Rmd", wpdf_document(number_sections = TRUE, wpdf_engine = "prince"), "prince.pdf")
+  knitr::knit_meta()
+  expect_true(file.exists("prince.pdf"))
+  unlink("prince.pdf")
 })
+

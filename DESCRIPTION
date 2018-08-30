@@ -9,7 +9,7 @@ Authors@R: c(
   )
 Description: Using weasydoc, one can use CSS layout to generate PDF from R Markdown.
 License: GPL-3
-Imports: bookdown, rmarkdown (>= 1.8.0), tools
+Imports: bookdown, rmarkdown (>= 1.8.0), tools, utils
 Suggests: 
     tibble,
     knitr,
@@ -24,6 +24,7 @@ RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 Collate: 
     'html2pdf.R'
+    'make_pdf.R'
     'utils.R'
     'wpdf_book.R'
     'wpdf_document_base.R'
