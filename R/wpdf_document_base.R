@@ -99,7 +99,8 @@ wpdf_document_base <- function(toc = FALSE,
                       dpi = dpi,
                       fig.width = fig_width,
                       fig.height = fig_height,
-                      fig.retina = fig_retina)
+                      fig.retina = fig_retina,
+                      screenshot.force = TRUE)
   )
 
   # smart extension
