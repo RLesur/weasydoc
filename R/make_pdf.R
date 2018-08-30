@@ -63,6 +63,7 @@ make_pdf <- function(file,
 }
 
 default_args <- function(engine = c("weasyprint", "prince")) {
+  engine <- match.arg(engine)
   switch(engine,
     weasyprint = c("--presentational-hints"),
     prince = c("--javascript")
