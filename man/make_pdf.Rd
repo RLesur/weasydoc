@@ -22,8 +22,9 @@ A character string of the path of the \code{PDF} output file (i.e., the
 value of the \code{pdf_file} argument).
 }
 \description{
-This function is a helper to use \code{WeasyPrint} or \code{Prince} in order to
-convert an \code{HTML} file to \code{PDF}.
+This function is a helper to use \href{https://weasyprint.org/}{WeasyPrint} or
+\href{https://www.princexml.com/}{Prince} in order to convert an \code{HTML} file to
+\code{PDF}.
 }
 \details{
 The \href{https://weasyprint.readthedocs.io/en/latest/api.html#cmdoption-p}{presentational hints option}

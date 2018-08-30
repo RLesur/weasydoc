@@ -19,8 +19,9 @@ NULL
 
 #' Generate a pdf from an html file
 #'
-#' This function is a helper to use `WeasyPrint` or `Prince` in order to
-#' convert an `HTML` file to `PDF`.
+#' This function is a helper to use [`WeasyPrint`](https://weasyprint.org/) or
+#' [`Prince`](https://www.princexml.com/) in order to convert an `HTML` file to
+#' `PDF`.
 #'
 #' The [presentational hints option](https://weasyprint.readthedocs.io/en/latest/api.html#cmdoption-p)
 #' is always enabled for `Weasyprint`.
