@@ -11,12 +11,13 @@ Authors@R: c(
 Description: Using weasydoc, one can use CSS layout to generate PDF from R Markdown.
 License: GPL-3
 Imports: bookdown, rmarkdown (>= 1.8.0), tools, utils
-Suggests: 
-    tibble,
+Suggests:
+    covr,
     knitr,
     pdftools,
     testthat,
-    covr
+    tibble,
+    webshot
 SystemRequirements: pandoc (>= 2.1.3), WeasyPrint (https://weasyprint.org/) or Prince XML (https://www.princexml.com/)
 Encoding: UTF-8
 LazyData: true
