@@ -14,10 +14,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#' @importFrom rmarkdown html_document
+#' @importFrom rmarkdown html_document output_format knitr_options
 NULL
 
 #' Add conversion to pdf
+#'
+#' This functions transforms an R Markdown HTML output format to a PDF
+#' output format using `WeasyPrint` or `Prince`.
 #'
 #' @param ... Arguments to be passed to a specific output format function.
 #' @param base_format Any `HTML` format.
@@ -31,6 +34,15 @@ html2pdf <- function(...,
                      base_format = rmarkdown::html_document) {
   base_format <- get_base_format(base_format)
   config <- base_format(...)
+  # Force screenshot
+  config <-
+    rmarkdown::output_format(
+      knitr = rmarkdown::knitr_options(
+        opts_chunk = list(screenshot.force = TRUE)
+        ),
+      pandoc = NULL,
+      base_format = config
+    )
 
   post <- config$post_processor
   config$post_processor <- function(metadata, input_file, output_file, clean, verbose) {

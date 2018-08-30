@@ -20,5 +20,6 @@ html2pdf(..., engine = c("weasyprint", "prince"), engine_opts = NULL,
 R Markdown output format to pass to \code{\link[rmarkdown:render]{rmarkdown::render()}}.
 }
 \description{
-Add conversion to pdf
+This functions transforms an R Markdown HTML output format to a PDF
+output format using \code{WeasyPrint} or \code{Prince}.
 }
