@@ -4,15 +4,20 @@
 \alias{html2pdf}
 \title{Add conversion to pdf}
 \usage{
-html2pdf(..., base_format = rmarkdown::html_document)
+html2pdf(..., engine = c("weasyprint", "prince"), engine_opts = NULL,
+  base_format = rmarkdown::html_document)
 }
 \arguments{
 \item{...}{Arguments to be passed to a specific output format function.}
 
+\item{engine}{A \code{PDF} engine.}
+
+\item{engine_opts}{A character vector of command-line arguments to be passed to \code{engine}.}
+
 \item{base_format}{Any \code{HTML} format.}
 }
 \value{
-R Markdown output format to pass to \code{rmarkdown::render}.
+R Markdown output format to pass to \code{\link[rmarkdown:render]{rmarkdown::render()}}.
 }
 \description{
 Add conversion to pdf

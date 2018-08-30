@@ -5,7 +5,8 @@ Version: 0.0.9000
 Authors@R: c(
   person("Romain", "Lesur", email = "romain.lesur@gmail.com", 
          role = c("aut", "cre"), comment = c(ORCID = "0000-0002-0721-5595")),
-  person(family = "Ministère de la Justice, République Française", role = "cph")
+  person(family = "Ministère de la Justice, République Française", role = "cph"),
+  person(family = "RStudio Inc", role = "cph", comment = "get_base_format function of the bookdown package")
   )
 Description: Using weasydoc, one can use CSS layout to generate PDF from R Markdown.
 License: GPL-3

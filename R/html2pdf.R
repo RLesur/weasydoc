@@ -21,26 +21,35 @@ NULL
 #'
 #' @param ... Arguments to be passed to a specific output format function.
 #' @param base_format Any `HTML` format.
+#' @inheritParams make_pdf
 #'
-#' @return R Markdown output format to pass to `rmarkdown::render`.
+#' @return R Markdown output format to pass to [rmarkdown::render()].
 #' @export
-html2pdf <- function(..., base_format = rmarkdown::html_document) {
+html2pdf <- function(...,
+                     engine = c("weasyprint", "prince"),
+                     engine_opts = NULL,
+                     base_format = rmarkdown::html_document) {
   base_format <- get_base_format(base_format)
-  config = base_format(...)
+  config <- base_format(...)
 
   post <- config$post_processor
   config$post_processor <- function(metadata, input_file, output_file, clean, verbose) {
     if (is.function(post)) {
       output_file <- post(metadata, input_file, output_file, clean, verbose)
     }
-    output <- paste0(tools::file_path_sans_ext(output_file), ".pdf")
-    system2("prince", c("--javascript", output_file, "-o", output))
-    output
+    if (clean) {
+      on.exit(unlink(output_file), add = TRUE)
+    }
+    make_pdf(output_file, engine = engine, engine_opts = engine_opts)
   }
-
   config
 }
 
+# Since the bookdown package does not export the get_base_format function
+# the source code of this function is copied below.
+# Source: https://github.com/rstudio/bookdown
+# License: GPL-3
+# Copyright holders: RStudio Inc
 get_base_format <- function(format) {
   if (is.character(format)) {
     format = eval(parse(text = format))

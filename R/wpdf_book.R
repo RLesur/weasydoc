@@ -14,12 +14,25 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#' @include make_pdf.R
 #' @importFrom bookdown html_document2
 NULL
 
+#' Output format for producing a bookdown pdf
+#'
+#' @inheritParams bookdown::html_document2
+#' @inheritParams make_pdf
+#' @return An R Markdown output format object to be passed to
+#'   [rmarkdown::render()].
 #' @export
-wpdf_document2 <- function(..., number_sections = TRUE, pandoc_args = NULL,
+wpdf_document2 <- function(...,
+                           engine = c("weasyprint", "prince"),
+                           engine_opts = NULL,
+                           number_sections = TRUE,
+                           pandoc_args = NULL,
                            base_format = rmarkdown::html_document) {
+
+  engine <- match.arg(engine)
   config <- bookdown::html_document2(...,
                                      number_sections = number_sections,
                                      pandoc_args = pandoc_args,
@@ -30,12 +43,12 @@ wpdf_document2 <- function(..., number_sections = TRUE, pandoc_args = NULL,
     if (is.function(post)) {
       output_file <- post(metadata, input_file, output_file, clean, verbose)
     }
-    output <- paste0(tools::file_path_sans_ext(output_file), ".pdf")
-    system2("prince", c("--javascript", output_file, "-o", output))
-    output
+    if (clean) {
+      on.exit(unlink(output_file), add = TRUE)
+    }
+    make_pdf(output_file, engine = engine, engine_opts = engine_opts)
   }
-
   config$bookdown_output_format <- 'pdf'
-  config <- bookdown:::set_opts_knit(config)
+  # config <- bookdown:::set_opts_knit(config)
   config
 }
