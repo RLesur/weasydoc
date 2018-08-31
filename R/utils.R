@@ -31,3 +31,27 @@ weasyprint_available <- function() {
 prince_available <- function() {
   is_installed("prince")
 }
+
+pandoc_notes_args <- function(notes = c("endnotes", "footnotes"),
+                              engine = c("weasyprint", "prince")) {
+  engine <- match.arg(engine)
+  notes <- match.arg(notes)
+  if (notes == "footnotes" && engine == "weasyprint") {
+    stop("Notes as footnotes are not supported by WeasyPrint.\n",
+         "Use endnotes or prince engine")
+  }
+  if (notes == "footnotes") {
+    # test Pandoc version. Required for the footnotes lua filter.
+    if (!is_pandoc_compatible()) {
+      stop("Pandoc version 2.1.3 or greater is required.\n")
+    }
+
+    luafilter <- system.file("luafilters", "footnotes.lua", package = "weasydoc")
+    css <- system.file("templates", "default", "footnotes.css", package = "weasydoc")
+    return(c("--lua-filter",
+             rmarkdown::pandoc_path_arg(luafilter),
+             pandoc_css_arg(css)
+    ))
+  }
+  NULL
+}

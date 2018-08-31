@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #' @include make_pdf.R
+#' @include utils.R
 #' @importFrom bookdown html_document2
 NULL
 
@@ -22,6 +23,7 @@ NULL
 #'
 #' @inheritParams bookdown::html_document2
 #' @inheritParams make_pdf
+#' @inheritParams html2pdf
 #' @return An R Markdown output format object to be passed to
 #'   [rmarkdown::render()].
 #' @export
@@ -30,9 +32,14 @@ wpdf_document2 <- function(...,
                            engine_opts = NULL,
                            number_sections = TRUE,
                            pandoc_args = NULL,
+                           notes = c("endnotes", "footnotes"),
                            base_format = rmarkdown::html_document) {
 
   engine <- match.arg(engine)
+  notes <- match.arg(notes)
+  pandoc_args <- c(pandoc_args,
+                   pandoc_notes_args(notes = notes, engine = engine)
+                   )
   config <- bookdown::html_document2(...,
                                      number_sections = number_sections,
                                      pandoc_args = pandoc_args,

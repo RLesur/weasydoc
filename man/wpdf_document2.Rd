@@ -5,8 +5,8 @@
 \title{Output format for producing a bookdown pdf}
 \usage{
 wpdf_document2(..., engine = c("weasyprint", "prince"), engine_opts = NULL,
-  number_sections = TRUE, pandoc_args = NULL,
-  base_format = rmarkdown::html_document)
+  number_sections = TRUE, pandoc_args = NULL, notes = c("endnotes",
+  "footnotes"), base_format = rmarkdown::html_document)
 }
 \arguments{
 \item{...}{Arguments to be passed to a
@@ -29,6 +29,9 @@ section headers in this case.}
 specific output format function. For a function \code{foo2()}, its
 arguments are passed to \code{foo()}, e.g. \code{...} of
 \code{html_document2()} are passed to \code{rmarkdown::html_document()}.}
+
+\item{notes}{Render notes as endnotes or footnotes. Footnotes are not
+yet supported by WeasyPrint and are only well rendered with Prince.}
 
 \item{base_format}{An output format function to be used as the base format.}
 }

@@ -15,6 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #' @include make_pdf.R
+#' @include utils.R
 #' @importFrom rmarkdown html_document output_format knitr_options
 #'     pandoc_path_arg
 NULL
@@ -45,7 +46,6 @@ html2pdf <- function(...,
                      notes = c("endnotes", "footnotes"),
                      base_format = rmarkdown::html_document) {
 
-  pandoc_args <- NULL
   base_format <- get_base_format(base_format)
   config <- base_format(...)
 
@@ -55,25 +55,7 @@ html2pdf <- function(...,
 
   engine <- match.arg(engine)
   notes <- match.arg(notes)
-  if (notes == "footnotes" && engine == "weasyprint") {
-    stop("Notes as footnotes are not supported by WeasyPrint.\n",
-         "Use endnotes or prince engine")
-  }
-  if (notes == "footnotes") {
-    # test Pandoc version. Required for the footnotes lua filter.
-    if (!is_pandoc_compatible()) {
-      stop("Pandoc version 2.1.3 or greater is required.\n")
-    }
-
-    luafilter <- system.file("luafilters", "footnotes.lua", package = "weasydoc")
-    css <- system.file("templates", "default", "footnotes.css", package = "weasydoc")
-    pandoc_args <- c(pandoc_args,
-                     "--lua-filter",
-                     rmarkdown::pandoc_path_arg(luafilter),
-                     "-c",
-                     rmarkdown::pandoc_path_arg(css)
-                     )
-  }
+  pandoc_args <- pandoc_notes_args(notes = notes, engine = engine)
 
   # get the rmd_file path using a pre_knit
   # it is useful only with attach_code=TRUE
