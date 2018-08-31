@@ -22,7 +22,9 @@ NULL
 #' Convert a HTML output format to a PDF output format
 #'
 #' This function transforms an R Markdown HTML output format to a PDF
-#' output format using `WeasyPrint` or `Prince`.
+#' output format using `WeasyPrint` or `Prince`. In order to get a good
+#' result, this kind of transformation usually requires some additional
+#' CSS rules for Paged Media.
 #'
 #' @param ... Arguments to be passed to a specific output format function.
 #' @param base_format Any `HTML` format.
@@ -42,10 +44,6 @@ html2pdf <- function(...,
                      keep_html = FALSE,
                      notes = c("endnotes", "footnotes"),
                      base_format = rmarkdown::html_document) {
-  # test Pandoc version
-  if (!is_pandoc_compatible()) {
-    stop("Pandoc version 2.1.3 or greater is required.\n")
-  }
 
   pandoc_args <- NULL
   base_format <- get_base_format(base_format)
@@ -62,6 +60,11 @@ html2pdf <- function(...,
          "Use endnotes or prince engine")
   }
   if (notes == "footnotes") {
+    # test Pandoc version. Required for the footnotes lua filter.
+    if (!is_pandoc_compatible()) {
+      stop("Pandoc version 2.1.3 or greater is required.\n")
+    }
+
     luafilter <- system.file("luafilters", "footnotes.lua", package = "weasydoc")
     css <- system.file("templates", "default", "footnotes.css", package = "weasydoc")
     pandoc_args <- c(pandoc_args,

@@ -14,7 +14,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#' @include utils.R
 #' @include html2pdf.R
 #' @importFrom rmarkdown from_rmarkdown html_document_base includes_to_pandoc_args
 #'     knitr_options output_format pandoc_highlight_args pandoc_options

@@ -80,5 +80,5 @@ base_url_args <- function(file, engine = c("weasyprint", "prince")) {
 get_base_url <- function(file) {
   dir <- normalizePath(dirname(file), winslash = "/")
   url <- sprintf("file://localhost/%s/", dir)
-  URLencode(url)
+  utils::URLencode(url)
 }
