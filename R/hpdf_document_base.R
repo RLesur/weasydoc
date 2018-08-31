@@ -154,7 +154,7 @@ hpdf_document_base <- function(toc = FALSE,
            attach_code = attach_code,
            keep_html = keep_html,
            notes = notes,
-           base_format = html_format)
+           base_format = function() html_format)
 }
 
 pandoc_math_engine_args <- function(math_engine = c("unicode",
