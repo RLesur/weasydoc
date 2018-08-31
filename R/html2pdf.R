@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#' @include make_pdf.R
 #' @importFrom rmarkdown html_document output_format knitr_options
 #'     pandoc_path_arg
 NULL
@@ -41,6 +42,11 @@ html2pdf <- function(...,
                      keep_html = FALSE,
                      notes = c("endnotes", "footnotes"),
                      base_format = rmarkdown::html_document) {
+  # test Pandoc version
+  if (!is_pandoc_compatible()) {
+    stop("Pandoc version 2.1.3 or greater is required.\n")
+  }
+
   pandoc_args <- NULL
   base_format <- get_base_format(base_format)
   config <- base_format(...)
@@ -98,6 +104,10 @@ html2pdf <- function(...,
     make_pdf(output_file, engine = engine, engine_opts = engine_opts)
   }
   config
+}
+
+is_pandoc_compatible <- function() {
+  rmarkdown::pandoc_available('2.1.3')
 }
 
 attach_file_args <- function(file, engine = c("weasyprint", "prince")) {

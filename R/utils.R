@@ -17,19 +17,6 @@
 #' @importFrom rmarkdown pandoc_available
 NULL
 
-highlighters <- function() {
-  c("default",
-    "tango",
-    "pygments",
-    "kate",
-    "monochrome",
-    "espresso",
-    "zenburn",
-    "haddock",
-    "breezedark"
-    )
-}
-
 is_installed <- function(pgm) {
   version <- tryCatch(system2(pgm, "--version", stdout = TRUE, stderr = TRUE),
                       error = function(e) "")
@@ -43,23 +30,4 @@ weasyprint_available <- function() {
 
 prince_available <- function() {
   is_installed("prince")
-}
-
-is_pandoc_compatible <- function() {
-  rmarkdown::pandoc_available('2.1.3')
-}
-
-pandoc_math_engine_args <- function(math_engine) {
-  args <- c()
-  math_args <-
-    switch(
-      math_engine,
-      unicode = NULL,
-      mathjax = "--mathjax",
-      mathml = "--mathml",
-      webtex_svg = c("--webtex", "https://latex.codecogs.com/svg.latex?"),
-      webtex_png = c("--webtex", "https://latex.codecogs.com/png.latex?"),
-      katex = "--katex"
-    )
-  c(args, math_args)
 }

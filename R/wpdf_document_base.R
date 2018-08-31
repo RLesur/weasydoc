@@ -19,6 +19,7 @@
 #'   pandoc_highlight_args pandoc_latex_engine_args pandoc_convert
 #' @importFrom tools file_path_sans_ext file_path_as_absolute
 #' @include utils.R
+#' @include hpdf_document_base.R
 NULL
 
 #' Base output format for PDF/HTML/CSS output formats
