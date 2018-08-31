@@ -2,10 +2,11 @@
 % Please edit documentation in R/html2pdf.R
 \name{html2pdf}
 \alias{html2pdf}
-\title{Add conversion to pdf}
+\title{Convert a HTML output format to a PDF output format}
 \usage{
 html2pdf(..., engine = c("weasyprint", "prince"), engine_opts = NULL,
-  base_format = rmarkdown::html_document)
+  attach_code = FALSE, keep_html = FALSE, notes = c("endnotes",
+  "footnotes"), base_format = rmarkdown::html_document)
 }
 \arguments{
 \item{...}{Arguments to be passed to a specific output format function.}
@@ -14,12 +15,20 @@ html2pdf(..., engine = c("weasyprint", "prince"), engine_opts = NULL,
 
 \item{engine_opts}{A character vector of command-line arguments to be passed to \code{engine}.}
 
+\item{attach_code}{Add the \code{Rmd} source code as an attachment to the \code{PDF}
+document.}
+
+\item{keep_html}{Keep intermediate \code{HTML} file.}
+
+\item{notes}{Render notes as endnotes or footnotes. Footnotes are not
+yet supported by WeasyPrint and are only well rendered with Prince.}
+
 \item{base_format}{Any \code{HTML} format.}
 }
 \value{
 R Markdown output format to pass to \code{\link[rmarkdown:render]{rmarkdown::render()}}.
 }
 \description{
-This functions transforms an R Markdown HTML output format to a PDF
+This function transforms an R Markdown HTML output format to a PDF
 output format using \code{WeasyPrint} or \code{Prince}.
 }
