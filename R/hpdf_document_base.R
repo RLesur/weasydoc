@@ -87,6 +87,9 @@ hpdf_document_base <- function(toc = FALSE,
     self_contained <- TRUE
   }
 
+  pandoc_args <- c("--standalone",
+                   pandoc_math_engine_args(math_engine))
+
   base_html_format <-
     rmarkdown::html_document_base(
       smart = smart,
@@ -94,7 +97,7 @@ hpdf_document_base <- function(toc = FALSE,
       self_contained = self_contained,
       lib_dir = NULL,
       mathjax = NULL,
-      pandoc_args = pandoc_math_engine_args(math_engine),
+      pandoc_args = pandoc_args,
       template = template,
       extra_dependencies = extra_dependencies,
       bootstrap_compatible = FALSE,
@@ -111,6 +114,7 @@ hpdf_document_base <- function(toc = FALSE,
   )
 
   # from extensions
+  md_extensions <- c(md_extensions, if (isTRUE(smart)) "+smart")
   from <- rmarkdown::from_rmarkdown(fig_caption, md_extensions)
 
   if (!is.null(highlight)) {
@@ -170,8 +174,8 @@ pandoc_math_engine_args <- function(math_engine = c("unicode",
            unicode = NULL,
            mathjax = "--mathjax",
            mathml = "--mathml",
-           webtex_svg = c("--webtex", "https://latex.codecogs.com/svg.latex?"),
-           webtex_png = c("--webtex", "https://latex.codecogs.com/png.latex?"),
+           webtex_svg = c("--webtex=https://latex.codecogs.com/svg.latex?"),
+           webtex_png = c("--webtex=https://latex.codecogs.com/png.latex?"),
            katex = "--katex"
     )
   c(args, math_args)
