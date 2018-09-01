@@ -46,9 +46,9 @@ wpdf_document2 <- function(...,
   notes <- match.arg(notes)
 
   html_config <- function(..., number_sections, pandoc_args) {
-    pandoc_args <- c(pandoc_args,
-                     pandoc_notes_args(notes = notes,
-                                       engine = engine)
+    pandoc_args <- c(pandoc_notes_args(notes = notes,
+                                       engine = engine),
+                     pandoc_args
                      )
     rmarkdown::output_format(
       knitr = rmarkdown::knitr_options(
@@ -78,6 +78,5 @@ wpdf_document2 <- function(...,
     make_pdf(output_file, engine = engine, engine_opts = engine_opts)
   }
   config$bookdown_output_format <- 'pdf'
-  # config <- bookdown:::set_opts_knit(config)
   config
 }
