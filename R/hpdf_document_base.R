@@ -190,14 +190,6 @@ highlighters <- function() {
   )
 }
 
-pandoc_css_arg <- function(css) {
-  args <- c()
-  for (css_file in css) {
-    args <- c(args, "--css", rmarkdown::pandoc_path_arg(css_file))
-  }
-  args
-}
-
 
 
 

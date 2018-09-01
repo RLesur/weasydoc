@@ -5,8 +5,9 @@
 \title{Output format for producing a bookdown pdf}
 \usage{
 wpdf_document2(..., engine = c("weasyprint", "prince"), engine_opts = NULL,
-  number_sections = TRUE, pandoc_args = NULL, notes = c("endnotes",
-  "footnotes"), base_format = rmarkdown::html_document)
+  keep_html = FALSE, number_sections = TRUE, pandoc_args = NULL,
+  notes = c("endnotes", "footnotes"),
+  base_format = rmarkdown::html_document)
 }
 \arguments{
 \item{...}{Arguments to be passed to a
@@ -17,6 +18,8 @@ arguments are passed to \code{foo()}, e.g. \code{...} of
 \item{engine}{A \code{PDF} engine.}
 
 \item{engine_opts}{A character vector of command-line arguments to be passed to \code{engine}.}
+
+\item{keep_html}{Keep intermediate \code{HTML} file.}
 
 \item{number_sections}{Whether to number section headers: if \code{TRUE},
 figure/table numbers will be of the form \code{X.i}, where \code{X} is the

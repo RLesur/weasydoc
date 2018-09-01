@@ -30,27 +30,49 @@ NULL
 wpdf_document2 <- function(...,
                            engine = c("weasyprint", "prince"),
                            engine_opts = NULL,
+                           keep_html = FALSE,
                            number_sections = TRUE,
                            pandoc_args = NULL,
                            notes = c("endnotes", "footnotes"),
                            base_format = rmarkdown::html_document) {
+  base_format <- get_base_format(base_format)
+  base_config <- base_format(..., number_sections = number_sections, pandoc_args = pandoc_args)
+
+  if (!base_config$pandoc$to %in% c("html", "html4", "html5")) {
+    stop("The base format must be an HTML output format")
+  }
 
   engine <- match.arg(engine)
   notes <- match.arg(notes)
-  pandoc_args <- c(pandoc_args,
-                   pandoc_notes_args(notes = notes, engine = engine)
-                   )
+
+  html_config <- function(..., number_sections, pandoc_args) {
+    pandoc_args <- c(pandoc_args,
+                     pandoc_notes_args(notes = notes,
+                                       engine = engine)
+                     )
+    rmarkdown::output_format(
+      knitr = rmarkdown::knitr_options(
+        # Force screenshot
+        opts_chunk = list(screenshot.force = TRUE)
+      ),
+      pandoc = NULL,
+      base_format = base_format(...,
+                                number_sections = number_sections,
+                                pandoc_args = pandoc_args)
+    )
+  }
+
   config <- bookdown::html_document2(...,
                                      number_sections = number_sections,
                                      pandoc_args = pandoc_args,
-                                     base_format = base_format)
+                                     base_format = html_config)
 
   post <- config$post_processor
   config$post_processor <- function(metadata, input_file, output_file, clean, verbose) {
     if (is.function(post)) {
       output_file <- post(metadata, input_file, output_file, clean, verbose)
     }
-    if (clean) {
+    if (clean && !isTRUE(keep_html)) {
       on.exit(unlink(output_file), add = TRUE)
     }
     make_pdf(output_file, engine = engine, engine_opts = engine_opts)

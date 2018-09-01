@@ -91,28 +91,10 @@ html2pdf <- function(...,
   config
 }
 
-is_pandoc_compatible <- function() {
-  rmarkdown::pandoc_available('2.1.3')
-}
-
 attach_file_args <- function(file, engine = c("weasyprint", "prince")) {
   engine <- match.arg(engine)
   switch(engine,
     weasyprint = c("-a", shQuote(file)),
     prince = paste0("--attach=", shQuote(file))
   )
-}
-
-# Since the bookdown package does not export the get_base_format function
-# the source code of this function is copied below.
-# Source: https://github.com/rstudio/bookdown
-# License: GPL-3
-# Copyright holders: RStudio Inc
-get_base_format <- function(format) {
-  if (is.character(format)) {
-    format = eval(parse(text = format))
-  }
-  if (!is.function(format))
-    stop("The output format must be a function")
-  format
 }

@@ -55,3 +55,29 @@ pandoc_notes_args <- function(notes = c("endnotes", "footnotes"),
   }
   NULL
 }
+
+is_pandoc_compatible <- function() {
+  rmarkdown::pandoc_available('2.1.3')
+}
+
+pandoc_css_arg <- function(css) {
+  args <- c()
+  for (css_file in css) {
+    args <- c(args, "--css", rmarkdown::pandoc_path_arg(css_file))
+  }
+  args
+}
+
+# Since the bookdown package does not export the get_base_format function
+# the source code of this function is copied below.
+# Source: https://github.com/rstudio/bookdown
+# License: GPL-3
+# Copyright holders: RStudio Inc
+get_base_format <- function(format) {
+  if (is.character(format)) {
+    format = eval(parse(text = format))
+  }
+  if (!is.function(format))
+    stop("The output format must be a function")
+  format
+}
