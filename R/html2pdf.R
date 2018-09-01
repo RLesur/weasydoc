@@ -71,6 +71,7 @@ html2pdf <- function(...,
       opts_chunk = list(screenshot.force = TRUE)
       ),
     pandoc = rmarkdown::pandoc_options(to = config$pandoc$to,
+                                       from = config$pandoc$from,
                                        args = pandoc_args),
     pre_knit = pre_knit,
     base_format = config
