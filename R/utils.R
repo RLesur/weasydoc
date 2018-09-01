@@ -60,6 +60,11 @@ is_pandoc_compatible <- function() {
   rmarkdown::pandoc_available('2.1.3')
 }
 
+pandoc_css_for_toc_args <- function() {
+  source_file <- system.file("templates", "default", "toc.css", package = "weasydoc")
+  pandoc_css_arg(source_file)
+}
+
 pandoc_css_arg <- function(css) {
   args <- c()
   for (css_file in css) {

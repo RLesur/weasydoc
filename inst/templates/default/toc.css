@@ -1,0 +1,13 @@
+/* This CSS rules insert page numbers with leading dots in table of contents */
+/* Note: WeasyPrint does not support this feature.                           */
+
+@media print {
+    #TOC ul {
+        list-style: none;
+        padding-left: 0;
+        margin-left: 1em;
+    }
+    #TOC a[href]::after {
+        content: leader(dotted) target-counter(attr(href), page);
+    }
+}

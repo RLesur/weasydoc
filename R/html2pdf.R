@@ -55,7 +55,8 @@ html2pdf <- function(...,
 
   engine <- match.arg(engine)
   notes <- match.arg(notes)
-  pandoc_args <- pandoc_notes_args(notes = notes, engine = engine)
+  pandoc_args <- c(pandoc_notes_args(notes = notes, engine = engine),
+                   pandoc_css_for_toc_args())
 
   # get the rmd_file path using a pre_knit
   # it is useful only with attach_code=TRUE

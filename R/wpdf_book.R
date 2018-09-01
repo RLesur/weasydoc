@@ -46,8 +46,8 @@ wpdf_document2 <- function(...,
   notes <- match.arg(notes)
 
   html_config <- function(..., number_sections, pandoc_args) {
-    pandoc_args <- c(pandoc_notes_args(notes = notes,
-                                       engine = engine),
+    pandoc_args <- c(pandoc_notes_args(notes = notes, engine = engine),
+                     pandoc_css_for_toc_args(),
                      pandoc_args
                      )
     rmarkdown::output_format(
