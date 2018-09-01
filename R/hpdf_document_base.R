@@ -16,7 +16,7 @@
 
 #' @include html2pdf.R
 #' @importFrom rmarkdown from_rmarkdown html_document_base includes_to_pandoc_args
-#'     knitr_options output_format pandoc_highlight_args pandoc_options
+#'     knitr_options output_format pandoc_available pandoc_highlight_args pandoc_options
 #'     pandoc_path_arg pandoc_toc_args
 NULL
 
@@ -87,9 +87,6 @@ hpdf_document_base <- function(toc = FALSE,
     self_contained <- TRUE
   }
 
-  pandoc_args <- c("--standalone",
-                   pandoc_math_engine_args(math_engine))
-
   base_html_format <-
     rmarkdown::html_document_base(
       smart = smart,
@@ -97,7 +94,7 @@ hpdf_document_base <- function(toc = FALSE,
       self_contained = self_contained,
       lib_dir = NULL,
       mathjax = NULL,
-      pandoc_args = pandoc_args,
+      pandoc_args = NULL,
       template = template,
       extra_dependencies = extra_dependencies,
       bootstrap_compatible = FALSE,
@@ -114,7 +111,8 @@ hpdf_document_base <- function(toc = FALSE,
   )
 
   # from extensions
-  md_extensions <- c(md_extensions, if (isTRUE(smart)) "+smart")
+  md_extensions <- c(md_extensions,
+                     if (isTRUE(smart) && rmarkdown::pandoc_available(2)) "+smart")
   from <- rmarkdown::from_rmarkdown(fig_caption, md_extensions)
 
   if (!is.null(highlight)) {
@@ -123,7 +121,9 @@ hpdf_document_base <- function(toc = FALSE,
 
   # pandoc arguments
   args <-
-    c(if (isTRUE(section_divs)) "--section-divs",
+    c(if (!isTRUE(self_contained)) "--standalone",
+      pandoc_math_engine_args(math_engine),
+      if (isTRUE(section_divs)) "--section-divs",
       # table of contents
       rmarkdown::pandoc_toc_args(toc, toc_depth),
       # highlighting,
