@@ -6,9 +6,10 @@
 \usage{
 wpdf_document_base(toc = FALSE, toc_depth = 3, fig_width = 5,
   fig_height = 4, fig_retina = 8, fig_caption = TRUE, dev = "png",
-  dpi = 96, df_print = NULL, attach_code = FALSE, smart = TRUE,
-  highlight = "default", math_engine = "webtex_svg", template = NULL,
-  wpdf_engine = "weasyprint", css = NULL, includes = NULL,
+  dpi = 96, df_print = NULL, notes = c("endnotes", "footnotes"),
+  attach_code = FALSE, smart = TRUE, highlight = "default",
+  math_engine = "webtex_svg", template = NULL,
+  wpdf_engine = c("weasyprint", "prince"), css = NULL, includes = NULL,
   keep_md = FALSE, keep_html = FALSE, self_contained = TRUE,
   verbose = FALSE, md_extensions = NULL, pandoc_args = NULL)
 }
@@ -40,6 +41,9 @@ summary of the data frame. In addition to the named methods you can also
 pass an arbitrary function to be used for printing data frames. You can
 disable the \code{df_print} behavior entirely by setting the option
 \code{rmarkdown.df_print} to \code{FALSE}.}
+
+\item{notes}{Render notes as endnotes or footnotes. Footnotes are not
+yet supported by WeasyPrint and are only well rendered with Prince.}
 
 \item{attach_code}{Add the \code{Rmd} source code as an attachment to the \code{PDF}
 document.}

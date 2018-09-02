@@ -59,6 +59,7 @@ NULL
 #'   and `"katex"`. See the `pandoc` manual for details.
 #' @inheritParams rmarkdown::html_document
 #' @inheritParams rmarkdown::output_format
+#' @inheritParams html2pdf
 #'
 #' @return `R Markdown` output format to pass to [rmarkdown::render()].
 #' @export
@@ -71,12 +72,13 @@ wpdf_document_base <- function(toc = FALSE,
                                dev = "png",
                                dpi = 96,
                                df_print = NULL,
+                               notes = c("endnotes", "footnotes"),
                                attach_code = FALSE,
                                smart = TRUE,
                                highlight = "default",
                                math_engine = "webtex_svg",
                                template = NULL,
-                               wpdf_engine = "weasyprint",
+                               wpdf_engine = c("weasyprint", "prince"),
                                css = NULL,
                                includes = NULL,
                                keep_md = FALSE,
@@ -142,8 +144,12 @@ wpdf_document_base <- function(toc = FALSE,
   args <- c(args, pandoc_args)
 
   # HTML to PDF engine
-  wpdf_engine <- match.arg(wpdf_engine, c("weasyprint", "prince"))
+  wpdf_engine <- match.arg(wpdf_engine)
   args_with_engine <- c(args, rmarkdown::pandoc_latex_engine_args(wpdf_engine))
+
+  # Type of notes
+  notes <- match.arg(notes)
+  args_with_engine <- c(args_with_engine, pandoc_notes_args(notes, wpdf_engine))
 
   # Activate HTML presentation hints for WeasyPrint
   if (identical(wpdf_engine, "weasyprint")) {
