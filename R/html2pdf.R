@@ -63,6 +63,11 @@ html2pdf <- function(...,
   rmd_file <- NULL
   pre_knit <- function(input, ...) {
     rmd_file <<- input
+    output_file <- dynGet('output_file')
+    if (!is.null(output_file)) {
+      if (!grepl("html?$", output_file))
+        stop("You have to use html extension for output_file")
+    }
   }
 
   config <- rmarkdown::output_format(
