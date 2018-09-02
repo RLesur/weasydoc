@@ -25,7 +25,8 @@ NULL
 #' This function transforms an R Markdown HTML output format to a PDF
 #' output format using `WeasyPrint` or `Prince`. In order to get a good
 #' result, this kind of transformation usually requires some additional
-#' CSS rules for Paged Media.
+#' CSS rules for Paged Media. Be aware that JavaScript generated content may
+#' be absent of the final PDF.
 #'
 #' @param ... Arguments to be passed to a specific output format function.
 #' @param base_format Any `HTML` format.
@@ -55,8 +56,7 @@ html2pdf <- function(...,
 
   engine <- match.arg(engine)
   notes <- match.arg(notes)
-  pandoc_args <- c(pandoc_notes_args(notes = notes, engine = engine),
-                   pandoc_css_for_toc_args())
+  pandoc_args <- c(pandoc_notes_args(notes = notes, engine = engine))
 
   # get the rmd_file path using a pre_knit
   # it is useful only with attach_code=TRUE
@@ -70,6 +70,25 @@ html2pdf <- function(...,
     }
   }
 
+  # CSS for TOC
+  # we need to deal with the pandoc "--id-prefix" option
+  pre_processor <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir) {
+    # see the rmarkdown::render() source code
+    # a variable named id_prefix is used
+    # in most cases, id_prefix is not used. In order to speed this step, we only use a template when "--id-prefix" is used
+    id_prefix <- dynGet("id_prefix")
+    if (nzchar(id_prefix)) {
+      template_file <- system.file("templates", "default", "toc.css", package = "weasydoc")
+      template <- readLines(template_file)
+      css_for_toc <- gsub("#TOC", sprintf("#%sTOC", id_prefix), template)
+      tmpfile <- tempfile(pattern = "css_for_toc", fileext = ".css")
+      writeLines(css_for_toc, sep = "\n", con = tmpfile)
+      return(pandoc_css_arg(tmpfile))
+    } else {
+      return(pandoc_css_for_toc_args())
+    }
+  }
+
   config <- rmarkdown::output_format(
     knitr = rmarkdown::knitr_options(
       # Force screenshot
@@ -79,6 +98,7 @@ html2pdf <- function(...,
                                        from = config$pandoc$from,
                                        args = pandoc_args),
     pre_knit = pre_knit,
+    pre_processor = pre_processor,
     base_format = config
   )
 
