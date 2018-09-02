@@ -29,12 +29,12 @@ NULL
 #' be absent of the final PDF.
 #'
 #' @param ... Arguments to be passed to a specific output format function.
-#' @param base_format Any `HTML` format.
-#' @param keep_html Keep intermediate `HTML` file.
 #' @param attach_code Add the `Rmd` source code as an attachment to the `PDF`
 #'   document.
+#' @param keep_html Keep intermediate `HTML` file.
 #' @param notes Render notes as endnotes or footnotes. Footnotes are not
 #'   yet supported by WeasyPrint and are only well rendered with Prince.
+#' @param base_format Any `HTML` format.
 #' @inheritParams make_pdf
 #'
 #' @return R Markdown output format to pass to [rmarkdown::render()].
