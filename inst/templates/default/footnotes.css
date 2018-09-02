@@ -1,0 +1,7 @@
+/* CSS rule for footnote class */
+@media print {
+  span.footnote {
+    float: footnote;
+    font-size: 0.75em;
+  }
+}

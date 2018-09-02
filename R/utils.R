@@ -17,19 +17,6 @@
 #' @importFrom rmarkdown pandoc_available
 NULL
 
-highlighters <- function() {
-  c("default",
-    "tango",
-    "pygments",
-    "kate",
-    "monochrome",
-    "espresso",
-    "zenburn",
-    "haddock",
-    "breezedark"
-    )
-}
-
 is_installed <- function(pgm) {
   version <- tryCatch(system2(pgm, "--version", stdout = TRUE, stderr = TRUE),
                       error = function(e) "")
@@ -45,21 +32,57 @@ prince_available <- function() {
   is_installed("prince")
 }
 
+pandoc_notes_args <- function(notes = c("endnotes", "footnotes"),
+                              engine = c("weasyprint", "prince")) {
+  engine <- match.arg(engine)
+  notes <- match.arg(notes)
+  if (notes == "footnotes" && engine == "weasyprint") {
+    stop("Notes as footnotes are not supported by WeasyPrint.\n",
+         "Use endnotes or prince engine")
+  }
+  if (notes == "footnotes") {
+    # test Pandoc version. Required for the footnotes lua filter.
+    if (!is_pandoc_compatible()) {
+      stop("Pandoc version 2.1.3 or greater is required.\n")
+    }
+
+    luafilter <- system.file("luafilters", "footnotes.lua", package = "weasydoc")
+    css <- system.file("templates", "default", "footnotes.css", package = "weasydoc")
+    return(c("--lua-filter",
+             rmarkdown::pandoc_path_arg(luafilter),
+             pandoc_css_arg(css)
+    ))
+  }
+  NULL
+}
+
 is_pandoc_compatible <- function() {
   rmarkdown::pandoc_available('2.1.3')
 }
 
-pandoc_math_engine_args <- function(math_engine) {
+pandoc_css_for_toc_args <- function() {
+  source_file <- system.file("templates", "default", "toc.css", package = "weasydoc")
+  pandoc_css_arg(source_file)
+}
+
+pandoc_css_arg <- function(css) {
   args <- c()
-  math_args <-
-    switch(
-      math_engine,
-      unicode = NULL,
-      mathjax = "--mathjax",
-      mathml = "--mathml",
-      webtex_svg = c("--webtex", "https://latex.codecogs.com/svg.latex?"),
-      webtex_png = c("--webtex", "https://latex.codecogs.com/png.latex?"),
-      katex = "--katex"
-    )
-  c(args, math_args)
+  for (css_file in css) {
+    args <- c(args, "--css", rmarkdown::pandoc_path_arg(css_file))
+  }
+  args
+}
+
+# Since the bookdown package does not export the get_base_format function
+# the source code of this function is copied below.
+# Source: https://github.com/rstudio/bookdown
+# License: GPL-3
+# Copyright holders: RStudio Inc
+get_base_format <- function(format) {
+  if (is.character(format)) {
+    format = eval(parse(text = format))
+  }
+  if (!is.function(format))
+    stop("The output format must be a function")
+  format
 }
