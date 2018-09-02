@@ -106,5 +106,5 @@ additional details.}
 \item{...}{Additional arguments passed to \code{\link[rmarkdown:html_document_base]{rmarkdown::html_document_base()}}.}
 }
 \description{
-A basic PDF document output format
+This output format is compatible with the \code{htmltools} package.
 }

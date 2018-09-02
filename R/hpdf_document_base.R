@@ -22,6 +22,8 @@ NULL
 
 #' A basic PDF document output format
 #'
+#' This output format is compatible with the `htmltools` package.
+#'
 #' @param fig_retina Setting this option to a ratio (for example, 2) will
 #'   change the `dpi` parameter to `dpi * fig.retina`, and `fig_width` to
 #'   `fig_width * dpi / fig_retina` internally; for example, the physical size

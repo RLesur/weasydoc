@@ -73,9 +73,9 @@ html2pdf <- function(...,
   # CSS for TOC
   # we need to deal with the pandoc "--id-prefix" option
   pre_processor <- function(metadata, input_file, runtime, knit_meta, files_dir, output_dir) {
-    # see the rmarkdown::render() source code
-    # a variable named id_prefix is used
-    # in most cases, id_prefix is not used. In order to speed this step, we only use a template when "--id-prefix" is used
+    # see the rmarkdown::render() source code: a variable named id_prefix is used
+    # in most cases, id_prefix is not used.
+    # In order to speed this step, we only use a template when "--id-prefix" is used
     id_prefix <- dynGet("id_prefix")
     if (nzchar(id_prefix)) {
       template_file <- system.file("templates", "default", "toc.css", package = "weasydoc")

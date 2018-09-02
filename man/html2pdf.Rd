@@ -32,5 +32,6 @@ R Markdown output format to pass to \code{\link[rmarkdown:render]{rmarkdown::ren
 This function transforms an R Markdown HTML output format to a PDF
 output format using \code{WeasyPrint} or \code{Prince}. In order to get a good
 result, this kind of transformation usually requires some additional
-CSS rules for Paged Media.
+CSS rules for Paged Media. Be aware that JavaScript generated content may
+be absent of the final PDF.
 }
