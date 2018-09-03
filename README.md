@@ -100,7 +100,7 @@ rmarkdown::render('myfile.Rmd', weasydoc::wpdf_document_base(highlight = "pygmen
 
 ## How can I learn CSS for Paged Media?
 
-There are a lot of great ressources on the web to learn `CSS for Paged Media`:
+There are a lot of great ressources on the web to learn _CSS for Paged Media_:
 
 - [A Guide To The State Of Print Stylesheets In 2018](https://www.smashingmagazine.com/2018/05/print-stylesheets-in-2018/) by Rachel Andrew
 - [Print CSS Rocks: https://print-css.rocks/](https://print-css.rocks/) by Andreas Jung (@zopyx)
