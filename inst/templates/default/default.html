@@ -75,12 +75,12 @@ $endif$
           color: cmyk(65%, 27%, 0%, 64%);
         }
         nav.toc ul {
-          $if(number-sections)$counter-reset: toc-section;$endif$
+          $if(number-sections-css)$counter-reset: toc-section;$endif$
           list-style: none;
           padding-left: 0;
           margin-left: 0.5em;
         }
-        $if(number-sections)$
+        $if(number-sections-css)$
         nav.toc li::before {
           counter-increment: toc-section;
           content: counters(toc-section, ".") " ";
@@ -91,7 +91,7 @@ $endif$
           float: right;
         }
       }
-    $if(number-sections)$
+    $if(number-sections-css)$
     section:first-of-type {counter-reset: section;}
     section {counter-increment: section;}
     .level1>h1::before, .level2>h2:not(.toc-title)::before, .level3>h3::before, .level4>h4::before, .level5>h5::before, .level6>h6::before {

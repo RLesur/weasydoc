@@ -49,13 +49,15 @@ html5_document <- function(toc = FALSE,
   html_format <- "html5"
 
   pandoc_args <-
-    c(if (isTRUE(number_sections)) c("-V", "number-sections"),
+    c(# For number sections, we want CSS styling, not pandoc internal numbers
+      if (isTRUE(number_sections)) c("-V", "number-sections-css"),
       pandoc_args
     )
 
   extd_html_document_base(
     toc = toc,
     toc_depth = toc_depth,
+    number_sections = FALSE, # not pandoc internal numbers
     section_divs = section_divs,
     fig_width = fig_width,
     fig_height = fig_height,

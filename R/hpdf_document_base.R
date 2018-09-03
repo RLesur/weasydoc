@@ -29,6 +29,7 @@ NULL
 #' @export
 hpdf_document_base <- function(toc = FALSE,
                                toc_depth = 3,
+                               number_sections = FALSE,
                                section_divs = TRUE,
                                fig_width = 5,
                                fig_height = 4,
@@ -65,6 +66,7 @@ hpdf_document_base <- function(toc = FALSE,
   base_format <- extd_html_document_base(
     toc = toc,
     toc_depth = toc_depth,
+    number_sections = number_sections,
     section_divs = section_divs,
     fig_width = fig_width,
     fig_height = fig_height,
@@ -136,6 +138,7 @@ hpdf_document_base <- function(toc = FALSE,
 #' @export
 extd_html_document_base <- function(toc = FALSE,
                                     toc_depth = 3,
+                                    number_sections = FALSE,
                                     section_divs = TRUE,
                                     fig_width = 5,
                                     fig_height = 4,
@@ -195,6 +198,8 @@ extd_html_document_base <- function(toc = FALSE,
   args <-
     c(# ensure a standalone html
       if (!isTRUE(self_contained)) "--standalone",
+      # number sections
+      if (isTRUE(number_sections)) "--number-sections",
       # math engine
       pandoc_math_engine_args(math_engine),
       # section_divs

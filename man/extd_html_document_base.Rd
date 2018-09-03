@@ -4,18 +4,21 @@
 \alias{extd_html_document_base}
 \title{An extended HTML document output format}
 \usage{
-extd_html_document_base(toc = FALSE, toc_depth = 3, section_divs = TRUE,
-  fig_width = 5, fig_height = 4, fig_retina = 8, fig_caption = TRUE,
-  dev = "png", dpi = 96, df_print = NULL, smart = TRUE,
-  highlight = "default", math_engine = "webtex_svg", template = NULL,
-  html_format = c("html4", "html5"), extra_dependencies = NULL,
-  css = NULL, includes = NULL, keep_md = FALSE, self_contained = TRUE,
-  lib_dir = NULL, md_extensions = NULL, pandoc_args = NULL, ...)
+extd_html_document_base(toc = FALSE, toc_depth = 3,
+  number_sections = FALSE, section_divs = TRUE, fig_width = 5,
+  fig_height = 4, fig_retina = 8, fig_caption = TRUE, dev = "png",
+  dpi = 96, df_print = NULL, smart = TRUE, highlight = "default",
+  math_engine = "webtex_svg", template = NULL, html_format = c("html4",
+  "html5"), extra_dependencies = NULL, css = NULL, includes = NULL,
+  keep_md = FALSE, self_contained = TRUE, lib_dir = NULL,
+  md_extensions = NULL, pandoc_args = NULL, ...)
 }
 \arguments{
 \item{toc}{\code{TRUE} to include a table of contents in the output}
 
 \item{toc_depth}{Depth of headers to include in table of contents}
+
+\item{number_sections}{\code{TRUE} to number section headings}
 
 \item{section_divs}{Wrap sections in <div> tags (or <section> tags in HTML5),
 and attach identifiers to the enclosing <div> (or <section>) rather than the
