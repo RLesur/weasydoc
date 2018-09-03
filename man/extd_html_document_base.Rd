@@ -98,3 +98,4 @@ additional details.}
 \description{
 This output format is compatible with the \code{htmltools} package.
 }
+\keyword{internal}

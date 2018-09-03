@@ -136,6 +136,7 @@ hpdf_document_base <- function(toc = FALSE,
 #' @param ... Additional arguments passed to [rmarkdown::html_document_base()].
 #' @inheritParams rmarkdown::html_document
 #' @export
+#' @keywords internal
 extd_html_document_base <- function(toc = FALSE,
                                     toc_depth = 3,
                                     number_sections = FALSE,
