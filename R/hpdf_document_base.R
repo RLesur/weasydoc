@@ -24,36 +24,8 @@ NULL
 #'
 #' This output format is compatible with the `htmltools` package.
 #'
-#' @param fig_retina Setting this option to a ratio (for example, 2) will
-#'   change the `dpi` parameter to `dpi * fig.retina`, and `fig_width` to
-#'   `fig_width * dpi / fig_retina` internally; for example, the physical size
-#'   of an image is doubled and its display size is halved when `fig_retina = 2`.
-#' @param dpi The DPI (dots per inch) for bitmap devices.
-#' @param df_print Method to be used for printing data frames. Valid values
-#'   include `"default"`, `"kable"` and `"tibble"`. The `"default"` method uses
-#'   `print.data.frame`. The `"kable"` method uses the [knitr::kable()]
-#'   function. The `"tibble"` method uses the [tibble::tibble-package] to print a
-#'   summary of the data frame. In addition to the named methods you can also
-#'   pass an arbitrary function to be used for printing data frames. You can
-#'   disable the `df_print` behavior entirely by setting the option
-#'   `rmarkdown.df_print` to `FALSE`.
-#' @param math_engine Method to be used to render `TeX` math. Valid values
-#'   include `"unicode"`, `"mathjax"`, `"mathml"`, `"webtex_svg"`, `"webtex_png"`
-#'   and `"katex"`. See the
-#'   [`pandoc` manual](https://pandoc.org/MANUAL.html#math-rendering-in-html)
-#'   for details.
-#' @param template `Pandoc` template to use for rendering. Pass `NULL` to use
-#'   `pandoc`'s built-in template; pass a path to use a custom template that
-#'   you've created. See the documentation on
-#'   [`pandoc` online documentation](http://pandoc.org/MANUAL.html#templates)
-#'   for details on creating custom templates.
-#' @param html_format HTML format of the intermediate HTML file.
-#' @param keep_html,self_contained Keep intermediate `HTML` file. Use
-#'   `self_contained` to indicate if external dependencies are embedded in
-#'   `HTML` file.
-#' @param ... Additional arguments passed to [rmarkdown::html_document_base()].
 #' @inheritParams html2pdf
-#' @inheritParams rmarkdown::html_document
+#' @inheritParams extd_html_document_base
 #' @export
 hpdf_document_base <- function(toc = FALSE,
                                toc_depth = 3,
@@ -84,10 +56,108 @@ hpdf_document_base <- function(toc = FALSE,
                                md_extensions = NULL,
                                pandoc_args = NULL,
                                ...) {
-
   if (!isTRUE(keep_html)) {
     self_contained <- TRUE
   }
+
+  html_format <- match.arg(html_format)
+
+  base_format <- extd_html_document_base(
+    toc = toc,
+    toc_depth = toc_depth,
+    section_divs = section_divs,
+    fig_width = fig_width,
+    fig_height = fig_height,
+    fig_retina = fig_retina,
+    fig_caption = fig_caption,
+    dev = dev,
+    dpi = dpi,
+    df_print = df_print,
+    smart = smart,
+    highlight = highlight,
+    math_engine = math_engine,
+    template = template,
+    html_format = html_format,
+    extra_dependencies = extra_dependencies,
+    css = css,
+    includes = includes,
+    keep_md = keep_md,
+    self_contained = self_contained,
+    lib_dir = lib_dir,
+    md_extensions = md_extensions,
+    pandoc_args = pandoc_args,
+    ...
+  )
+
+  notes <- match.arg(notes)
+  engine <- match.arg(engine)
+
+  html2pdf(engine = engine,
+           engine_opts = engine_opts,
+           attach_code = attach_code,
+           keep_html = keep_html,
+           notes = notes,
+           base_format = function() base_format)
+}
+
+
+#' An extended HTML document output format
+#'
+#' This output format is compatible with the `htmltools` package.
+#'
+#' @param fig_retina Setting this option to a ratio (for example, 2) will
+#'   change the `dpi` parameter to `dpi * fig.retina`, and `fig_width` to
+#'   `fig_width * dpi / fig_retina` internally; for example, the physical size
+#'   of an image is doubled and its display size is halved when `fig_retina = 2`.
+#' @param dpi The DPI (dots per inch) for bitmap devices.
+#' @param df_print Method to be used for printing data frames. Valid values
+#'   include `"default"`, `"kable"` and `"tibble"`. The `"default"` method uses
+#'   `print.data.frame`. The `"kable"` method uses the [knitr::kable()]
+#'   function. The `"tibble"` method uses the [tibble::tibble-package] to print a
+#'   summary of the data frame. In addition to the named methods you can also
+#'   pass an arbitrary function to be used for printing data frames. You can
+#'   disable the `df_print` behavior entirely by setting the option
+#'   `rmarkdown.df_print` to `FALSE`.
+#' @param math_engine Method to be used to render `TeX` math. Valid values
+#'   include `"unicode"`, `"mathjax"`, `"mathml"`, `"webtex_svg"`, `"webtex_png"`
+#'   and `"katex"`. See the
+#'   [`pandoc` manual](https://pandoc.org/MANUAL.html#math-rendering-in-html)
+#'   for details.
+#' @param template `Pandoc` template to use for rendering. Pass `NULL` to use
+#'   `pandoc`'s built-in template; pass a path to use a custom template that
+#'   you've created. See the documentation on
+#'   [`pandoc` online documentation](http://pandoc.org/MANUAL.html#templates)
+#'   for details on creating custom templates.
+#' @param html_format HTML format of the intermediate HTML file.
+#' @param self_contained Use `self_contained` to indicate if external
+#'   dependencies are embedded in `HTML` file.
+#' @param ... Additional arguments passed to [rmarkdown::html_document_base()].
+#' @inheritParams rmarkdown::html_document
+#' @export
+extd_html_document_base <- function(toc = FALSE,
+                                    toc_depth = 3,
+                                    section_divs = TRUE,
+                                    fig_width = 5,
+                                    fig_height = 4,
+                                    fig_retina = 8,
+                                    fig_caption = TRUE,
+                                    dev = "png",
+                                    dpi = 96,
+                                    df_print = NULL,
+                                    smart = TRUE,
+                                    highlight = "default",
+                                    math_engine = "webtex_svg",
+                                    template = NULL,
+                                    html_format = c("html4", "html5"),
+                                    extra_dependencies = NULL,
+                                    css = NULL,
+                                    includes = NULL,
+                                    keep_md = FALSE,
+                                    self_contained = TRUE,
+                                    lib_dir = NULL,
+                                    md_extensions = NULL,
+                                    pandoc_args = NULL,
+                                    ...) {
 
   base_html_format <-
     rmarkdown::html_document_base(
@@ -96,7 +166,7 @@ hpdf_document_base <- function(toc = FALSE,
       self_contained = self_contained,
       lib_dir = NULL,
       mathjax = NULL,
-      pandoc_args = NULL,
+      pandoc_args = NULL, # keep pandoc_args for later
       template = template,
       extra_dependencies = extra_dependencies,
       bootstrap_compatible = FALSE,
@@ -123,13 +193,17 @@ hpdf_document_base <- function(toc = FALSE,
 
   # pandoc arguments
   args <-
-    c(if (!isTRUE(self_contained)) "--standalone",
+    c(# ensure a standalone html
+      if (!isTRUE(self_contained)) "--standalone",
+      # math engine
       pandoc_math_engine_args(math_engine),
+      # section_divs
       if (isTRUE(section_divs)) "--section-divs",
       # table of contents
       rmarkdown::pandoc_toc_args(toc, toc_depth),
-      # highlighting,
+      # highlighting
       rmarkdown::pandoc_highlight_args(highlight),
+      # template
       if (!is.null(template)) c("--template", rmarkdown::pandoc_path_arg(template)),
       # content includes
       rmarkdown::includes_to_pandoc_args(includes),
@@ -145,23 +219,14 @@ hpdf_document_base <- function(toc = FALSE,
     args = args
   )
 
-  html_format <- rmarkdown::output_format(knitr = knitr,
-                                          pandoc = pandoc,
-                                          keep_md = keep_md,
-                                          clean_supporting = self_contained,
-                                          df_print = df_print,
-                                          base_format = base_html_format)
-
-  engine <- match.arg(engine)
-  notes <- match.arg(notes)
-
-  html2pdf(engine = engine,
-           engine_opts = engine_opts,
-           attach_code = attach_code,
-           keep_html = keep_html,
-           notes = notes,
-           base_format = function() html_format)
+  rmarkdown::output_format(knitr = knitr,
+                           pandoc = pandoc,
+                           keep_md = keep_md,
+                           clean_supporting = self_contained,
+                           df_print = df_print,
+                           base_format = base_html_format)
 }
+
 
 pandoc_math_engine_args <- function(math_engine = c("unicode",
                                                     "mathjax",
