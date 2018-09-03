@@ -29,6 +29,8 @@ Collate:
     'make_pdf.R'
     'html2pdf.R'
     'hpdf_document_base.R'
+    'html5_document.R'
+    'h5pdf_document.R'
     'wpdf_book.R'
     'wpdf_document_base.R'
     'wpdf_document.R'
