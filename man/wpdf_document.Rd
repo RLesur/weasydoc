@@ -103,3 +103,4 @@ R Markdown output format to pass to \code{rmarkdown::render}.
 \description{
 Format for converting from R Markdown to a PDF using Weasyprint.
 }
+\keyword{internal}

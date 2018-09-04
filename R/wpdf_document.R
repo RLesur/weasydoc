@@ -31,6 +31,7 @@ NULL
 #' @inheritParams wpdf_document_base
 #' @return R Markdown output format to pass to `rmarkdown::render`.
 #' @export
+#' @keywords internal
 wpdf_document <- function(toc = FALSE,
                           toc_depth = 3,
                           number_sections = FALSE,

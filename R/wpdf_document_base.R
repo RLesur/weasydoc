@@ -63,6 +63,7 @@ NULL
 #'
 #' @return `R Markdown` output format to pass to [rmarkdown::render()].
 #' @export
+#' @keywords internal
 wpdf_document_base <- function(toc = FALSE,
                                toc_depth = 3,
                                fig_width = 5,
