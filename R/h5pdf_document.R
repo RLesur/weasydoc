@@ -19,7 +19,8 @@ NULL
 
 #' A PDF output format using CSS for Paged Media
 #'
-#' This is a format relying on CSS for Paged Media using HTML5.
+#' This is a format relying on CSS for Paged Media using an internal HTML5
+#' template.
 #'
 #' @inheritParams html5_document
 #' @inheritParams convert_html2pdf_format
@@ -86,7 +87,7 @@ h5pdf_document <- function(toc = FALSE,
 
 #' HTML5 output format with CSS for Paged Media
 #'
-#' This is a basic HTML5 output format.
+#' This is a basic HTML5 output format using an internal template.
 #'
 #' @inheritParams extd_html_document_base
 #' @inheritParams rmarkdown::html_document

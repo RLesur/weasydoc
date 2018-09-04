@@ -24,8 +24,8 @@ NULL
 #'
 #' This output format is compatible with the `htmltools` package.
 #'
-#' @inheritParams convert_html2pdf_format
 #' @inheritParams extd_html_document_base
+#' @inheritParams convert_html2pdf_format
 #' @export
 hpdf_document_base <- function(toc = FALSE,
                                toc_depth = 3,
@@ -103,9 +103,11 @@ hpdf_document_base <- function(toc = FALSE,
 }
 
 
-#' An extended HTML document output format
+#' An extended HTML base output format
 #'
-#' This output format is compatible with the `htmltools` package.
+#' The original [rmarkdown::html_document_base()] output format offers few
+#' options. This HTML output format offers many options and can be re-used by
+#' other developers.
 #'
 #' @param fig_retina Setting this option to a ratio (for example, 2) will
 #'   change the `dpi` parameter to `dpi * fig.retina`, and `fig_width` to

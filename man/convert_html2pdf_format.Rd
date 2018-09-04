@@ -30,9 +30,10 @@ yet supported by WeasyPrint and are only well rendered with Prince.}
 R Markdown output format to pass to \code{\link[rmarkdown:render]{rmarkdown::render()}}.
 }
 \description{
-This function transforms an R Markdown HTML output format to a PDF
-output format using \code{WeasyPrint} or \code{Prince}. In order to get a good
-result, this kind of transformation usually requires some additional
-CSS rules for Paged Media. Be aware that JavaScript generated content may
-be absent of the final PDF.
+This function is dedicated to advanced users who have a knowledge of CSS for
+Paged Media. It transforms an R Markdown HTML output format to a PDF output
+format using \code{WeasyPrint} or \code{Prince}. In order to get a good result, this
+kind of transformation usually requires some additional CSS rules for Paged
+Media. Be aware that JavaScript generated content may be absent of the final
+PDF.
 }

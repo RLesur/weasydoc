@@ -22,11 +22,12 @@ NULL
 
 #' Convert a HTML output format to a PDF output format
 #'
-#' This function transforms an R Markdown HTML output format to a PDF
-#' output format using `WeasyPrint` or `Prince`. In order to get a good
-#' result, this kind of transformation usually requires some additional
-#' CSS rules for Paged Media. Be aware that JavaScript generated content may
-#' be absent of the final PDF.
+#' This function is dedicated to advanced users who have a knowledge of CSS for
+#' Paged Media. It transforms an R Markdown HTML output format to a PDF output
+#' format using `WeasyPrint` or `Prince`. In order to get a good result, this
+#' kind of transformation usually requires some additional CSS rules for Paged
+#' Media. Be aware that JavaScript generated content may be absent of the final
+#' PDF.
 #'
 #' @param ... Arguments to be passed to a specific output format function.
 #' @param attach_code Add the `Rmd` source code as an attachment to the `PDF`

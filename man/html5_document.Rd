@@ -73,6 +73,6 @@ additional details.}
 \item{pandoc_args}{Additional command line options to pass to pandoc}
 }
 \description{
-This is a basic HTML5 output format.
+This is a basic HTML5 output format using an internal template.
 }
 \keyword{internal}

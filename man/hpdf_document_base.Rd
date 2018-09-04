@@ -107,7 +107,7 @@ additional details.}
 
 \item{pandoc_args}{Additional command line options to pass to pandoc}
 
-\item{...}{Arguments to be passed to a specific output format function.}
+\item{...}{Additional arguments passed to \code{\link[rmarkdown:html_document_base]{rmarkdown::html_document_base()}}.}
 }
 \description{
 This output format is compatible with the \code{htmltools} package.

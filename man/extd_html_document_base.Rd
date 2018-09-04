@@ -2,7 +2,7 @@
 % Please edit documentation in R/hpdf_document_base.R
 \name{extd_html_document_base}
 \alias{extd_html_document_base}
-\title{An extended HTML document output format}
+\title{An extended HTML base output format}
 \usage{
 extd_html_document_base(toc = FALSE, toc_depth = 3,
   number_sections = FALSE, section_divs = TRUE, fig_width = 5,
@@ -96,6 +96,8 @@ additional details.}
 \item{...}{Additional arguments passed to \code{\link[rmarkdown:html_document_base]{rmarkdown::html_document_base()}}.}
 }
 \description{
-This output format is compatible with the \code{htmltools} package.
+The original \code{\link[rmarkdown:html_document_base]{rmarkdown::html_document_base()}} output format offers few
+options. This HTML output format offers many options and can be re-used by
+other developers.
 }
 \keyword{internal}

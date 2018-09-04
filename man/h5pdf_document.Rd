@@ -87,5 +87,6 @@ additional details.}
 \item{pandoc_args}{Additional command line options to pass to pandoc}
 }
 \description{
-This is a format relying on CSS for Paged Media using HTML5.
+This is a format relying on CSS for Paged Media using an internal HTML5
+template.
 }
