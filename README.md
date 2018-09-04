@@ -34,6 +34,8 @@ The _CSS for Paged Media_ standard is a subset of the [W3C CSS specifications](h
 Some important features of _CSS for Paged Media_ are not implemented by the top browsers in use. So, you cannot rely on browsers (or headless browsers) to generate a `PDF` file from `HTML` using _CSS for Paged Media_: you have to install a converter that implements the _CSS for Paged Media_ standard.  
 The great [print-css.rocks](https://print-css.rocks/) website by Andreas Jung (@zopyx) offers a [comprehensive list of converters](https://print-css.rocks/tools.html) using _CSS for Paged Media_.
 
+**Note:** a very promising project of the Paged Media initiative named [Paged.js](https://gitlab.pagedmedia.org/tools/pagedjs) proposes a polyfill for Paged Media. I think this will be a game changer.
+
 ## Installation
 
 _If you do not want to modify your system, you can use the `rlesur/weasydoc` docker image or even easier the `MyBinder` environment (see below)._
