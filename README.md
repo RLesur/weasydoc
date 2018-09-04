@@ -114,7 +114,7 @@ There are a lot of great ressources on the web to learn _CSS for Paged Media_:
 - [Part 3: Paged Media Basics](https://www.youtube.com/watch?v=P-bDFt2wZDA)
 - [Part 4: Generated Content - Counters & Strings](https://www.youtube.com/watch?v=mTgxZmOpJls)
 
-I also recommend this article [Streamlining CSS Print Design with Sass](https://medium.com/@sandersk/streamlining-css-print-design-with-sass-debaa2a204c3) by Sanders Kleinfeld (@sandersk).
+I also recommend this article [Streamlining CSS Print Design with Sass](https://medium.com/@sandersk/streamlining-css-print-design-with-sass-debaa2a204c3) by Sanders Kleinfeld (@sandersk) and the **Paged Media initiative** blog [www.pagedmedia.org](https://www.pagedmedia.org/).
 
 ## Contribution
 
