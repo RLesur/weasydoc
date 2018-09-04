@@ -94,8 +94,9 @@ Using this environment, you agree with the terms of the Prince end user license:
 
 Here is a simple example:
 
-``` r
-rmarkdown::render('myfile.Rmd', weasydoc::h5pdf_document(highlight = "pygments"))
+```r
+file.copy(system.file("rmarkdown", "templates", "h5pdf_document", "skeleton", "skeleton.Rmd", package = "weasydoc"), "myfile.Rmd")
+rmarkdown::render("myfile.Rmd", weasydoc::h5pdf_document())
 ```
 
 ## How can I learn CSS for Paged Media?

@@ -4,7 +4,7 @@ author: "Your Name"
 date: |
   `r format(Sys.time(), '%d %B, %Y')`
 lang: en-US
-output: weasydoc::wpdf_document
+output: weasydoc::h5pdf_document
 ---
 
 ```{r setup, include=FALSE}

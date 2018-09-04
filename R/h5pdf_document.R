@@ -114,7 +114,7 @@ html5_document <- function(toc = FALSE,
                            pandoc_args = NULL) {
 
   section_divs <- TRUE
-  template <- system.file("templates", "default", "default.html", package = "weasydoc")
+  template <- system.file("templates", "default", "h5default.html", package = "weasydoc")
   html_format <- "html5"
 
   pandoc_args <-

@@ -62,7 +62,7 @@ wpdf_document <- function(toc = FALSE,
   args <- c()
 
   if (identical(template, "default")) {
-    template <- system.file("templates", "default", "default.html", package = "weasydoc")
+    template <- system.file("templates", "default", "h5default.html", package = "weasydoc")
   }
 
   if (isTRUE(number_sections)) {
