@@ -26,7 +26,7 @@ html4_pagedjs <- function(toc = FALSE,
                            pandoc_args = NULL) {
 
   section_divs <- TRUE
-  template <- system.file("templates", "default", "h4default.html", package = "weasydoc")
+  template <- system.file("templates", "default", "h4pagedjs.html", package = "weasydoc")
   html_format <- "html4"
 
   pagedjs_preview_css <- system.file("templates", "default", "pagedpreview.css",
