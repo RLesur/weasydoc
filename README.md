@@ -15,7 +15,7 @@ Since [`pandoc`](https://pandoc.org/) version 2 supports `PDF` generation throug
 
 ### What is CSS for Paged Media?
 
-In industry, printed document are commonly designed with publishing softwares like [InDesign®](https://www.adobe.com/InDesign) or [Scribus](https://www.scribus.net/).
+In industry, printed document are commonly designed with publishing softwares like [Microsoft Publisher](https://products.office.com/publisher), [Adobe InDesign®](https://www.adobe.com/InDesign) or [Scribus](https://www.scribus.net/).
 
 _CSS for Paged Media_ can mainly be understood as an alternative for these publishing softwares: it allows conversion from HTML to PDF using CSS rules.  
 
