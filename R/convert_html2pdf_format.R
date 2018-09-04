@@ -39,13 +39,13 @@ NULL
 #'
 #' @return R Markdown output format to pass to [rmarkdown::render()].
 #' @export
-html2pdf <- function(...,
-                     engine = c("weasyprint", "prince"),
-                     engine_opts = NULL,
-                     attach_code = FALSE,
-                     keep_html = FALSE,
-                     notes = c("endnotes", "footnotes"),
-                     base_format = rmarkdown::html_document) {
+convert_html2pdf_format <- function(...,
+                                    engine = c("weasyprint", "prince"),
+                                    engine_opts = NULL,
+                                    attach_code = FALSE,
+                                    keep_html = FALSE,
+                                    notes = c("endnotes", "footnotes"),
+                                    base_format = rmarkdown::html_document) {
 
   base_format <- get_base_format(base_format)
   config <- base_format(...)

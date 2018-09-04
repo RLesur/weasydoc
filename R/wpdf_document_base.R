@@ -59,7 +59,7 @@ NULL
 #'   and `"katex"`. See the `pandoc` manual for details.
 #' @inheritParams rmarkdown::html_document
 #' @inheritParams rmarkdown::output_format
-#' @inheritParams html2pdf
+#' @inheritParams convert_html2pdf_format
 #'
 #' @return `R Markdown` output format to pass to [rmarkdown::render()].
 #' @export

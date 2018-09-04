@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#' @include html2pdf.R
+#' @include convert_html2pdf_format.R
 #' @importFrom rmarkdown from_rmarkdown html_document_base includes_to_pandoc_args
 #'     knitr_options output_format pandoc_available pandoc_highlight_args pandoc_options
 #'     pandoc_path_arg pandoc_toc_args
@@ -24,7 +24,7 @@ NULL
 #'
 #' This output format is compatible with the `htmltools` package.
 #'
-#' @inheritParams html2pdf
+#' @inheritParams convert_html2pdf_format
 #' @inheritParams extd_html_document_base
 #' @export
 hpdf_document_base <- function(toc = FALSE,
@@ -94,12 +94,12 @@ hpdf_document_base <- function(toc = FALSE,
   notes <- match.arg(notes)
   engine <- match.arg(engine)
 
-  html2pdf(engine = engine,
-           engine_opts = engine_opts,
-           attach_code = attach_code,
-           keep_html = keep_html,
-           notes = notes,
-           base_format = function() base_format)
+  convert_html2pdf_format(engine = engine,
+                          engine_opts = engine_opts,
+                          attach_code = attach_code,
+                          keep_html = keep_html,
+                          notes = notes,
+                          base_format = function() base_format)
 }
 
 

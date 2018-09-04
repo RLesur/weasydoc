@@ -27,7 +27,7 @@ VignetteBuilder: knitr
 Collate: 
     'utils.R'
     'make_pdf.R'
-    'html2pdf.R'
+    'convert_html2pdf_format.R'
     'hpdf_document_base.R'
     'h5pdf_document.R'
     'wpdf_book.R'

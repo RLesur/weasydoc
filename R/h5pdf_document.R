@@ -22,7 +22,7 @@ NULL
 #' This is a format relying on CSS for Paged Media using HTML5.
 #'
 #' @inheritParams html5_document
-#' @inheritParams html2pdf
+#' @inheritParams convert_html2pdf_format
 #' @export
 h5pdf_document <- function(toc = FALSE,
                            toc_depth = 3,
@@ -75,12 +75,12 @@ h5pdf_document <- function(toc = FALSE,
   notes <- match.arg(notes)
   engine <- match.arg(engine)
 
-  html2pdf(engine = engine,
-           engine_opts = engine_opts,
-           attach_code = attach_code,
-           keep_html = keep_html,
-           notes = notes,
-           base_format = function() base_format)
+  convert_html2pdf_format(engine = engine,
+                          engine_opts = engine_opts,
+                          attach_code = attach_code,
+                          keep_html = keep_html,
+                          notes = notes,
+                          base_format = function() base_format)
 }
 
 

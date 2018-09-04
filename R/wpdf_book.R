@@ -23,7 +23,7 @@ NULL
 #'
 #' @inheritParams bookdown::html_document2
 #' @inheritParams make_pdf
-#' @inheritParams html2pdf
+#' @inheritParams convert_html2pdf_format
 #' @return An R Markdown output format object to be passed to
 #'   [rmarkdown::render()].
 #' @export
