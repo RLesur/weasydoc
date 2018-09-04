@@ -101,6 +101,9 @@ file.copy(system.file("rmarkdown/templates/hpdf_document/skeleton/skeleton.Rmd",
 rmarkdown::render("myfile.Rmd", weasydoc::hpdf_document())
 ```
 
+This package also supports `bookdown` output format. You can use 
+`weasydoc::hpdf_book()` to generate a PDF using `bookdown`.
+
 ## How can I learn CSS for Paged Media?
 
 There are a lot of great ressources on the web to learn _CSS for Paged Media_:

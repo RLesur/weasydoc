@@ -81,6 +81,7 @@ hpdf_book <- function(toc = FALSE,
 #'
 #' @inheritParams extd_html_document_base
 #' @inheritParams rmarkdown::html_document
+#' @keywords internal
 html4_document <- function(toc = FALSE,
                            toc_depth = 3,
                            number_sections = FALSE,

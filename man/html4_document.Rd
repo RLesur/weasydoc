@@ -75,3 +75,4 @@ additional details.}
 \description{
 This HTML format is developped only for bookdown.
 }
+\keyword{internal}
