@@ -3,6 +3,7 @@
 export(convert_html2pdf_format)
 export(extd_html_document_base)
 export(h5pdf_document)
+export(hpdf_book)
 export(hpdf_document2)
 export(hpdf_document_base)
 export(html5_document)
