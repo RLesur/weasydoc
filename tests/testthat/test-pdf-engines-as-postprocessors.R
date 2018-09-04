@@ -15,7 +15,7 @@ test_that("Post process html_document", {
 })
 
 test_that("Post process a bookdown", {
-  pdf_file <- rmarkdown::render("document.Rmd", wpdf_document2())
+  pdf_file <- rmarkdown::render("document.Rmd", hpdf_document2())
   expect_true(file.exists(pdf_file))
   unlink(pdf_file)
 })

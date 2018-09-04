@@ -27,7 +27,7 @@ NULL
 #' @return An R Markdown output format object to be passed to
 #'   [rmarkdown::render()].
 #' @export
-wpdf_document2 <- function(...,
+hpdf_document2 <- function(...,
                            engine = c("weasyprint", "prince"),
                            engine_opts = NULL,
                            keep_html = FALSE,
