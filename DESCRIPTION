@@ -32,5 +32,6 @@ Collate:
     'hpdf_document_base.R'
     'hpdf_book.R'
     'hpdf_document.R'
+    'html4_pagedjs.R'
     'wpdf_document_base.R'
     'wpdf_document.R'

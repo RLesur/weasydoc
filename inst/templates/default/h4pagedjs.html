@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"$if(lang)$ lang="$lang$" xml:lang="$lang$"$endif$$if(dir)$ dir="$dir$"$endif$>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+$for(author-meta)$
+  <meta name="author" content="$author-meta$" />
+$endfor$
+$if(date-meta)$
+  <meta name="date" content="$date-meta$" />
+$endif$
+$if(keywords)$
+  <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
+$endif$
+  <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+  <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+$if(quotes)$
+      q { quotes: "“" "”" "‘" "’"; }
+$endif$
+  </style>
+$if(highlighting-css)$
+  <style type="text/css">
+$highlighting-css$
+  </style>
+$endif$
+  <style type="text/css">
+      @page {
+        size: $if(papersize)$$papersize$$else$a4$endif$;
+        margin-top: $if(margin-top)$$margin-top$$else$12%$endif$;
+        margin-right: $if(margin-right)$$margin-right$$else$15%$endif$;
+        margin-bottom: $if(margin-bottom)$$margin-bottom$$else$18%$endif$;
+        margin-left: $if(margin-left)$$margin-left$$else$15%$endif$;
+        $if(pagecounter)$@$pagecounter${content: counter(page);}$endif$
+      }
+      @page portrait {size: portrait;}
+      .portrait {page: portrait;}
+      @page landscape {size: landscape;}
+      .landscape {page: landscape;}
+      @media print {
+        html {
+          font-family: $if(mainfont)$"$mainfont$", $endif$$if(main-sans-serif)$"TeX Gyre Heros", "Arial", "DejaVu Sans", "DejaVu LGC Sans", "Liberation Sans", sans-serif$else$"Tex Gyre Termes", "Times New Roman", "DejaVu Serif", "DejaVu LGC Serif", "Liberation Serif", serif$endif$;
+          font-size: $if(fontsize)$$fontsize$$else$11pt$endif$;
+          line-height: $if(lineheight)$$lineheight$$else$1em$endif$;
+          color: cmyk(35%, 60%, 60%, 100%); /* Warm black */
+        }
+        h1, h2, h3, h4, h5, h6 {
+          font-family: $if(titlefont)$"$titlefont$", $endif$$if(titles-serif)$"Tex Gyre Termes", "Times New Roman", "DejaVu Serif", "DejaVu LGC Serif", "Liberation Serif", serif$else$"TeX Gyre Heros", "Arial", "DejaVu Sans", "DejaVu LGC Sans", "Liberation Sans", sans-serif$endif$;
+          color: #20435C;
+          color: cmyk(65%, 27%, 0%, 64%);
+        }
+        code, kbd, listing, plaintext, pre, samp, tt, xmp {
+          font-family: $if(monofont)$"$monofont$", $endif$"TeX Gyre Cursor", "Courier New", "DejaVu Sans Mono", "DejaVu LGC Sans Mono", "Liberation Mono", monospace;
+          font-size: $if(monofontsize)$$monofontsize$$else$0.9em$endif$;
+        }
+        p {text-align: $if(textalign)$$textalign$$else$justify$endif$;}
+        a:link {
+          text-decoration: none;
+          color: #377063;
+          color: cmyk(51%, 0%, 12%, 56%);
+        }
+        a {
+          white-space: nowrap;
+        }
+        #$idprefix$TOC {
+          color: #20435C;
+          color: cmyk(65%, 27%, 0%, 64%);
+        }
+        #$idprefix$TOC a:link {
+          color: #20435C;
+          color: cmyk(65%, 27%, 0%, 64%);
+        }
+        #$idprefix$TOC ul {
+          $if(number-sections-css)$counter-reset: toc-section;$endif$
+          list-style: none;
+          padding-left: 0;
+          margin-left: 0.5em;
+        }
+        $if(number-sections-css)$
+        #$idprefix$TOC li::before {
+          counter-increment: toc-section;
+          content: counters(toc-section, ".") " ";
+        }
+        $endif$
+        .section.level1 {page-break-before: always;}
+        table {
+          page-break-inside: avoid;
+          width: auto;
+        }
+        pre {page-break-inside: avoid;}
+        caption, p.caption {
+        text-align: center;
+        font-weight: bolder;
+        }
+        p.caption {page-break-before: avoid;}
+      }
+    $if(number-sections-css)$
+    .section:first-of-type {counter-reset: section;}
+    .section {counter-increment: section;}
+    .level1>h1::before, .level2>h2:not(.toc-title)::before, .level3>h3::before, .level4>h4::before, .level5>h5::before, .level6>h6::before {
+      content: counters(section, ".") " ";
+    }
+    $endif$
+  </style>
+
+$for(css)$
+  <link rel="stylesheet" href="$css$" type="text/css" />
+$endfor$
+$if(math)$
+  $math$
+$endif$
+$for(header-includes)$
+  $header-includes$
+$endfor$
+</head>
+<body>
+$for(include-before)$
+$include-before$
+$endfor$
+$if(title)$
+<div id="$idprefix$header">
+<h1 class="title">$title$</h1>
+$if(subtitle)$
+<h1 class="subtitle">$subtitle$</h1>
+$endif$
+$for(author)$
+<h2 class="author">$author$</h2>
+$endfor$
+$if(date)$
+<h3 class="date">$date$</h3>
+$endif$
+</div>
+$endif$
+$if(toc)$
+<div id="$idprefix$TOC">
+$table-of-contents$
+</div>
+$endif$
+$body$
+$for(include-after)$
+$include-after$
+$endfor$
+</body>
+</html>
