@@ -86,10 +86,17 @@ $endif$
           content: counters(toc-section, ".") " ";
         }
         $endif$
-        #$idprefix$TOC a[href]::after {
-          content: target-counter(attr(href), page);
-          float: right;
+        .section.level1 {page-break-before: always;}
+        table {
+          page-break-inside: avoid;
+          width: auto;
         }
+        pre {page-break-inside: avoid;}
+        caption, p.caption {
+        text-align: center;
+        font-weight: bolder;
+        }
+        p.caption {page-break-before: avoid;}
       }
     $if(number-sections-css)$
     .section:first-of-type {counter-reset: section;}
