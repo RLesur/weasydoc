@@ -11,7 +11,7 @@ output: weasydoc::hpdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-With this template, you can use `CSS` for paged document (pdf).
+This template is a basic document using `CSS` for paged document (pdf).
 
 ## Top level variables
 
@@ -39,7 +39,7 @@ The `fontsize` variable control the main size of the font for the document. Its 
 ### Line spacing
 
 The line spacing is controlled by the `lineheight` variable. It replaces the `linestretch` variable of `pdf_document`.  
-The default value is 1. If you want double line spacing, you can set the `lineheight` value to 2.
+The default value is 1.4. If you want double line spacing, you can set the `lineheight` value to 2.
 
 ### Using a `sans-serif` main font
 

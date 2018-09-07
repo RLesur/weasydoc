@@ -45,7 +45,7 @@ $endif$
         html {
           font-family: $if(mainfont)$"$mainfont$", $endif$$if(main-sans-serif)$"TeX Gyre Heros", "Arial", "DejaVu Sans", "DejaVu LGC Sans", "Liberation Sans", sans-serif$else$"Tex Gyre Termes", "Times New Roman", "DejaVu Serif", "DejaVu LGC Serif", "Liberation Serif", serif$endif$;
           font-size: $if(fontsize)$$fontsize$$else$11pt$endif$;
-          line-height: $if(lineheight)$$lineheight$$else$1em$endif$;
+          color: black;
           color: cmyk(35%, 60%, 60%, 100%); /* Warm black */
         }
         h1, h2, h3, h4, h5, h6 {
@@ -57,7 +57,10 @@ $endif$
           font-family: $if(monofont)$"$monofont$", $endif$"TeX Gyre Cursor", "Courier New", "DejaVu Sans Mono", "DejaVu LGC Sans Mono", "Liberation Mono", monospace;
           font-size: $if(monofontsize)$$monofontsize$$else$0.9em$endif$;
         }
-        p {text-align: $if(textalign)$$textalign$$else$justify$endif$;}
+        p {
+          text-align: $if(textalign)$$textalign$$else$justify$endif$;
+          line-height: $if(lineheight)$$lineheight$$else$1.4$endif$;
+        }
         a:link {
           text-decoration: none;
           color: #377063;
