@@ -1,17 +1,121 @@
 ---
-title: "Untitled"
+title: "A Basic Document With CSS"
 author: "Your Name"
 date: |
   `r format(Sys.time(), '%d %B, %Y')`
 lang: en-US
-output: weasydoc::hpdf_document
+output: 
+  weasydoc::hpdf_document:
+    number_sections: true
+    keep_html: true
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-This template is a basic document using `CSS` for paged document (pdf).
+**Caution: the native RStudio PDF viewer does not handle well some PDF.  
+If this file seems weird, open it with another PDF viewer.**
+
+## Overview
+
+This is a basic template using `CSS` for paged media. 
+The output file is a `PDF`. 
+You can customize it using `CSS` rules.  
+
+## Some examples of customization
+
+Providing a `CSS` tutorial is under the scope of `weasydoc`. To learn how to 
+use CSS with `rmarkdown`, it is recommended to read _R Markdown: The Definitive Guide_([bookdown.org/yihui/rmarkdown](https://bookdown.org/yihui/rmarkdown/)).   
+However, you will find here some demos of `CSS` customizations using pandoc's 
+`markdown`.
+
+### Add styling rules to divs and spans
+
+You can modify a portion of the text using 
+[bracketed spans](https://pandoc.org/MANUAL.html#extension-bracketed_spans):  
+
+```markdown
+The following bracketed text [will be rendered **in red**]{style="color: red;"}.
+```
+
+The following bracketed text [will be rendered **in red**]{style="color: red;"}.
+
+If you want to style a block of content, you can use [fenced divs](https://pandoc.org/MANUAL.html#extension-fenced_divs):
+
+```markdown
+:::{style="text-transform: uppercase;"}  
+Make this paragraph uppercase.  
+
+And this one, too.  
+:::  
+```
+
+:::{style="text-transform: uppercase;"}  
+Make this paragraph uppercase.  
+
+And this one, too.  
+:::  
+
+### Put the styling rules in CSS declarations
+
+The use of `style` declaration is discouraged. Defining CSS classes is a best 
+practice.  
+Thanks to the [`css` `knitr` engine](https://bookdown.org/yihui/rmarkdown/language-engines.html#javascript-and-css), you can insert CSS declarations in your `Rmd` file.
+
+You can define rules applied to custom classes...
+
+~~~css
+`r ''````{css, echo=FALSE}
+.rotated {  
+    transform: rotate(-45deg);
+}
+.bg-lightsteelblue {  
+    background-color: LightSteelBlue;
+}
+.box2 {  
+    height: 20mm;
+    width: 20mm;
+    margin: auto;
+}
+.box2 > p {  
+    line-height: 20mm;
+    text-align: center;
+}
+`r ''````
+~~~
+
+```{css, echo=FALSE}
+.rotated {
+  transform: rotate(-45deg);
+}
+.bg-lightsteelblue {
+  background-color: LightSteelBlue;
+}
+.box2 {
+  height: 20mm;
+  width: 20mm;
+  margin: auto;
+}
+.box2 > p {
+  line-height: 20mm;
+  text-align: center;
+}
+```
+
+... and reuse them in your RMarkdown document.
+
+```markdown
+:::{.box2 .bg-lightsteelblue .rotated}
+Hello! 
+:::
+```
+
+:::{.box2 .bg-lightsteelblue .rotated}
+Hello! 
+:::
+
+
 
 ## Top level variables
 
