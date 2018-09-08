@@ -1,7 +1,7 @@
 ---
-title: "A Basic Document With CSS"
-author: "Your Name"
-date: |
+title: "A Basic Document With CSS" 
+author: "Jane Doe" 
+date: | 
   `r format(Sys.time(), '%d %B, %Y')`
 lang: en-US
 pagecounter: "bottom-center"
@@ -14,106 +14,85 @@ output:
 **Caution: the native RStudio PDF viewer does not handle well some PDF files.  
 If this PDF file seems weird, open it with another PDF viewer.**
 
-
 The `weasydoc::hpdf_document()` function provides a basic R Markdown output 
 format using `CSS` for paginated document. 
 The output file is a `PDF`. 
-You can customize it with built-in parameters (see the first section) or `CSS` 
-rules (see [here](#customizations)).  
+You can customize it with built-in parameters ([first section](#parameters)) 
+and `CSS` rules ([second section](#customizations)).  
 
-## Built-in parameters
+## Built-in parameters {#parameters}
 
-You can modify the rendered PDF document with:
+You can modify the PDF document with:
 
-- top level variables  
-- built-on CSS classes  
+- top-level parameters  
+- built-in CSS classes  
 - arguments passed to the `weasydoc::hpdf_document()` function
 
+### Top-level parameters
 
-### Top level variables
+Top-level parameters are not indented in the document header:
 
-#### Compulsory variable: `lang`
+``` {.yaml}
+---
+title: "A Basic Document With CSS" # this is a top-level parameter
+author: "Jane Doe"                           # top-level parameter
+lang: "en-US"                                # top-level parameter
+pagecounter: "bottom-center"                 # top-level parameter
+output:   
+  weasydoc::hpdf_document:  
+    number_sections: true         # argument passed to hpdf_document
+    keep_html: true               # argument passed to hpdf_document
+---
+```
 
-There is only one compulsory variable: `lang` that defines the language of the document.  
-See the [language variables section](http://pandoc.org/MANUAL.html#language-variables) 
-of the `pandoc` documentation.
+Table: Available top-level YAML metadata variables for `hpdf_document`
 
-#### Papersize
+Variable|Description
+---------------|-----------------------------------
+`lang`|Document language code ([`en`]{.underline}, `fr`...). For admitted values, see the [language variables section](http://pandoc.org/MANUAL.html#language-variables) of the `pandoc` documentation
+`dir`|Text direction ([`ltr`]{.underline}, `rtl` or `auto`)
+`keywords`|One or more keyword
+`papersize`|Page size ([`"a4"`]{.underline}, `"letter landscape"`, `"4in 6in"` ...)
+`margin-top`, `margin-right`, `margin-bottom` and `margin-left`|Margins sizes, either a percentage or a length (`15mm`...)
+`fontsize`|Font size (`10pt`, [`11pt`]{.underline} ...)
+`lineheight`|Amount of space used for lines; either a percentage, a length or a unitless value ([`1.4`]{.underline}, `2` ...)
+`main-sans-serif`, `mainfont`|Use `main-sans-serif: true` to use a sans serif font for main text. Change the main font with `mainfont`
+`title-serif`, `titlefont`|Use `title-serif: true` to use a serif font for titles. Change the titles font with `titlefont`
+`monofont`, `monofontsize`|Name and size of the monospaced font
+`textalign`|Text alignement (`left`, [`justify`]{.underline} ...)
+`pagecounter`|One of the margin boxes (`bottom-left-corner`, `bottom-right`, [`bottom-center`]{.underline} ...). Default: no page counter.
 
-The `papersize` variable control the size of the pages. You can use:
-
-- a well-known size: `a4`, `letter`...  
-You can add `landscape` for orientation, for instance: `"a5 landscape"`.
-- a customized size: `"4in 6in"`...
-
-#### Margins
-
-There is no `geometry` option. In order to control the margins, you can use 
-`margin-top`, `margin-right`, `margin-bottom` and `margin-left` variables.
-
-#### Font size
-
-The `fontsize` variable control the main size of the font for the document. 
-Its default value is `11pt`.
-
-#### Line spacing
-
-The line spacing is controlled by the `lineheight` variable. It replaces the 
-`linestretch` variable of `pdf_document`.  
-The default value is 1.4.
-
-#### Change the main font
-
-The defaut main font is a `serif` font. If you prefer a `sans-serif` font, you 
-can add the `main-sans-serif: true` option to the `YAML` header.
-
-With `mainfont`, you can select a specific font for the document.
-
-#### Modify the monospaced font
-
-Use `monofont` to declare the name of the monospaced font you want to use.
-
-You can modify the monospaced font size with `monofontsize`.
-
-#### Change the titles font
-
-Use `title-serif: true` if you prefer a serif font for the titles, `titlefont` 
-if you want to select a specific font.
-
-#### Text alignment
-
-The text is justified by default. You can modify this behavior with the 
-`textalign` variable. See values in CSS specifications.
-
-#### Page counter
-
-You can add page counter with the `pagecounter` variable. For instance: 
-
-    pagecounter: bottom-center
 
 ### Built-in classes
 
-The `weasydoc::wpdf_document` provides a set of built-in classes. They can 
-be overridden with a customized `CSS` style.
+The `weasydoc::hpdf_document()` provides a set of `HTML` classes. They can be 
+overridden with customized `CSS` style rules.
 
 #### Paper orientation
 
-You can add the class `portrait` or `landscape` to change the orientation.
-
+You can add the class `portrait` or `landscape` to change the page orientation.  
 For instance, the following `data.frame` will be print in landscape mode.
 
     `r ''````{r echo=FALSE, class.output="landscape"}
-    mtcars
+    head(mtcars, 15L)
     ```
 
 ```{r echo=FALSE, class.output="landscape"}
 head(mtcars, 15L)
 ```
 
+#### Text transformations {.portrait}
+
+This template is built on top of `pandoc` default template. The usual `pandoc` 
+`HTML` classes are available:
+
+- smallcaps spans: `[text in smallcaps]{.smallcaps}` is rendered as [text in smallcaps]{.smallcaps}
+- underlined spans: `[underlined text]{.underline}` is rendered as [underlined text]{.underline} 
+
 ## CSS customizations {#customizations .portrait}
 
 Providing a `CSS` tutorial is under the scope of `weasydoc`. To learn how to 
-use CSS with `rmarkdown`, it is recommended to read _R Markdown: The Definitive Guide_([bookdown.org/yihui/rmarkdown](https://bookdown.org/yihui/rmarkdown/)).   
+use CSS with `rmarkdown`, it is recommended to read _R Markdown: The Definitive Guide_ ([bookdown.org/yihui/rmarkdown](https://bookdown.org/yihui/rmarkdown/)).   
 However, you will find here some demos of `CSS` customizations using pandoc's 
 `markdown`.
 
@@ -150,7 +129,7 @@ The use of the `style` attribute is discouraged. Defining CSS classes is a best
 practice.  
 Thanks to the [`css` `knitr` engine](https://bookdown.org/yihui/rmarkdown/language-engines.html#javascript-and-css),
 you can insert CSS declarations in your `Rmd` file (another better option is to 
-put these rules in a specific `.css` file).
+put these rules in `.css` files).
 
 You can define rules applied to custom classes...
 
@@ -204,5 +183,8 @@ Hello!
 Hello! 
 :::
 
+### Styling page
 
+With CSS Paged Media, one can style pages with CSS rules.  
 
+A common task is to style the first page of a document. 

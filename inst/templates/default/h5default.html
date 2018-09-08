@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="$lang$" xml:lang="$lang$"$if(dir)$ dir="$dir$"$endif$>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="$if(lang)$$lang$$else$en$endif$" xml:lang="$if(lang)$$lang$$else$en$endif$"$if(dir)$ dir="$dir$"$endif$>
 <head>
   <meta charset="utf-8" />
   <meta name="generator" content="pandoc" />
@@ -18,7 +18,7 @@ $endif$
       code{white-space: pre-wrap;}
       span.smallcaps{font-variant: small-caps;}
       span.underline{text-decoration: underline;}
-      div.column{display: inline-block; vertical-align: top; width: 50%;}
+      div.column{display: inline-block; vertical-align: top; width: 49.5%;}
 $if(quotes)$
       q { quotes: "“" "”" "‘" "’"; }
 $endif$
@@ -62,6 +62,17 @@ $endif$
           text-align: $if(textalign)$$textalign$$else$justify$endif$;
           line-height: $if(lineheight)$$lineheight$$else$1.4$endif$;
         }
+        table{
+          border: 1pt solid rgb(204, 204, 204);
+          border-right: 0;
+          border-left: 0;
+          border-collapse: collapse;
+          page-break-inside: avoid;
+          width: auto;
+        }
+        tbody tr:nth-child(even) {background: rgb(240, 240, 240);}
+        th, tr{border-bottom: 0.5pt solid rgb(204, 204, 204);}
+        .header>th {text-align: center;}
         a:link {
           text-decoration: none;
           color: #377063;
@@ -90,10 +101,6 @@ $endif$
           content: counters(toc-section, ".") " ";
         }
         $endif$
-        table {
-          page-break-inside: avoid;
-          width: auto;
-        }
         pre {page-break-inside: avoid;}
         caption, p.caption {
         text-align: center;
