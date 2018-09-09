@@ -46,7 +46,8 @@ output:
 ---
 ```
 
-Table: Available top-level YAML metadata variables for `hpdf_document`
+Table: Available top-level YAML metadata variables for `hpdf_document`  
+([default values are underlined]{style="font-weight:lighter;font-size:0.9em;"})
 
 Variable|Description
 ---------------|-----------------------------------
@@ -61,7 +62,7 @@ Variable|Description
 `title-serif`, `titlefont`|Use `title-serif: true` to use a serif font for titles. Change the titles font with `titlefont`
 `monofont`, `monofontsize`|Name and size of the monospaced font
 `textalign`|Text alignement (`left`, [`justify`]{.underline} ...)
-`pagecounter`|One of the margin boxes (`bottom-left-corner`, `bottom-right`, [`bottom-center`]{.underline} ...). Default: no page counter.
+`pagecounter`|One of the margin boxes (`bottom-left-corner`, `bottom-right`, `bottom-center` ...). Default: no page counter.
 
 
 ### Built-in classes
