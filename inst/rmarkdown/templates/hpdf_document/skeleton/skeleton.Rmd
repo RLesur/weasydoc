@@ -26,7 +26,8 @@ You can modify the PDF document with:
 
 - top-level parameters  
 - built-in CSS classes  
-- arguments passed to the `weasydoc::hpdf_document()` function
+- arguments passed to the `weasydoc::hpdf_document()` function  
+see `help(hpdf_document)`
 
 ### Top-level parameters
 
@@ -183,8 +184,66 @@ Hello!
 Hello! 
 :::
 
-### Styling page
+### Styling pages
 
-With CSS Paged Media, one can style pages with CSS rules.  
+With CSS Paged Media, one can style pages with CSS rules. 
+The first page of a document is oftenly styled differently than the other ones.  
+For instance, you can remove the content of the bottom-center margin box using the `@page` at-rule and the `:first` pseudo-class:
 
-A common task is to style the first page of a document. 
+```{css}
+@page:first {
+  @bottom-center {
+    content: ""
+  }
+}
+```
+
+For double-sided printed document, you can define different styles for right and left pages:
+
+```{css, eval=FALSE}
+@page:right {
+  @bottom-right: {
+    content: counter(page) "/" counter(pages);
+  }
+}
+@page:left {
+  @bottom-left {
+    content: counter(page) "/" counter(pages);
+  }
+}
+```
+
+You also can define your own page selector:
+
+```{css}
+@page SunriseBackground {
+   background: linear-gradient(to top, 
+                               #355C7D 30%, 
+                               #6C5B7B, 
+                               #C06C84, 
+                               #F67280, 
+                               #F8B195);
+   margin: 0;
+   @bottom-center {
+     content: "";
+   }
+}
+
+.sunrise {
+  page: SunriseBackground;
+  color: #fff;
+}
+
+.sunrise > p {
+  text-align: center;
+  position: relative;
+  bottom: -100mm;
+  text-transform: uppercase;
+  font-size: 42pt;
+}
+```
+
+:::{.sunrise}
+Have fun with  
+CSS Paged Media!
+:::
