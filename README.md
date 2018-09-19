@@ -4,7 +4,7 @@
 
 _Work In Progress. Do Not Use in Production Yet!_ 
 
-The goal of `weasydoc` is to convert `R Markdown` to `PDF` using [`WeasyPrint`](https://weasyprint.org/) or [`Prince`](https://www.princexml.com/) with **CSS for Paged Media**.
+The goal of `weasydoc` is to convert `R Markdown` to `PDF` using [`WeasyPrint`](https://weasyprint.org/) or [`Prince`](https://www.princexml.com/) with **CSS for Paged Media**. 
 
 ## Motivation
 
@@ -32,7 +32,7 @@ The _CSS for Paged Media_ standard is a subset of the [W3C CSS specifications](h
 #### CSS for Paged Media Converters
 
 Some important features of _CSS for Paged Media_ are not implemented by the top browsers in use. So, you cannot rely on browsers (or headless browsers) to generate a `PDF` file from `HTML` using _CSS for Paged Media_: you have to install a converter that implements the _CSS for Paged Media_ standard.  
-The great [print-css.rocks](https://print-css.rocks/) website by Andreas Jung (@zopyx) offers a [comprehensive list of converters](https://print-css.rocks/tools.html) using _CSS for Paged Media_.
+The great [print-css.rocks](https://print-css.rocks/) website by Andreas Jung ([@zopyx](https://github.com/zopyx)) offers a [comprehensive list of converters](https://print-css.rocks/tools.html) using _CSS for Paged Media_.
 
 **Note:** a very promising project of the Paged Media initiative named [Paged.js](https://gitlab.pagedmedia.org/tools/pagedjs) proposes a polyfill for Paged Media. I think this could be a game changer.
 
@@ -111,8 +111,8 @@ This package also supports `bookdown` output format. You can use
 There are a lot of great ressources on the web to learn _CSS for Paged Media_:
 
 - [A Guide To The State Of Print Stylesheets In 2018](https://www.smashingmagazine.com/2018/05/print-stylesheets-in-2018/) by Rachel Andrew
-- [Print CSS Rocks: https://print-css.rocks/](https://print-css.rocks/) by Andreas Jung (@zopyx)
-- [Introduction to CSS for Paged Media](http://www.xmlprague.cz/wp-content/uploads/www.xmlprague.cz/2018/02/CSS-Print.pdf) by Tony Graham (@tgraham-antenna), Antenna House - XML Prague 2018 Conference.
+- [Print CSS Rocks: https://print-css.rocks/](https://print-css.rocks/) by Andreas Jung ([@zopyx](https://github.com/zopyx))
+- [Introduction to CSS for Paged Media](http://www.xmlprague.cz/wp-content/uploads/www.xmlprague.cz/2018/02/CSS-Print.pdf) by Tony Graham ([@tgraham-antenna](https://github.com/tgraham-antenna)), Antenna House - XML Prague 2018 Conference.
 - [Prince User Guide](https://www.princexml.com/doc-prince/)
 
 **O'Reilly Media tutorials on Youtube:**
@@ -122,7 +122,7 @@ There are a lot of great ressources on the web to learn _CSS for Paged Media_:
 - [Part 3: Paged Media Basics](https://www.youtube.com/watch?v=P-bDFt2wZDA)
 - [Part 4: Generated Content - Counters & Strings](https://www.youtube.com/watch?v=mTgxZmOpJls)
 
-I also recommend this article [Streamlining CSS Print Design with Sass](https://medium.com/@sandersk/streamlining-css-print-design-with-sass-debaa2a204c3) by Sanders Kleinfeld (@sandersk) and the **Paged Media initiative** blog [www.pagedmedia.org](https://www.pagedmedia.org/).
+I also recommend this article [Streamlining CSS Print Design with Sass](https://medium.com/@sandersk/streamlining-css-print-design-with-sass-debaa2a204c3) by Sanders Kleinfeld ([@sandersk](https://github.com/sandersk)) and the **Paged Media initiative** blog [www.pagedmedia.org](https://www.pagedmedia.org/).
 
 ## Contribution
 
@@ -132,6 +132,6 @@ This package is still in active development. Some breaking changes may appear. F
 
 The name `weasydoc` is a tribute to the [WeasyPrint](https://github.com/Kozea/WeasyPrint) project: I like open source and really appreciate the effort of the community to develop an open source software using _CSS for Paged Media_.
 
-Thanks Christophe Dervieux (@cderv) for making me discover [MyBinder](https://mybinder.org/)! 
+Thanks Christophe Dervieux ([@cderv](https://github.com/cderv)) for making me discover [MyBinder](https://mybinder.org/)! 
 
-The most important source of inspiration comes from the [rmarkdown](https://github.com/rstudio/rmarkdown) and [bookdown](https://github.com/rstudio/bookdown) package created by Yihui Xie (@yihui). Many thanks!
+The most important source of inspiration comes from the [rmarkdown](https://github.com/rstudio/rmarkdown) and [bookdown](https://github.com/rstudio/bookdown) packages created by Yihui Xie ([@yihui](https://github.com/yihui)). Many thanks!
